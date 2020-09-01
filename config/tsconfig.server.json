@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "baseUrl": "../src",
+    "esModuleInterop": true,
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "outDir": "../build-server",
+    "paths": {
+      "*": [
+        "*"
+      ]
+    },
+    "resolveJsonModule": true,
+    "sourceMap": true,
+    "target": "es6"
+  },
+  "lib": [
+    "es2015"
+  ],
+  "files": [
+    "../src/paths.json",
+    "../src/server/dev.ts",
+    "../src/server/prod.ts"
+  ]
+}
