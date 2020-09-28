@@ -1,0 +1,33 @@
+{
+  "type": "ARBEIDSEVNEVURDERING",
+  "navn": "Arbeidsevnevurdering Bilservice AS",
+  "eksternId": "123456789",
+  "fristDato": "2020-09-24",
+  "bestiller": {
+    "ident": "12345",
+    "name": "Vegard Veileder",
+    "telefon": "92 31 23 01"
+  },
+  "behandler": {
+    "ident": "24342",
+    "name": "Frode Fastlege"
+  },
+  "bruker": {
+    "ident": "24342",
+    "name": "Berit Bruker"
+  },
+  "spesifikasjon": [
+    {
+      "type": "TEKST",
+      "feltNavn": "ARBEIDSEVNEVURDERING",
+      "tekstTilBehandler": "Din vurdering på Terjes utførelse av arbeid hos Bilservice AS",
+      "obligatorisk": true
+    },
+    {
+      "type": "PROSENT",
+      "feltNavn": "ARBEIDSPROSENT",
+      "tekstTilBehandler": "Hvor stor arbeidsevne har Trond?",
+      "obligatorisk": true
+    }
+  ]
+}

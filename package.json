@@ -7,8 +7,8 @@
   "dependencies": {
     "axios": "^0.20.0",
     "express": "^4.17.1",
-    "nav-frontend-core": "^5.0.1",
-    "react-hook-form": "^6.6.0"
+    "node-pg-migrate": "^5.6.0",
+    "pg": "^8.3.3"
   },
   "devDependencies": {
     "@craco/craco": "^5.6.4",
@@ -20,13 +20,17 @@
     "@types/express": "^4.17.7",
     "@types/jest": "^26.0.10",
     "@types/node": "^14.6.0",
+    "@types/pg": "^7.14.4",
     "@types/react": "^16.9.46",
     "@types/react-dom": "^16.9.8",
     "cheerio": "^1.0.0-rc.3",
     "craco-less": "^1.17.0",
+    "html-webpack-plugin": "^4.5.0",
     "jest-mock-axios": "^4.2.1",
+    "nav-frontend-core": "^5.0.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-hook-form": "^6.8.0",
     "react-scripts": "3.4.3",
     "sync-request": "^6.1.0",
     "ts-node": "^9.0.0",
@@ -36,7 +40,11 @@
     "start": "yarn build-dev-server  && craco start",
     "build": "craco build",
     "build-dev-server": "tsc -p config/tsconfig.server.json",
-    "test": "craco test"
+    "test": "craco test",
+    "up": "docker-compose up -d",
+    "down": "docker-compose down",
+    "migrate": "node-pg-migrate --f=config/default.js",
+    "create-migration": "npm run migrate create $(git branch --show-current)"
   },
   "eslintConfig": {
     "extends": "react-app"

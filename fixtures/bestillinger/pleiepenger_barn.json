@@ -1,0 +1,42 @@
+{
+  "type": "PLEIEPENGER_BARN",
+  "navn": "Pleiepenger til barn",
+  "fristDato": "2020-09-24",
+  "bestiller": {
+    "ident": "12345",
+    "name": "Vegard Veileder",
+    "telefon": "92 31 23 01"
+  },
+  "behandler": {
+    "ident": "24342",
+    "name": "Frode Fastlege"
+  },
+  "bruker": {
+    "ident": "24342",
+    "name": "Berit Bruker"
+  },
+  "spesifikasjon": [
+    {
+      "type": "DIAGNOSE_ICD10",
+      "feltNavn": "DIAGNOSE_ICD10",
+      "tekstTilBehandler": "Når har Berit termin?",
+      "obligatorisk": true
+    },
+    {
+      "type": "BOOLSK",
+      "feltNavn": "TRENGER_BARNET_KONTINUERLIG_TILSYN",
+      "tekstTilBehandler": "Trenger Trond kontinuerlig tilsyn og pleie pga. sykdom eller skade?",
+      "obligatorisk": true
+    },
+    {
+      "type": "ALTERNATIVER",
+      "feltNavn": "ANTALL_OMSORGSPERSONER",
+      "tekstTilBehandler": "Trenger Trond kontinuerlig tilsyn og pleie pga. sykdom eller skade?",
+      "obligatorisk": true,
+      "alternativer": [
+        1,
+        2
+      ]
+    }
+  ]
+}
