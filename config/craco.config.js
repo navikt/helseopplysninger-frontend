@@ -3,6 +3,9 @@ module.exports = {
   devServer: {
     port: 4059,
   },
+  webpack: {
+    plugins: [require('./plugin/inject-dekorator-webpack')],
+  },
   plugins: [
     {
       plugin: require('craco-less'),

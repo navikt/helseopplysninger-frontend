@@ -25,7 +25,8 @@
     "src"
   ],
   "exclude": [
-    "src/setupProxy.js"
+    "src/setupProxy.js",
+    "src/server/**"
   ],
   "ts-node": {
     "transpileOnly": true

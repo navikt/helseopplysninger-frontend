@@ -1,0 +1,25 @@
+{
+  "type": "TERMINBEKREFTELSE",
+  "fristDato": "2020-09-24",
+  "bestiller": {
+    "ident": "12345",
+    "name": "Vegard Veileder",
+    "telefon": "92 31 23 01"
+  },
+  "behandler": {
+    "ident": "24342",
+    "name": "Frode Fastlege"
+  },
+  "bruker": {
+    "ident": "24342",
+    "name": "Berit Bruker"
+  },
+  "spesifikasjon": [
+    {
+      "type": "DATO",
+      "navn": "TERMINDATO",
+      "tekstTilBehandler": "Når har Berit termin?",
+      "obligatorisk": true
+    }
+  ]
+}
