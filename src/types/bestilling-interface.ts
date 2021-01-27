@@ -12,7 +12,6 @@ export interface BestillingInterface {
     opplysninger: OpplysningInterface[];
     opprettet: Date;
     oppdatert: Date;
-
 }
 
 export interface AktoerInterface {
@@ -36,7 +35,7 @@ export interface OpplysningInterface {
 export interface HendelseInterface {
     id: string;
     dato: Date;
-    type: "OPPRETTET" | "SENDT_INN" | "OPPDATERT" | "JOURNALFOERT";
+    status: "OPPRETTET" | "SENDT_INN" | "OPPDATERT" | "JOURNALFOERT";
     aktoer: AktoerInterface;
 }
 

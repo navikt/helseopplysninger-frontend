@@ -2,5 +2,6 @@
   "BESTILLING": "bestilling",
   "AKTOR": "aktoer",
   "HELSEOPPLYSNING": "helseopplysning",
-  "HELSEOPPLYSNINGSTYPE": "helseopplysningstype"
+  "HELSEOPPLYSNINGSTYPE": "helseopplysningstype",
+  "INNKOMMENDE_MELDINGER": "innkommende_meldinger"
 }

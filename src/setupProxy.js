@@ -1,1 +1,1 @@
-module.exports = require('../build-server/server/dev').default
+module.exports = require('../builds/server/dev').default

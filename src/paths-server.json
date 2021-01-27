@@ -1,0 +1,11 @@
+{
+  "BESTILLING": "/bestilling/api/bestillinger/:bestillingId",
+  "BESTILLINGER": "/bestilling/api/bestillinger",
+  "INNLOGGET": "/bestilling/api/innlogget",
+  "OPPLYSNING": "/bestilling/api/bestillinger/:bestillingId/opplysning/:opplysningId",
+  "QUESTIONNAIRE": "/bestilling/api/questionnaire/:id",
+  "QUESTIONNAIRE_RESPONSE": "/bestilling/api/questionnaire-response/:id",
+  "QUESTIONNAIRE_RESPONSES": "/bestilling/api/questionnaire-response",
+  "TEST_TEST_API": "/bestilling/api/test-test"
+}
+

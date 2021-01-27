@@ -1,6 +1,0 @@
-{
-  "INNLOGGET_BRUKER": "/behandler/api/innlogget",
-  "TEST_ROUTE": "/behandler/api/test-test",
-  "MELDINGER":"/behandler/api/meldinger/:behandlerId",
-  "MELDING":"/behandler/api/melding/:meldingsId"
-}

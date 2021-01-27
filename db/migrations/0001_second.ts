@@ -2,33 +2,14 @@
 
 import MigrationBuilderImpl from "node-pg-migrate/dist/migration-builder";
 import tableNames from "../tableNames.json"
-import {Action} from "node-pg-migrate/dist/operations/tablesTypes";
+import {CURRENT_TIMESTAMP, REF, UUID, VARCHAR_NOT_NULL} from "../utils";
 
-export const shorthands = undefined;
-
-const CURRENT_TIMESTAMP = (pgm: MigrationBuilderImpl) => ({
-    type: 'timestamp',
-    notNull: true,
-    default: pgm.func('current_timestamp'),
-});
-const UUID = (pgm: MigrationBuilderImpl) => ({
-    type: 'uuid',
-    notNull: true,
-    primaryKey: true,
-    default: pgm.func('uuid_generate_v4()'),
-});
-const REF = (pgm: MigrationBuilderImpl, tableRef: string) => ({
-    type: 'uuid',
-    notNull: true,
-    references: '\"' + tableRef + '\"',
-    onDelete: 'RESTRICT' as Action,
-});
-const VARCHAR_NOT_NULL = {type: 'varchar(1000)', notNull: true}
 
 export const up = (pgm: MigrationBuilderImpl) => {
     pgm.createExtension("uuid-ossp", {
         ifNotExists: true
     });
+
     pgm.createTable(tableNames.AKTOR, {
         id: UUID(pgm),
         navn: VARCHAR_NOT_NULL,
@@ -49,12 +30,22 @@ export const up = (pgm: MigrationBuilderImpl) => {
         opprettet: CURRENT_TIMESTAMP(pgm),
         oppdatert: CURRENT_TIMESTAMP(pgm),
     })
+
+    pgm.createTable(tableNames.INNKOMMENDE_MELDINGER, {
+        id: UUID(pgm),
+        navn: VARCHAR_NOT_NULL,
+        status: VARCHAR_NOT_NULL,
+        opprettet: CURRENT_TIMESTAMP(pgm),
+        oppdatert: CURRENT_TIMESTAMP(pgm),
+    })
+
     pgm.createTable(tableNames.HELSEOPPLYSNINGSTYPE, {
         id: UUID(pgm),
         navn: VARCHAR_NOT_NULL,
         opprettet: CURRENT_TIMESTAMP(pgm),
         oppdatert: CURRENT_TIMESTAMP(pgm),
     })
+
     pgm.createTable(tableNames.HELSEOPPLYSNING, {
         id: UUID(pgm),
         bestilling: REF(pgm, tableNames.BESTILLING),

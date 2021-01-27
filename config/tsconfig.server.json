@@ -4,7 +4,7 @@
     "esModuleInterop": true,
     "module": "commonjs",
     "moduleResolution": "node",
-    "outDir": "../build-server",
+    "outDir": "../builds",
     "paths": {
       "*": [
         "*"
@@ -18,7 +18,7 @@
     "es2015"
   ],
   "files": [
-    "../src/paths.json",
+    "../src/paths-server.json",
     "../src/server/dev.ts",
     "../src/server/prod.ts"
   ]
