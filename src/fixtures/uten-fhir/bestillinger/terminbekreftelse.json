@@ -1,4 +1,5 @@
 {
+  "ref": "a13d968d-16fa-4545-81b0-6e72c87d2ee5",
   "type": "TERMINBEKREFTELSE",
   "fristDato": "2020-09-24",
   "bestiller": {
@@ -8,11 +9,13 @@
   },
   "behandler": {
     "ident": "24342",
-    "name": "Frode Fastlege"
+    "name": "Frode Fastlege",
+    "telefon": null
   },
   "bruker": {
     "ident": "24342",
-    "name": "Berit Bruker"
+    "name": "Berit Bruker",
+    "telefon": null
   },
   "spesifikasjon": [
     {

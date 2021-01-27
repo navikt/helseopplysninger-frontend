@@ -36,7 +36,7 @@
 .yarn-integrity
 /.pnp
 /build
-/build-server
+/builds
 /coverage
 /node_modules
 bower_components

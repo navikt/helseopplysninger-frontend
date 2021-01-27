@@ -1,0 +1,48 @@
+{
+  "resourceType": "Questionnaire",
+  "title": "Legeerklæring",
+  "purpose": "Få informasjon om x,y,z",
+  "copyright": "NAV 2020",
+  "approvalDate": "2020-12-04",
+  "lastReviewDate": "2020-12-04",
+  "item": [
+    {
+      "linkId": "hoveddiagnose",
+      "definition": "Definisjon",
+      "prefix": "1.1.1",
+      "text": "Hoveddiagnose",
+      "type": "string",
+      "repeats": false
+    },
+    {
+      "linkId": "kan-pasientent-jobbe",
+      "definition": "Definisjon",
+      "prefix": "3.4",
+      "text": "Kan pasienten jobbe?",
+      "type": "boolean",
+      "repeats": false
+    },
+    {
+      "linkId": "kan-pasientent-lofte-over",
+      "definition": "Definisjon",
+      "prefix": "3.5",
+      "text": "Kan pasienten løfte over 40kg over hodet?",
+      "type": "boolean",
+      "repeats": false
+    },
+    {
+      "linkId": "kan-pasientent-lofte-over-hodet-hvor-mye",
+      "definition": "Definisjon",
+      "prefix": "3.5.2",
+      "text": "Hvor mye kan pasienten løfte over hodet?",
+      "type": "string",
+      "repeats": false,
+      "enableWhen": [
+        {
+          "question": "kan-pasientent-lofte-over",
+          "answerBoolean": true
+        }
+      ]
+    }
+  ]
+}

@@ -1,6 +1,11 @@
 version: '3.1'
 
 services:
+  launcher:
+    image: smartonfhir/smart-launcher
+    restart: always
+    ports:
+      - 9009:80
   db:
     image: postgres
     restart: always
