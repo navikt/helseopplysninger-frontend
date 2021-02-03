@@ -1,5 +1,0 @@
-{
-  "INDEX": "/bestilling",
-  "BESTILLINGS_SKJEMA": "/bestilling/utfylling/:id",
-  "TEST_TEST": "/bestilling/test-test"
-}
