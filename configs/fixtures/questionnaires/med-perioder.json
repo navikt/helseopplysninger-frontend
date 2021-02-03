@@ -1,0 +1,125 @@
+{
+  "resourceType": "Questionnaire",
+  "title": "Skjema med perioder",
+  "purpose": "Få informasjon om x,y,z",
+  "copyright": "NAV 2020",
+  "approvalDate": "2020-12-04",
+  "lastReviewDate": "2020-12-04",
+  "item": [
+    {
+      "linkId": "0382186d-e0d4-4321-81b8-d36b612ce0f0",
+      "definition": "Definisjon",
+      "prefix": "1.1.1",
+      "text": "Hoveddiagnose",
+      "type": "string",
+      "repeats": false
+    },
+    {
+      "linkId": "test-av-fritekst",
+      "definition": "Definisjon",
+      "prefix": "1.1.2",
+      "text": "Dette er noe fritekst",
+      "type": "text",
+      "repeats": false
+    },
+    {
+      "linkId": "arbeidsforhold",
+      "definition": "Har pasienten: o Én arbeidsgiver o Flere arbeidsgivere o Ingen arbeidsgiver",
+      "prefix": "1.1.2",
+      "text": "Arbeidsforhold",
+      "type": "choice",
+      "answerOption": [
+        {
+          "valueString": ""
+        },
+        {
+          "valueString": "Én arbeidsgiver"
+        },
+        {
+          "valueString": "Flere arbeidsgivere"
+        },
+        {
+          "valueString": "Ingen arbeidsgiver"
+        }
+      ],
+      "repeats": false
+    },
+    {
+      "linkId": "2.2",
+      "text": "Other Information",
+      "type": "choice",
+      "answerOption": [
+        {
+          "valueCoding": {
+            "code": "otherinformation-hypertension",
+            "display": "Hypertension"
+          }
+        },
+        {
+          "valueCoding": {
+            "code": "otherinformation-smoker",
+            "display": "Smoker"
+          }
+        }
+      ]
+    },
+    {
+      "linkId": "da1d5e07-78b0-4ecc-8166-3f8ca22a6bf4",
+      "definition": "Definisjon",
+      "prefix": "3.4",
+      "text": "Sykdommen er svangerskapsrelatert",
+      "type": "boolean",
+      "repeats": false
+    },
+    {
+      "linkId": "52dc75da-6710-487d-82ac-847b272be87f",
+      "definition": "Definisjon",
+      "prefix": "3.4",
+      "text": "Periode",
+      "type": "group",
+      "repeats": true,
+      "item": [
+        {
+          "linkId": "d426c1e7-78e5-46d8-bb46-c1e84196a19a",
+          "definition": "Fra Dato",
+          "prefix": "4.1.1",
+          "text": "Fra Dato",
+          "type": "date",
+          "repeats": false
+        },
+        {
+          "linkId": "34b428c9-7364-4702-b19c-52e11c358dd9",
+          "definition": "Til Dato",
+          "prefix": "4.1.2",
+          "text": "Til Dato",
+          "type": "date",
+          "repeats": false
+        },
+        {
+          "linkId": "7aac4494-d5db-4423-a697-d6fe98e62c55",
+          "definition": "Avventende",
+          "prefix": "4.1.3",
+          "text": "Pasienten kan benytte avventende sykmelding",
+          "type": "boolean",
+          "repeats": false
+        },
+        {
+          "linkId": "36ee2e27-6e80-4c69-a175-4c1d4afe00af",
+          "definition": "Gradert",
+          "prefix": "4.1.4",
+          "text": "Pasienten kan være i delvis arbeid (gradert sykmelding)",
+          "type": "boolean",
+          "repeats": false
+        },
+        {
+          "linkId": "f87aa30a-c55d-491c-b20a-a89147ae272d",
+          "definition": "Reisetilskudd",
+          "prefix": "4.1.5",
+          "text": "Pasienten kan være i delvis arbeid ved bruk av reisetilskudd",
+          "type": "boolean",
+          "repeats": false
+        }
+      ]
+    }
+  ]
+}

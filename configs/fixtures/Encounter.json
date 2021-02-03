@@ -1,0 +1,48 @@
+{
+  "resourceType": "Encounter",
+  "id": "418e38cf-9da6-4155-b205-0be24024b1db",
+  "meta": {
+    "versionId": "2",
+    "lastUpdated": "2019-06-05T02:57:51.694-04:00",
+    "tag": [
+      {
+        "system": "https://smarthealthit.org/tags",
+        "code": "synthea-5-2019"
+      }
+    ]
+  },
+  "status": "finished",
+  "class": {
+    "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+    "code": "AMB"
+  },
+  "type": [
+    {
+      "coding": [
+        {
+          "system": "http://snomed.info/sct",
+          "code": "185347001",
+          "display": "Encounter for problem (procedure)"
+        }
+      ],
+      "text": "Encounter for problem (procedure)"
+    }
+  ],
+  "subject": {
+    "reference": "Patient/87a339d0-8cae-418e-89c7-8651e6aab3c6"
+  },
+  "participant": [
+    {
+      "individual": {
+        "reference": "Practitioner/6d705d81-8546-43b2-b336-31a282128f2d"
+      }
+    }
+  ],
+  "period": {
+    "start": "2019-05-05T19:17:40-04:00",
+    "end": "2019-05-05T19:32:40-04:00"
+  },
+  "serviceProvider": {
+    "reference": "Organization/4861d01f-019c-3dac-a153-8334e50919f9"
+  }
+}
