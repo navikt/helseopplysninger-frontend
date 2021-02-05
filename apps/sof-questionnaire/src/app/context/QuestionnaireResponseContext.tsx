@@ -3,6 +3,7 @@ import {useParams} from "react-router";
 import {IQuestionnaire, IQuestionnaireResponse, IQuestionnaireResponse_Item} from "@ahryman40k/ts-fhir-types/lib/R4";
 import {fetchQuestionnaire, fetchQuestionnaireResponse, saveQuestionnaireResponse} from "../utils/questionnaire";
 import {useFhirContext} from "./FhirContext";
+import {fhirclient} from "fhirclient/lib/types";
 
 
 type ContextProps = {
@@ -45,9 +46,9 @@ export const QuestionnaireResponseContextProvider = (props: any) => {
 
     }, [id, client]);
     const saveQuestionnaireResponseItems = async (item: IQuestionnaireResponse_Item[]) => {
-        const data = Object.assign(questionnaireResponse, {item});
-        await saveQuestionnaireResponse(id, data);
-        setQuestionnaireResponse(data)
+        const resource = Object.assign(questionnaireResponse, {item}) as fhirclient.FHIR.Resource;
+        await client.update(resource)
+        setQuestionnaireResponse(resource as IQuestionnaireResponse)
     }
     const context = {
         questionnaire,
