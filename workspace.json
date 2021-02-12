@@ -194,6 +194,31 @@
           }
         }
       }
+    },
+    "fixtures": {
+      "root": "libs/fixtures",
+      "sourceRoot": "libs/fixtures/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/fixtures/**/*.ts"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/fixtures"
+          ],
+          "options": {
+            "jestConfig": "libs/fixtures/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   },
   "cli": {

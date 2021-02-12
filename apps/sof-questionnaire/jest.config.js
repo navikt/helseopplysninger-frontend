@@ -10,4 +10,7 @@ module.exports = {
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
   coverageDirectory: '../../coverage/apps/sof-questionnaire',
+  moduleNameMapper: {
+    'nav-(.*)-style': 'jest-transform-stub'
+  },
 };

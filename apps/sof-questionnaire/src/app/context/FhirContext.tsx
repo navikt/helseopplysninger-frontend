@@ -26,7 +26,6 @@ export const FhirContextProvider = (props: any) => {
 
     useEffect(() => {
         async function fetchData() {
-            //const questionaire = await fetchQuestionnaireResponseList();
             await oauth2.init({
                 clientId: "whatever-you-want",
                 scope: "launch launch/patient patient/read openid fhirUser",

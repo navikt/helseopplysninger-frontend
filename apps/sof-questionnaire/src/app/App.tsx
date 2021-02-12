@@ -8,7 +8,6 @@ import {QuestionnaireResponseContextProvider} from "./context/QuestionnaireRespo
 import {FhirContextProvider} from "./context/FhirContext";
 
 function App() {
-
     return (
         <BrowserRouter>
             <FhirContextProvider>
