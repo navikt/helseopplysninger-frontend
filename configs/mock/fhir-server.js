@@ -1,23 +1,21 @@
 const querystring = require('querystring');
 const uuid = require('uuid');
 const localHost = req => 'http://' + req.get('host');
-
+const fixtures = require('../../fixtures');
 /**
  *
  * @param {Express}app
  */
 module.exports = (app) => {
+
   const storage = {
-    Encounter: [require('../fixtures/Encounter.json')],
-    Patient: [require('../fixtures/Patient.json')],
-    Practitioner: [require('../fixtures/Practitioner.json')],
+    Encounter: [fixtures.Encounter],
+    Patient: [fixtures.Patient],
+    Practitioner: [fixtures.Practitioner],
     Questionnaire: [],
     QuestionnaireResponse: [],
   };
-  [
-    require('../fixtures/questionnaires/legeerklæring.json'),
-    require('../fixtures/questionnaires/med-perioder.json'),
-  ].forEach((questionnaire, index) => {
+  fixtures.Questionnaire.forEach((questionnaire, index) => {
     const id = 'Q-' + index;
     storage.Questionnaire.push({...questionnaire, id});
     storage.QuestionnaireResponse.push({

@@ -1,13 +1,21 @@
 version: '3.1'
 
 services:
-  launcher:
-    image: smartonfhir/smart-launcher
-    restart: always
+  hops-bestiller-backend:
+    build:
+      context: "."
+      args:
+        app: hops-bestiller-backend
     ports:
-      - 9009:80
-  db:
-    image: postgres
-    restart: always
+     - 8002:2022
+    environment:
+      - port=2022
+  sof-questionnaire:
+    build:
+      context: "."
+      args:
+        app: sof-questionnaire
     ports:
-      - 10864:5432
+      - 8003:2022
+    environment:
+      - port=2022

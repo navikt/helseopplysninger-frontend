@@ -6,7 +6,7 @@ function BestillingsListe() {
     const {questionnaireResponseList} = useUserContext();
     return (
         <div>
-            <ul>
+            <ul data-testid="tst123">
                 {questionnaireResponseList?.map(questionnaireResponse =>
                     <li>
                         Bestilling:

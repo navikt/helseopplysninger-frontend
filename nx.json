@@ -1,6 +1,6 @@
 {
   "npmScope": "navikt",
-  "affected": { "defaultBase": "master" },
+  "affected": { "defaultBase": "main" },
   "implicitDependencies": {
     "workspace.json": "*",
     "package.json": { "dependencies": "*", "devDependencies": "*" },
@@ -22,6 +22,7 @@
       "implicitDependencies": ["sof-questionnaire"]
     },
     "hops-bestiller-backend": { "tags": [] },
-    "fhir-questionnaire": { "tags": [] }
+    "fhir-questionnaire": { "tags": [] },
+    "fixtures": { "tags": [] }
   }
 }

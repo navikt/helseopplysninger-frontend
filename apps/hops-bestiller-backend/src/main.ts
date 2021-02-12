@@ -9,7 +9,7 @@ import helloWorld from "./app/hello-world";
 
 const app = express();
 helloWorld(app);
-const port = process.env.port || 3333;
+const port = process.env.PORT || 2022;
 const server = app.listen(port, () => {
     console.log(`Listening at http://localhost:${port}/api`);
 });

@@ -1,0 +1,78 @@
+name: default
+
+on:
+  push:
+    branches:
+      - "*"
+
+env: # Used by nais/deploy/actions/deploy.
+  IMAGE_PREFIX: docker.pkg.github.com/${{ github.repository }}
+
+
+jobs:
+  test:
+    name: Test and build
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - run: git fetch origin main
+      - name: Cache Node.js modules
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.OS }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.OS }}-node-
+            ${{ runner.OS }}-
+      - run: npm ci --no-audit --prefer-offline --no-optional --ignore-scripts
+      - id: set-matrix
+        run: echo "::set-output name=matrix::{\"appname\":$(npm run matrix --silent)}"
+      - run: npm run affected:test
+      - run: npm run affected:build
+      - name: Archive build artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: dist
+          path: dist
+          if-no-files-found: error
+          retention-days: 1
+
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    needs: test
+    strategy:
+      matrix: ${{fromJSON(needs.test.outputs.matrix)}}
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - id: create-tag
+        run: echo '::set-output name=SHORTSHA::'$(git rev-parse --short HEAD)
+      - uses: actions/download-artifact@v2
+        with:
+          name: dist
+          path: dist
+      - run: echo "deploying ${{ matrix.appname }}"
+      - uses: docker/build-push-action@v2
+        with:
+          push: false
+          context: .
+          tags: ${{ github.repository }}/${{ matrix.appname }}:${{ steps.create-tag.outputs.SHORTSHA }}
+          build-args: |
+            APPNAME=${{ matrix.appname }}
+
+      #- run: |
+      #    export IMAGE=${IMAGE_PREFIX}/${{ matrix.appname }}:$(git rev-parse --short HEAD)
+      #    echo building $IMAGE
+      #    docker build . --build-arg APPNAME=${{ matrix.appname }}  --pull --tag ${IMAGE}
+      #    echo "$GITHUB_TOKEN" | docker login --username "$GITHUB_REPOSITORY" --password-stdin https://docker.pkg.github.com
+      #    #docker push ${IMAGE}
+
+
+
+

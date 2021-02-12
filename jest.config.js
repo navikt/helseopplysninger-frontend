@@ -3,5 +3,6 @@ module.exports = {
     '<rootDir>/apps/sof-questionnaire',
     '<rootDir>/apps/hops-bestiller-backend',
     '<rootDir>/libs/fhir-questionnaire',
+    '<rootDir>/libs/fixtures',
   ],
 };
