@@ -5,9 +5,9 @@ on:
     branches:
       - "*"
 
-env: # Used by nais/deploy/actions/deploy.
-  IMAGE_PREFIX: docker.pkg.github.com/${{ github.repository }}
-
+env:
+  APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
+  NX_BASE: ""
 
 jobs:
   test:
@@ -21,6 +21,10 @@ jobs:
         with:
           fetch-depth: 0
       - run: git fetch origin main
+      - run: |
+          if [[ ${{ github.ref == 'refs/heads/main' }} == true ]]; then
+            echo "NX_BASE=~1" >> $GITHUB_ENV
+          fi
       - name: Cache Node.js modules
         uses: actions/cache@v2
         with:
@@ -58,20 +62,30 @@ jobs:
           name: dist
           path: dist
       - run: echo "deploying ${{ matrix.appname }}"
-      - uses: docker/build-push-action@v2
+      - name: Login to GitHub Packages Docker Registry
+        uses: docker/login-action@ab80d026d4753220c4243394c07c7d80f9638d06 # Use commit-sha1 instead of tag for security concerns
         with:
-          push: false
-          context: .
-          tags: ${{ github.repository }}/${{ matrix.appname }}:${{ steps.create-tag.outputs.SHORTSHA }}
-          build-args: |
-            APPNAME=${{ matrix.appname }}
-
-      #- run: |
-      #    export IMAGE=${IMAGE_PREFIX}/${{ matrix.appname }}:$(git rev-parse --short HEAD)
-      #    echo building $IMAGE
-      #    docker build . --build-arg APPNAME=${{ matrix.appname }}  --pull --tag ${IMAGE}
-      #    echo "$GITHUB_TOKEN" | docker login --username "$GITHUB_REPOSITORY" --password-stdin https://docker.pkg.github.com
-      #    #docker push ${IMAGE}
+          registry: ghcr.io
+          username: ${{ secrets.GHCR_PUSH_USERNAME }}
+          password: ${{ secrets.GHCR_PUSH_TOKEN }}
+      - name: Build and tag docker image
+        run: |
+          TAG=${{ steps.create-tag.outputs.SHORTSHA }}
+          IMAGE_BASE=ghcr.io/navikt/${{ matrix.appname }}
+          docker build --pull --tag ${IMAGE_BASE}:${TAG} --tag ${IMAGE_BASE}:latest --build-arg APPNAME=${{ matrix.appname }} .
+      - name: Push docker image
+        if: ${{ github.ref == 'refs/heads/main' }}
+        run: |
+          docker push ${IMAGE_BASE}:latest
+          docker push ${IMAGE_BASE}:${TAG}
+      - name: Deploy to Dev
+        uses: nais/deploy/actions/deploy@master
+        env:
+          IMAGE: ghcr.io/navikt/${{ matrix.appname }}:${{ steps.create-tag.outputs.SHORTSHA }}
+          CLUSTER: dev-gcp
+          DRY_RUN: ${{ github.ref != 'refs/heads/main' }}
+          VAR: ingress=https://${{ matrix.appname }}.dev.nav.no
+          RESOURCE:  apps/${{ matrix.appname }}/naiserator.yaml
 
 
 
