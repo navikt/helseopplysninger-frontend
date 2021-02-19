@@ -6,6 +6,9 @@ metadata:
   labels:
     team: helseopplysninger
 spec:
+  azure:
+    application:
+      enabled: true
   image: {{ image }}
   port: 2022
   team: helseopplysninger

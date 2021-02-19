@@ -15,6 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
+      changed: ${{ steps.set-matrix.outputs.changed }}
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
@@ -35,7 +36,9 @@ jobs:
             ${{ runner.OS }}-
       - run: npm ci --no-audit --prefer-offline --no-optional --ignore-scripts
       - id: set-matrix
-        run: echo "::set-output name=matrix::{\"appname\":$(npm run matrix --silent)}"
+        run: |
+          echo "::set-output name=matrix::{\"appname\":$(npm run matrix --silent)}"
+          echo "::set-output name=changed::$(npm run matrix --silent)"
       - run: npm run affected:test
       - run: npm run affected:build
       - name: Archive build artifacts
@@ -43,20 +46,22 @@ jobs:
         with:
           name: dist
           path: dist
-          if-no-files-found: error
           retention-days: 1
 
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
     needs: test
+    if: ${{ needs.test.outputs.changed != '[]' }}
     strategy:
       matrix: ${{fromJSON(needs.test.outputs.matrix)}}
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
-      - id: create-tag
-        run: echo '::set-output name=SHORTSHA::'$(git rev-parse --short HEAD)
+      - id: tag
+        run: |
+          echo '::set-output name=sha::'$(git rev-parse --short HEAD)
+          echo '::set-output name=base::ghcr.io/navikt/'${{ matrix.appname }}
       - uses: actions/download-artifact@v2
         with:
           name: dist
@@ -70,23 +75,19 @@ jobs:
           password: ${{ secrets.GHCR_PUSH_TOKEN }}
       - name: Build and tag docker image
         run: |
-          TAG=${{ steps.create-tag.outputs.SHORTSHA }}
-          IMAGE_BASE=ghcr.io/navikt/${{ matrix.appname }}
-          docker build --pull --tag ${IMAGE_BASE}:${TAG} --tag ${IMAGE_BASE}:latest --build-arg APPNAME=${{ matrix.appname }} .
+          docker build --pull \
+            --tag ${{ steps.tag.outputs.base }}:${{ steps.tag.outputs.sha }} \
+            --tag ${{ steps.tag.outputs.base }}:latest --build-arg APPNAME=${{ matrix.appname }} .
       - name: Push docker image
         if: ${{ github.ref == 'refs/heads/main' }}
         run: |
-          docker push ${IMAGE_BASE}:latest
-          docker push ${IMAGE_BASE}:${TAG}
+          docker push ${{ steps.tag.outputs.base }}:latest
+          docker push ${{ steps.tag.outputs.base }}:${{ steps.tag.outputs.sha }}
       - name: Deploy to Dev
         uses: nais/deploy/actions/deploy@master
         env:
-          IMAGE: ghcr.io/navikt/${{ matrix.appname }}:${{ steps.create-tag.outputs.SHORTSHA }}
+          IMAGE: ${{ steps.tag.outputs.base }}:${{ steps.tag.outputs.sha }}
           CLUSTER: dev-gcp
           DRY_RUN: ${{ github.ref != 'refs/heads/main' }}
           VAR: ingress=https://${{ matrix.appname }}.dev.nav.no
           RESOURCE:  apps/${{ matrix.appname }}/naiserator.yaml
-
-
-
-
