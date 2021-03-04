@@ -18,17 +18,20 @@ spec:
     path: /internal/is-ready
   resources:
     limits:
-      cpu: 200m
+      cpu: 400m
       memory: 512Mi
     requests:
-      cpu: 100m
-      memory: 256Mi
+      cpu: 200m
+      memory: 128Mi
   replicas:
     min: 1
     max: 2
-    cpuThresholdPercentage: 90
+    cpuThresholdPercentage: 50
   prometheus:
     enabled: false
     path: /internal/prometheus
   ingresses:
     - {{ingress}}
+  env:
+    - name: APP_INGRESS
+      value: {{ingress}}

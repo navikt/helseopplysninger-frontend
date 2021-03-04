@@ -1,21 +1,33 @@
 version: '3.1'
 
 services:
-  hops-bestiller-backend:
+  bestiller-backend:
     build:
       context: "."
       args:
-        app: hops-bestiller-backend
+        APPNAME: hops-bestiller-backend
     ports:
      - 8002:2022
     environment:
-      - port=2022
+      - PORT=2022
+      - APP_INGRESS=http://localhost:8002
+    env_file:
+      - .env
+    depends_on:
+      - "mock-oauth2-server"
   sof-questionnaire:
     build:
       context: "."
       args:
-        app: sof-questionnaire
+        APPNAME: sof-questionnaire
     ports:
       - 8003:2022
     environment:
       - port=2022
+  mock-oauth2-server:
+    image: docker.pkg.github.com/navikt/mock-oauth2-server/mock-oauth2-server:0.3.1
+    ports:
+      - 8030:8030
+    environment:
+      - SERVER_PORT=8030
+    hostname: host.docker.internal
