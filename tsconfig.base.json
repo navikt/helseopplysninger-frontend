@@ -18,7 +18,8 @@
       "@navikt/fhir-questionnaire": ["libs/fhir-questionnaire/src/index.ts"],
       "@navikt/fixtures": ["libs/fixtures/src/index.ts"]
     },
-    "types": ["jest", "node"]
+    "types": ["jest", "node"],
+    "allowSyntheticDefaultImports": true
   },
   "exclude": ["node_modules", "tmp"]
 }

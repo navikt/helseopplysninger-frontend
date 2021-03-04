@@ -51,6 +51,7 @@ jobs:
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
+    timeout-minutes: 3
     needs: test
     if: ${{ needs.test.outputs.changed != '[]' }}
     strategy:

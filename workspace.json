@@ -123,6 +123,9 @@
             "{options.outputPath}"
           ],
           "options": {
+            "externalDependencies": "none",
+            "generatePackageJson": true,
+            "showCircularDependencies": false,
             "outputPath": "dist/apps/hops-bestiller-backend",
             "main": "apps/hops-bestiller-backend/src/main.ts",
             "tsConfig": "apps/hops-bestiller-backend/tsconfig.app.json",
