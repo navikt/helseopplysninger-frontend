@@ -20,7 +20,7 @@ async function bootstrap() {
         internals
     ].forEach(f => f(app))
 
-    const {port,ingress} = server;
+    const {port, ingress} = server;
     app.listen(port, () => {
         logger.info(`Listening at ${ingress}/api`);
     }).on('error', console.error);

@@ -1,4 +1,4 @@
-import {custom, Issuer, Strategy} from 'openid-client';
+import {custom, Issuer} from 'openid-client';
 
 import {azureAd} from '../config';
 import httpProxy from '../proxy/http-proxy';

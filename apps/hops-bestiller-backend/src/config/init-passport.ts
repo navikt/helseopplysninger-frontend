@@ -4,8 +4,6 @@ import createAzureClient from "../auth/create-azure-client";
 import createStrategy from "../auth/strategy";
 import bodyParser from "body-parser";
 
-const users = new Map();
-
 async function initPassport(app: Express): Promise<void> {
     app.use(bodyParser.urlencoded({extended: false}));
     app.use(bodyParser.json());
@@ -14,27 +12,10 @@ async function initPassport(app: Express): Promise<void> {
     const azureAuthClient = await createAzureClient();
     passport.use('azureOidc', createStrategy(azureAuthClient));
     passport.serializeUser(function (user, done) {
-        users.set(user.claims.sub, user)
-        done(null, user.claims.sub);
+        done(null, user);
     });
-    passport.deserializeUser(function (sub, done) {
-        if(users.has(sub)){
-            done(null, users.get(sub));
-        } else {
-            done(null, null);
-        }
-
-        /*
-        const user = users.find(u => u.sub === sub);
-        if (user) {
-            done(null, user);
-        } else {
-            const newFetchedUser = await getUserInfoFromGraphApi(sub, azureAuthClient);
-            newFetchedUser.sub = sub;
-            users.push(newFetchedUser);
-            done(null, newFetchedUser);
-        }
-         */
+    passport.deserializeUser(function (user, done) {
+        done(null, user);
     });
 
     app.use((req, res, next) => {
@@ -49,7 +30,7 @@ async function initPassport(app: Express): Promise<void> {
     app.get('/oauth2/callback', (req, res, next) => {
         passport.authenticate('azureOidc', {response: res})(req, res, next);
 
-    },(req, res) => {
+    }, (req, res) => {
         res.redirect("/api");
     });
 
