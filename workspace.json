@@ -130,7 +130,8 @@
             "main": "apps/hops-bestiller-backend/src/main.ts",
             "tsConfig": "apps/hops-bestiller-backend/tsconfig.app.json",
             "assets": [
-              "apps/hops-bestiller-backend/src/assets"
+              "apps/hops-bestiller-backend/src/assets",
+              "apps/hops-bestiller-backend/src/migrations"
             ]
           },
           "configurations": {
