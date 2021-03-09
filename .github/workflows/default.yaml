@@ -51,7 +51,7 @@ jobs:
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
-    timeout-minutes: 3
+    timeout-minutes: 4
     needs: test
     if: ${{ needs.test.outputs.changed != '[]' }}
     strategy:
@@ -80,7 +80,7 @@ jobs:
             --tag ${{ steps.tag.outputs.base }}:${{ steps.tag.outputs.sha }} \
             --tag ${{ steps.tag.outputs.base }}:latest --build-arg APPNAME=${{ matrix.appname }} .
       - name: Push docker image
-        if: ${{ github.ref == 'refs/heads/main' }}
+        #if: ${{ github.ref == 'refs/heads/main' }}
         run: |
           docker push ${{ steps.tag.outputs.base }}:latest
           docker push ${{ steps.tag.outputs.base }}:${{ steps.tag.outputs.sha }}
@@ -89,6 +89,6 @@ jobs:
         env:
           IMAGE: ${{ steps.tag.outputs.base }}:${{ steps.tag.outputs.sha }}
           CLUSTER: dev-gcp
-          DRY_RUN: ${{ github.ref != 'refs/heads/main' }}
+          #DRY_RUN: ${{ github.ref != 'refs/heads/main' }}
           VAR: ingress=https://${{ matrix.appname }}.dev.nav.no
           RESOURCE:  apps/${{ matrix.appname }}/naiserator.yaml

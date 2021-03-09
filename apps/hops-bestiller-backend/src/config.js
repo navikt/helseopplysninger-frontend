@@ -11,7 +11,7 @@ const envVar = (name, required = true) => {
 const server = {
   // port for your application
   port: envVar('PORT', false) || 2022,
-
+  ingress: envVar('APP_INGRESS', true),
   // optional, only set if requests to Azure AD must be performed through a corporate proxy (i.e. traffic to login.microsoftonline.com is blocked by the firewall)
   proxy: envVar('HTTP_PROXY', false),
 
@@ -49,7 +49,6 @@ const reverseProxy = {
   clientId: envVar('DOWNSTREAM_API_CLIENT_ID', false),
   path: envVar('DOWNSTREAM_API_PATH', false) || 'downstream',
   url: envVar('DOWNSTREAM_API_URL', false),
-  ingress: envVar('APP_INGRESS', true),
 };
 
 export {

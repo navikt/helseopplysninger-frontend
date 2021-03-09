@@ -9,6 +9,9 @@ spec:
   azure:
     application:
       enabled: true
+      claims:
+        extra:
+          - "NAVident"
   image: {{ image }}
   port: 2022
   team: helseopplysninger

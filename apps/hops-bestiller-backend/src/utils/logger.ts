@@ -1,4 +1,4 @@
-import {createLogger, LogContexts, LogLevels} from 'bs-logger';
+import {createLogger, LogContexts, LogLevels,logLevelNameFor} from 'bs-logger';
 
 const logger = createLogger({
     context: {namespace: 'http'},
@@ -7,7 +7,7 @@ const logger = createLogger({
     translate: msg => {
         return {
             msg: msg.message,
-            level: msg.context[LogContexts.logLevel],
+            level: logLevelNameFor(msg.context[LogContexts.logLevel]),
             time: msg.time
         };
     }

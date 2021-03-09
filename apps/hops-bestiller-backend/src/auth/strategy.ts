@@ -1,6 +1,5 @@
 import {Strategy} from "openid-client";
 import {azureAd} from '../config';
-import authUtils from './utils';
 
 const createStrategy = client => {
     return new Strategy({
@@ -17,10 +16,7 @@ const createStrategy = client => {
             return done(null, false)
         }
         const user = {
-            'tokenSets': {
-                [authUtils.tokenSetSelfId]: tokenSet
-            },
-            'claims': tokenSet.claims()
+            'token': tokenSet,
         };
         return done(null, user);
     });
