@@ -50,9 +50,17 @@ const reverseProxy = {
   path: envVar('DOWNSTREAM_API_PATH', false) || 'downstream',
   url: envVar('DOWNSTREAM_API_URL', false),
 };
+const database = {
+  user: envVar('DB_USERNAME', true),
+  host: envVar('DB_HOST', true),
+  database: envVar('DB_DATABASE', true),
+  password: envVar('DB_PASSWORD', true),
+  port: envVar('DB_PORT', true),
+};
 
 export {
-  server,
   azureAd,
+  database,
   reverseProxy,
+  server,
 };

@@ -6,6 +6,12 @@ metadata:
   labels:
     team: helseopplysninger
 spec:
+  gcp:
+    sqlInstances:
+      - type: POSTGRES_12
+        databases:
+          - name: hops-bestiller
+            envVarPrefix: DB
   azure:
     application:
       enabled: true
