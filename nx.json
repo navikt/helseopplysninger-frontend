@@ -1,28 +1,42 @@
 {
-  "npmScope": "navikt",
-  "affected": { "defaultBase": "main" },
   "implicitDependencies": {
     "workspace.json": "*",
-    "package.json": { "dependencies": "*", "devDependencies": "*" },
+    "package.json": {
+      "dependencies": "*",
+      "devDependencies": "*"
+    },
     "tsconfig.base.json": "*",
     "tslint.json": "*",
     ".eslintrc.json": "*",
     "nx.json": "*"
   },
+  "affected": {
+    "defaultBase": "main"
+  },
+  "npmScope": "navikt",
   "tasksRunnerOptions": {
     "default": {
       "runner": "@nrwl/workspace/tasks-runners/default",
-      "options": { "cacheableOperations": ["build", "lint", "test", "e2e"] }
+      "options": {
+        "cacheableOperations": ["build", "lint", "test", "e2e"]
+      }
     }
   },
   "projects": {
-    "sof-questionnaire": { "tags": [] },
-    "sof-questionnaire-e2e": {
-      "tags": [],
-      "implicitDependencies": ["sof-questionnaire"]
+    "sof-questionnaire": {
+      "tags": []
     },
-    "hops-bestiller-backend": { "tags": [] },
-    "fhir-questionnaire": { "tags": [] },
-    "fixtures": { "tags": [] }
+    "hops-bestiller-backend": {
+      "tags": []
+    },
+    "fhir-questionnaire": {
+      "tags": []
+    },
+    "fixtures": {
+      "tags": []
+    },
+    "hops-bestiller-frontend": {
+      "tags": []
+    }
   }
 }

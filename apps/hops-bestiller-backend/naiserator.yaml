@@ -22,9 +22,9 @@ spec:
   port: 2022
   team: helseopplysninger
   liveness:
-    path: /internal/is-alive
+    path: /api/internal/is-alive
   readiness:
-    path: /internal/is-ready
+    path: /api/internal/is-ready
   resources:
     limits:
       cpu: 400m
@@ -38,9 +38,10 @@ spec:
     cpuThresholdPercentage: 50
   prometheus:
     enabled: false
-    path: /internal/prometheus
+    path: /api/internal/prometheus
   ingresses:
-    - {{ingress}}
+    - {{hops-ingress}}/api
+    - {{hops-ingress}}/oauth2
   env:
     - name: APP_INGRESS
-      value: {{ingress}}
+      value: {{hops-ingress}}

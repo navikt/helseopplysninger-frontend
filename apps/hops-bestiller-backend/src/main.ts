@@ -4,7 +4,7 @@
  */
 
 import * as express from 'express';
-import helloWorld from "./app/hello-world";
+import defaults from "./app/defaults";
 import internals from "./app/internals";
 import {initPassport} from "./config/init-passport"
 import initSession from "./config/init-session";
@@ -22,7 +22,7 @@ async function bootstrap() {
     initSession(app);
     await initPassport(app);
     [
-        helloWorld,
+        defaults,
         internals
     ].forEach(f => f(app))
 

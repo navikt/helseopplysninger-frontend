@@ -1,18 +1,18 @@
 apiVersion: "nais.io/v1alpha1"
 kind: "Application"
 metadata:
-  name: sof-questionnaire
+  name: hops-bestiller-frontend
   namespace: helseopplysninger
   labels:
     team: helseopplysninger
 spec:
-  image: {{ image }}
+  image: {{image}}
   port: 2022
   team: helseopplysninger
   liveness:
-    path: /questionnaire/internal/health
+    path: /gui/internal/health
   readiness:
-    path: /questionnaire/internal/health
+    path: /gui/internal/health
   resources:
     limits:
       cpu: 200m
@@ -26,6 +26,7 @@ spec:
     cpuThresholdPercentage: 90
   prometheus:
     enabled: false
-    path: /questionnaire/internal/prometheus
+    path: /gui/internal/prometheus
   ingresses:
-    - {{sof-ingress}}/questionnaire
+    - {{hops-ingress}}
+    - {{hops-ingress}}/gui

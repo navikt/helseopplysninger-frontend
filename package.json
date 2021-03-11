@@ -8,12 +8,10 @@
     "build": "nx build",
     "test": "nx test",
     "lint": "nx workspace-lint && nx lint",
-    "e2e": "nx e2e",
     "ch": "echo $LESS",
     "affected:apps": "nx affected:apps --plain --base=remotes/origin/main$NX_BASE",
     "affected:libs": "nx affected:libs --base=remotes/origin/main$NX_BASE",
     "affected:build": "nx affected:build --base=remotes/origin/main$NX_BASE",
-    "affected:e2e": "nx affected:e2e --base=remotes/origin/main$NX_BASE",
     "affected:test": "nx affected:test --base=remotes/origin/main$NX_BASE",
     "affected:lint": "nx affected:lint --base=remotes/origin/main$NX_BASE",
     "affected:dep-graph": "nx affected:dep-graph --base=remotes/origin/main$NX_BASE",
@@ -26,7 +24,7 @@
     "dep-graph": "nx dep-graph",
     "help": "nx help",
     "matrix": "nx affected:apps --plain --base=remotes/origin/main$NX_BASE|tr -d '\\n'|jq -cRs 'split(\" \")'",
-    "up": "npm run affected:build && docker-compose -p hops --env-file ./.env up -d --build "
+    "up": "npm run affected:build && docker-compose -p hops --env-file ./.env up -d --build --remove-orphans"
   },
   "private": true,
   "dependencies": {
@@ -97,6 +95,7 @@
     "@types/hapi": "^18.0.5",
     "@types/jest": "^26.0.8",
     "@types/node": "^14.14.31",
+    "@types/passport": "^1.0.6",
     "@types/pg": "^7.14.11",
     "@types/react": "^16.9.56",
     "@types/react-dom": "^16.9.9",
