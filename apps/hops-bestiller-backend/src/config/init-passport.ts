@@ -3,6 +3,7 @@ import passport from "passport";
 import createAzureClient from "../auth/create-azure-client";
 import createStrategy from "../auth/strategy";
 import bodyParser from "body-parser";
+import {API_CALLBACK_PATH, API_LOGIN_PATH, API_PATH} from "../paths";
 
 async function initPassport(app: Express): Promise<void> {
     app.use(bodyParser.urlencoded({extended: false}));
@@ -10,7 +11,8 @@ async function initPassport(app: Express): Promise<void> {
     app.use(passport.initialize());
     app.use(passport.session());
     const azureAuthClient = await createAzureClient();
-    passport.use('azureOidc', createStrategy(azureAuthClient));
+    const strategyName = 'azureOidc'
+    passport.use(strategyName, createStrategy(azureAuthClient));
     passport.serializeUser(function (user, done) {
         done(null, user);
     });
@@ -22,16 +24,19 @@ async function initPassport(app: Express): Promise<void> {
         next();
     })
 
-    app.get('/login', (req, res, next) => {
-        passport.authenticate('azureOidc', {response: res})(req, res, next);
+    app.get(API_LOGIN_PATH, (req, res, next) => {
+        // @ts-ignore
+        passport.authenticate(strategyName, {response: res})(req, res, next);
     }, (req, res) => {
         res.send({result: 'succeeded'});
     });
-    app.get('/oauth2/callback', (req, res, next) => {
-        passport.authenticate('azureOidc', {response: res})(req, res, next);
+
+    app.get(API_CALLBACK_PATH, (req, res, next) => {
+        // @ts-ignore
+        passport.authenticate(strategyName, {response: res})(req, res, next);
 
     }, (req, res) => {
-        res.redirect("/api");
+        res.redirect(API_PATH);
     });
 
 }

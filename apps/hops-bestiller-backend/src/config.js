@@ -10,7 +10,7 @@ const envVar = (name, required = true) => {
 
 const server = {
   // port for your application
-  port: envVar('PORT', false) || 2022,
+  port: envVar('SERVER_PORT', false) || 2022,
   ingress: envVar('APP_INGRESS', true),
   // optional, only set if requests to Azure AD must be performed through a corporate proxy (i.e. traffic to login.microsoftonline.com is blocked by the firewall)
   proxy: envVar('HTTP_PROXY', false),
@@ -32,7 +32,7 @@ const azureAd = {
   // not provided by NAIS, must be configured
   // where the user should be redirected after authenticating at the third party
   // should be "$host + /oauth2/callback", e.g. http://localhost:3000/oauth2/callback
-  redirectUri: envVar('APP_INGRESS', true) + '/oauth2/callback',
+  redirectUri: envVar('APP_INGRESS', true) + '/api/oauth2/callback',
 
   // not provided by NAIS, must be configured
   // where your application should redirect the user after logout

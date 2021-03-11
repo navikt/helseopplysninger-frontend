@@ -90,5 +90,5 @@ jobs:
           IMAGE: ${{ steps.tag.outputs.base }}:${{ steps.tag.outputs.sha }}
           CLUSTER: dev-gcp
           #DRY_RUN: ${{ github.ref != 'refs/heads/main' }}
-          VAR: ingress=https://${{ matrix.appname }}.dev.nav.no
-          RESOURCE:  apps/${{ matrix.appname }}/naiserator.yaml
+          VARS: .nais/dev.json
+          RESOURCE: apps/${{ matrix.appname }}/naiserator.yaml
