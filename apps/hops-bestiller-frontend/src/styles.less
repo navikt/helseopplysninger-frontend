@@ -1,1 +1,27 @@
-/* You can add global styles to this file, and also import other style files */
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-width: max-content;
+  flex: 1;
+}
+body {
+  background-color: var(--navds-color-background);
+  font-family: 'Source Sans Pro', Helvetica, sans-serif;
+  min-width: max-content;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  &.ReactModal__Body--open {
+    overflow: hidden;
+  }
+}
+
+.main {
+  margin-top: 1em;
+}
+
+.typo-normal {
+  color: var(--navds-color-text-primary);
+}

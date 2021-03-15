@@ -2,11 +2,11 @@ import {Express} from "express";
 import getUserFromToken from "../auth/get-user-from-token";
 import {JWT} from "jose";
 import {azureAd} from "../config";
-import {API_PATH, API_USER_PATH} from "../paths";
+import {BackendPaths} from "@navikt/hops-types";
 
 function defaults(app: Express): void {
 
-    app.get(API_PATH, (req: any, res) => {
+    app.get(BackendPaths.PATH, (req: any, res) => {
         res.send({
             application: 'hops-bestiller-backend!',
             isAuthenticated: req.isAuthenticated(),
@@ -17,7 +17,7 @@ function defaults(app: Express): void {
         });
     });
 
-    app.get(API_USER_PATH, (req: any, res) => {
+    app.get(BackendPaths.USER_PATH, (req: any, res) => {
         res.send(getUserFromToken(req.user.token.access_token));
     });
 }

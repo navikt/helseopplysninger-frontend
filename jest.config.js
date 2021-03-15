@@ -5,5 +5,6 @@ module.exports = {
     '<rootDir>/libs/fhir-questionnaire',
     '<rootDir>/libs/fixtures',
     '<rootDir>/apps/hops-bestiller-frontend',
+    '<rootDir>/libs/hops-types',
   ],
 };

@@ -4,8 +4,8 @@
  */
 
 import * as express from 'express';
-import defaults from "./app/defaults";
-import internals from "./app/internals";
+import defaults from "./routes/defaults";
+import internals from "./routes/internals";
 import {initPassport} from "./config/init-passport"
 import initSession from "./config/init-session";
 import {server} from "./config.js";
@@ -13,6 +13,7 @@ import logger from "./utils/logger";
 import dbPool from "./database/connection";
 import runMigrations from "./database/run-migration";
 import path from "path";
+import patient from "./routes/patient";
 
 
 async function bootstrap() {
@@ -23,7 +24,8 @@ async function bootstrap() {
     await initPassport(app);
     [
         defaults,
-        internals
+        internals,
+        patient
     ].forEach(f => f(app))
 
     const {port, ingress} = server;
