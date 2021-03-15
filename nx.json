@@ -37,6 +37,9 @@
     },
     "hops-bestiller-frontend": {
       "tags": []
+    },
+    "hops-types": {
+      "tags": []
     }
   }
 }

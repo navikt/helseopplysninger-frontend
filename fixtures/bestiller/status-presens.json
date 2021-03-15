@@ -1,0 +1,77 @@
+{
+  "status": {
+    "type": "tett",
+    "navn": "Behov for tett oppfølging",
+    "endret": "2020-09-11"
+  },
+  "diagnoser": [
+    {
+      "id": "opplysning-diagnoser-1",
+      "type": "Hoveddiagnose",
+      "tekst": "H82 Svimmelhet/vertigo labyrinitt (ICD-10)",
+      "endret": "2020-09-11"
+    },
+    {
+      "id": "opplysning-diagnoser-2",
+      "type": "Bidiagnose",
+      "tekst": "K01 Brystsmerte ved anstrengelse (ICD-10)",
+      "endret": "2020-09-11"
+    }
+  ],
+  "opplysninger": [
+    {
+      "id": "opplysning-1",
+      "type": "Funksjonsevne",
+      "states": [
+        {
+          "tekst": [
+            "Pasienten kan bare konsentrere seg noen timer av gangen",
+            "Pasienten kan ikke gå eller stå oppreist i lengre perioder",
+            "Pasienten kan ikke betjene maskiner og farlig utstyr"
+          ],
+          "endret": "2020-09-11"
+        }
+      ]
+    },
+    {
+      "id": "opplysning-2",
+      "type": "Arbeidsevne",
+      "states": [
+        {
+          "tekst": [
+            "Pasienten kan ikke fortsette som steinghogger hos Acme AS",
+            "Pasienten kan jobbe noen dager i uka",
+            "Arbeidsoppgaver: Forefallende kontorarbeid, salg o.l."
+          ],
+          "endret": "2020-09-11"
+        }
+      ]
+    },
+    {
+      "id": "opplysning-3",
+      "type": "Behandlingsplan",
+      "states": [
+        {
+          "tekst": [
+            "Intensiv svimmelhetsmestringsbehandling 01.01.2021 - 31.05.2021"
+          ],
+          "endret": "2020-09-11"
+        }
+      ]
+    },
+    {
+      "id": "opplysning-4",
+      "type": "Prognose",
+      "states": [
+        {
+          "tekst": [
+            "Tilstanden er kronisk",
+            "Varig funksjons- og arbeisevne",
+            "Gradert arbeid inntil 50% mulig etter endt behandling"
+          ],
+          "endret": "2020-09-11"
+        }
+      ]
+    }
+  ]
+}

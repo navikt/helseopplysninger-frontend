@@ -1,14 +1,13 @@
-import {JWT} from "jose";
+import {JWT} from 'jose';
+import {AccessToken, Brukerinfo} from '@navikt/hops-types';
 
 
-function getUserFromToken(accessToken) {
-    const tokenContent = JWT.decode(accessToken);
+function getUserFromToken(accessToken): Brukerinfo {
+    const tokenContent = JWT.decode(accessToken) as AccessToken;
     return {
-        // @ts-ignore
-        name: tokenContent.name || tokenContent.sub,
-        // @ts-ignore
-        NAVident: tokenContent.NAVident || tokenContent.jti,
-    }
+        navn: tokenContent.name || tokenContent.sub,
+        ident: tokenContent.NAVident || tokenContent.jti,
+    };
 }
 
 export default getUserFromToken;

@@ -269,6 +269,27 @@
           }
         }
       }
+    },
+    "hops-types": {
+      "root": "libs/hops-types",
+      "sourceRoot": "libs/hops-types/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/hops-types/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/hops-types"],
+          "options": {
+            "jestConfig": "libs/hops-types/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   }
 }

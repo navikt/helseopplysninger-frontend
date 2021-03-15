@@ -1,0 +1,85 @@
+[
+  {
+    "id": "event-1",
+    "periode": [
+      "2020-01-01",
+      "2020-10-02"
+    ],
+    "type": "Sykemelding",
+    "icon": "bandage",
+    "status": "Mottatt"
+  },
+  {
+    "id": "event-2",
+    "periode": [
+      "2020-01-01",
+      "2020-10-02"
+    ],
+    "type": "Sykemelding (7)",
+    "icon": "bandage",
+    "status": "Mottatt"
+  },
+  {
+    "id": "event-3",
+    "periode": [
+      "2020-01-01",
+      "2020-10-02"
+    ],
+    "type": "Sykemelding (17)",
+    "icon": "bandage",
+    "status": "Mottatt"
+  },
+  {
+    "id": "event-4",
+    "periode": [
+      "2020-01-01",
+      "2020-10-02"
+    ],
+    "type": "Sykemelding (39)",
+    "icon": "bandage",
+    "status": "Mottatt"
+  },
+  {
+    "id": "event-5",
+    "periode": [
+      "2020-01-01",
+      "2020-10-02"
+    ],
+    "type": "Notat",
+    "icon": "note",
+    "status": "Delt med legen"
+  },
+  {
+    "id": "event-6",
+    "periode": [
+      "2020-01-01",
+      "2020-10-02"
+    ],
+    "type": "11-5",
+    "icon": "legal",
+    "status": "Ikke mottatt",
+    "aksjoner": [
+      "Send Purring"
+    ]
+  },
+  {
+    "id": "event-7",
+    "periode": [
+      "2020-01-01",
+      "2020-10-02"
+    ],
+    "type": "AAP innvilget",
+    "icon": "info",
+    "status": null
+  },
+  {
+    "id": "event-8",
+    "periode": [
+      "2020-01-01",
+      "2020-10-02"
+    ],
+    "type": "Oppfølging",
+    "icon": "dialogue",
+    "status": "Venter"
+  }
+]
