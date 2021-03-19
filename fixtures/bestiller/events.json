@@ -5,9 +5,14 @@
       "2020-01-01",
       "2020-10-02"
     ],
-    "type": "Sykemelding",
-    "icon": "bandage",
-    "status": "Mottatt"
+    "type": {
+      "tekst": "Sykemelding",
+      "icon": "Bandage"
+    },
+    "status": {
+      "type": "suksess",
+      "tekst": "Mottatt"
+    }
   },
   {
     "id": "event-2",
@@ -15,9 +20,14 @@
       "2020-01-01",
       "2020-10-02"
     ],
-    "type": "Sykemelding (7)",
-    "icon": "bandage",
-    "status": "Mottatt"
+    "type": {
+      "tekst": "Sykemelding (7)",
+      "icon": "Bandage"
+    },
+    "status": {
+      "type": "suksess",
+      "tekst": "Mottatt"
+    }
   },
   {
     "id": "event-3",
@@ -25,9 +35,14 @@
       "2020-01-01",
       "2020-10-02"
     ],
-    "type": "Sykemelding (17)",
-    "icon": "bandage",
-    "status": "Mottatt"
+    "type": {
+      "tekst": "Sykemelding (17)",
+      "icon": "Bandage"
+    },
+    "status": {
+      "type": "suksess",
+      "tekst": "Mottatt"
+    }
   },
   {
     "id": "event-4",
@@ -35,9 +50,14 @@
       "2020-01-01",
       "2020-10-02"
     ],
-    "type": "Sykemelding (39)",
-    "icon": "bandage",
-    "status": "Mottatt"
+    "type": {
+      "tekst": "Sykemelding (39)",
+      "icon": "Bandage"
+    },
+    "status": {
+      "type": "suksess",
+      "tekst": "Mottatt"
+    }
   },
   {
     "id": "event-5",
@@ -45,9 +65,14 @@
       "2020-01-01",
       "2020-10-02"
     ],
-    "type": "Notat",
-    "icon": "note",
-    "status": "Delt med legen"
+    "type": {
+      "tekst": "Notat",
+      "icon": "FileContent"
+    },
+    "status": {
+      "type": "info",
+      "tekst": "Delt med legen"
+    }
   },
   {
     "id": "event-6",
@@ -55,9 +80,14 @@
       "2020-01-01",
       "2020-10-02"
     ],
-    "type": "11-5",
-    "icon": "legal",
-    "status": "Ikke mottatt",
+    "type": {
+      "tekst": "11-5",
+      "icon": "Law"
+    },
+    "status": {
+      "type": "advarsel",
+      "tekst": "Ikke mottatt"
+    },
     "aksjoner": [
       "Send Purring"
     ]
@@ -68,8 +98,10 @@
       "2020-01-01",
       "2020-10-02"
     ],
-    "type": "AAP innvilget",
-    "icon": "info",
+    "type": {
+      "tekst": "AAP innvilget",
+      "icon": "Information"
+    },
     "status": null
   },
   {
@@ -78,8 +110,13 @@
       "2020-01-01",
       "2020-10-02"
     ],
-    "type": "Oppfølging",
-    "icon": "dialogue",
-    "status": "Venter"
+    "type": {
+      "tekst": "Oppfølging",
+      "icon": "DialogDots"
+    },
+    "status": {
+      "type": "info",
+      "tekst": "Venter"
+    }
   }
 ]

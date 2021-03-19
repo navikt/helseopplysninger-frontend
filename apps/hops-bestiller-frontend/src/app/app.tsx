@@ -9,7 +9,10 @@ export function App() {
     return (
         <>
             <Route path="/" exact component={HelloWorldRoute}/>
-            <Route path="/patient/:patientId" exact>
+            <Route path={[
+                "/patient/:patientId",
+                "/patient/:patientId/:eventId"
+            ]} exact>
                 <PatientContextProvider>
                     <PatientRoute/>
                 </PatientContextProvider>

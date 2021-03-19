@@ -6,7 +6,8 @@ const path = require('path');
 app.get('/gui/internal/health', (req, res) => res.status(200).send('Ok!'));
 app.use(express.static('dist'));
 [
-  '/patient/:patientId',
+  "/patient/:patientId",
+  "/patient/:patientId/:eventId"
 ].forEach(route => {
   app.get(route, (req, res) => res.sendFile(path.join(__dirname, 'dist/index.html')));
 });

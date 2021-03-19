@@ -16,7 +16,7 @@ import TextItem from "./items/TextItem";
 import TimeItem from "./items/TimeItem";
 import UrlItem from "./items/UrlItem";
 import ItemContainer from "./ItemContainer";
-import {FaInfoCircle} from 'react-icons/fa';
+import {Information} from "@navikt/ds-icons";
 
 const ItemMapper: React.FunctionComponent<ItemProps> = (
     {
@@ -38,7 +38,7 @@ const ItemMapper: React.FunctionComponent<ItemProps> = (
         linkId: questionnaireItem.linkId,
     }
     return <ItemContainer key={responseItem.id}>
-        <FaInfoCircle
+        <Information
             style={{float: "right", position: "relative", zIndex: 1}}
             onClick={(e: any) => setAnker(anker ? undefined : e.currentTarget)}
         />
