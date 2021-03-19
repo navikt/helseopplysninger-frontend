@@ -1,24 +1,42 @@
 import {useParams} from "react-router";
 import React, {useContext, useEffect, useState} from "react";
 import axios from "axios";
-import {BackendPaths} from "@navikt/hops-types";
+import {BackendPaths, PatientEvent, StatusPresens} from "@navikt/hops-types";
 
-const PatientContext = React.createContext({
+
+interface ParamTypes {
+    patientId: string;
+    eventId?: string;
+}
+
+interface ContextProps {
+    patientId?: string;
+    patientData?: {
+        name: string;
+    };
+    practitioner?: {
+        id: string;
+        name: string;
+    }
+    statusPresens?: StatusPresens,
+    events: PatientEvent[],
+}
+
+const PatientContext = React.createContext<Partial<ContextProps>>({
     statusPresens: null,
     events: [],
 })
 
-interface ParamTypes {
-    patientId: string
-}
-
 
 const PatientContextProvider = (props: any) => {
-    let {patientId} = useParams<ParamTypes>()
-    const [patient, setPatient] = useState({
+    let {patientId,eventId} = useParams<ParamTypes>()
+
+    const [patient, setPatient] = useState<ContextProps>({
+        patientId: patientId,
         statusPresens: null,
         events: [],
     });
+    const [selectedEvent,setSelectedEvent] = useState(null);
     useEffect(() => {
         async function fetch() {
             // @TODO parallelize
@@ -32,7 +50,16 @@ const PatientContextProvider = (props: any) => {
 
         if (patientId) fetch().then(null);
     }, [patientId]);
-    console.log("I was rendered", patientId);
+    useEffect(() => {
+        async function fetch() {
+            const eventRes = await axios.get(BackendPaths.PATIENT_STATUS_PRESENS
+                .replace(":eventId", eventId));
+            setSelectedEvent(eventRes.data);
+        }
+
+        if (eventId) fetch().then(null);
+    }, [eventId]);
+
     return (
         <PatientContext.Provider value={patient}>
             {props.children}

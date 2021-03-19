@@ -1,6 +1,3 @@
-export function types(): string {
-    return 'types';
-}
 
 export type Brukerinfo = {
     navn: string;
