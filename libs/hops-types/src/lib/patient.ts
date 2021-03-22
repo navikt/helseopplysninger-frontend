@@ -4,25 +4,29 @@ export type StatusPresensStatus = {
     endret: string;
 }
 
-export type StatusPresensDiagnoser = {
+export type StatusPresensDiagnose = {
     id: string;
     type: string;
     tekst: string;
     endret: string;
 }
 
-export type StatusPresensOpplysninge = {
+export type StatusPresensOpplysning = {
     id: string;
     type: string;
     states: StatusPresensOpplysningerState[]
 }
 
-export type StatusPresensOpplysningerState = {}
+export type StatusPresensOpplysningerState = {
+    parent?: string;
+    tekst: string[];
+    endret: string;
+}
 
 export type StatusPresens = {
     status: StatusPresensStatus;
-    diagnoser: StatusPresensDiagnoser;
-    opplysninger: StatusPresensOpplysninge[];
+    diagnoser: StatusPresensDiagnose[];
+    opplysninger: StatusPresensOpplysning[];
 };
 
 export type PatientEvent = {

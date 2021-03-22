@@ -7,6 +7,7 @@ import {AppContainer} from "../components/AppContainer";
 import {Column, Container, Row} from "nav-frontend-grid";
 import Panel from "nav-frontend-paneler";
 import {PatientInfoBox} from "../components/PatientInfobox";
+import StatusPresensBox from "../components/StatusPresensBox";
 
 export const PatientRoute = () => {
     //const [view, setView] = useState();
@@ -30,8 +31,7 @@ export const PatientRoute = () => {
                     <Column md={"6"}>
                         <SimpleTabs>
                             <Panel>
-                                <h3>Status Presens</h3>
-                                Some content
+                                <StatusPresensBox statusPresens={statusPresens}/>
                             </Panel>
                             <PrettyPrint data={statusPresens}></PrettyPrint>
                         </SimpleTabs>

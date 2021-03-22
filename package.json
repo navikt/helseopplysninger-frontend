@@ -2,13 +2,13 @@
   "name": "hops",
   "version": "0.0.0",
   "license": "MIT",
+  "private": true,
   "scripts": {
     "nx": "nx",
     "start": "nx serve",
     "build": "nx build",
     "test": "npm run affected:test",
     "lint": "nx workspace-lint && nx lint",
-    "ch": "echo $LESS",
     "affected:apps": "nx affected:apps --plain --base=remotes/origin/main$NX_BASE",
     "affected:libs": "nx affected:libs --base=remotes/origin/main$NX_BASE",
     "affected:build": "nx affected:build --base=remotes/origin/main$NX_BASE",
@@ -26,7 +26,6 @@
     "matrix": "nx affected:apps --plain --base=remotes/origin/main$NX_BASE|tr -d '\\n'|jq -cRs 'split(\" \")'",
     "up": "npm run affected:build && docker-compose -p hops --env-file ./.env up -d --build --remove-orphans"
   },
-  "private": true,
   "dependencies": {
     "@ahryman40k/ts-fhir-types": "^4.0.34",
     "@microsoft/microsoft-graph-client": "^2.2.1",
