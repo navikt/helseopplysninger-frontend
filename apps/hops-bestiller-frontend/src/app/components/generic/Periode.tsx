@@ -1,5 +1,5 @@
 import React from "react";
-import dayjs from "dayjs";
+import FormattedDate from "./FormattedDate";
 
 interface Props {
     periode: []
@@ -7,10 +7,7 @@ interface Props {
 
 const Periode: React.FunctionComponent<Props> = ({periode}) => {
     const firstDate = Array.from(periode).sort().shift();
-    const formattedDate = dayjs(firstDate).format("DD.MM.YYYY");
-    return <time dateTime={firstDate}>
-                {formattedDate}
-            </time>
+    return <FormattedDate date={firstDate}/>
 }
 
 export default Periode;

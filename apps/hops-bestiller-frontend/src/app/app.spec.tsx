@@ -23,6 +23,6 @@ describe('App', () => {
       </BrowserRouter>
     );
 
-    expect(getByText('Resources & Tools')).toBeTruthy();
+    expect(getByText('Bestilling av Helseopplysninger')).toBeTruthy();
   });
 });
