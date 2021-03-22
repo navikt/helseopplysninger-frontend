@@ -1,8 +1,9 @@
 import 'dotenv/config';
+import logger from './utils/logger';
 
 const envVar = (name, required = true) => {
   if (!process.env[name] && required) {
-    console.error(`Missing required environment variable '${name}'`);
+    logger.error(`Missing required environment variable '${name}'`);
     process.exit(1);
   }
   return process.env[name];
@@ -56,6 +57,7 @@ const database = {
   database: envVar('DB_DATABASE', true),
   password: envVar('DB_PASSWORD', true),
   port: envVar('DB_PORT', true),
+  connectionTimeoutMillis: 10000,
 };
 
 export {

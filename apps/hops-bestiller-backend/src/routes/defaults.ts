@@ -18,7 +18,12 @@ function defaults(app: Express): void {
     });
 
     app.get(BackendPaths.USER_PATH, (req: any, res) => {
-        res.send(getUserFromToken(req.user.token.access_token));
+        if (req.user) {
+            res.send(getUserFromToken(req.user.token.access_token));
+        } else {
+            res.status(401).send({});
+        }
+
     });
 }
 
