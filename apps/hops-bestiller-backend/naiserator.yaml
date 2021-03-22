@@ -23,15 +23,17 @@ spec:
   team: helseopplysninger
   liveness:
     path: /api/internal/is-alive
+    initialDelay: 90
   readiness:
     path: /api/internal/is-ready
+    initialDelay: 90
   resources:
     limits:
       cpu: 400m
       memory: 512Mi
     requests:
       cpu: 200m
-      memory: 128Mi
+      memory: 256Mi
   replicas:
     min: 1
     max: 2
