@@ -57,7 +57,6 @@ const database = {
   database: envVar('DB_DATABASE', true),
   password: envVar('DB_PASSWORD', true),
   port: envVar('DB_PORT', true),
-  connectionTimeoutMillis: 10000,
 };
 
 export {
