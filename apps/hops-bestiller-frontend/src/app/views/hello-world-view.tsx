@@ -4,7 +4,7 @@ import Panel from "nav-frontend-paneler";
 import {Container, Row} from "nav-frontend-grid";
 
 
-export const HelloWorldRoute = () => {
+export const HelloWorldView = () => {
     return (<Container>
         <br/>
         <Row>

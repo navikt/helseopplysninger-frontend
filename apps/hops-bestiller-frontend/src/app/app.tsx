@@ -1,20 +1,21 @@
 import React from 'react';
 
 import {Route} from 'react-router-dom';
-import {HelloWorldRoute} from "./routes/hello-world-route";
-import {PatientRoute} from "./routes/patient-route";
+import {HelloWorldView} from "./views/hello-world-view";
+import {PatientView} from "./views/patient-view";
 import {PatientContextProvider} from "./contexts/PatientContext";
 
 export function App() {
     return (
         <>
-            <Route path="/" exact component={HelloWorldRoute}/>
+            <Route path="/" exact component={HelloWorldView}/>
             <Route path={[
                 "/patient/:patientId",
-                "/patient/:patientId/:eventId"
+                "/patient/:patientId/:view",
+                "/patient/:patientId/:view/:eventId"
             ]} exact>
                 <PatientContextProvider>
-                    <PatientRoute/>
+                    <PatientView/>
                 </PatientContextProvider>
             </Route>
         </>

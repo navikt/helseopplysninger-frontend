@@ -7,6 +7,7 @@ import {BackendPaths, PatientEvent, StatusPresens} from "@navikt/hops-types";
 interface ParamTypes {
     patientId: string;
     eventId?: string;
+    view?: string;
 }
 
 interface ContextProps {
@@ -29,14 +30,14 @@ const PatientContext = React.createContext<Partial<ContextProps>>({
 
 
 const PatientContextProvider = (props: any) => {
-    let {patientId,eventId} = useParams<ParamTypes>()
+    let {patientId, eventId} = useParams<ParamTypes>()
 
     const [patient, setPatient] = useState<ContextProps>({
         patientId: patientId,
         statusPresens: null,
         events: [],
     });
-    const [selectedEvent,setSelectedEvent] = useState(null);
+    const [selectedEvent, setSelectedEvent] = useState(null);
     useEffect(() => {
         async function fetch() {
             // @TODO parallelize
@@ -52,7 +53,7 @@ const PatientContextProvider = (props: any) => {
     }, [patientId]);
     useEffect(() => {
         async function fetch() {
-            const eventRes = await axios.get(BackendPaths.PATIENT_STATUS_PRESENS
+            const eventRes = await axios.get(BackendPaths.PATIENT_EVENT
                 .replace(":eventId", eventId));
             setSelectedEvent(eventRes.data);
         }
