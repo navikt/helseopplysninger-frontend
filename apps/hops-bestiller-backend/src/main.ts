@@ -25,7 +25,7 @@ async function bootstrap(): Promise<Server> {
     logger.info("Bootstrap started");
     await waitOn({
         resources: [
-            "tcp:" + database.host + ":" + database.port
+            ["tcp", database.host, database.port].join(":")
         ],
         timeout: 30000, // total timeout før vi forventer at databasen skal være oppe
         delay: 3000, // venter 3 sekunder før vi prøver cloudsql
