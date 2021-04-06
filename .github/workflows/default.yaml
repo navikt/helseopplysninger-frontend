@@ -82,7 +82,7 @@ jobs:
       - name: Push docker image
         #if: ${{ github.ref == 'refs/heads/main' }}
         run: |
-          docker push ${{ steps.tag.outputs.base }} --all-tags
+          docker push --all-tags ${{ steps.tag.outputs.base }}
       - name: Deploy to Dev
         uses: nais/deploy/actions/deploy@master
         env:
