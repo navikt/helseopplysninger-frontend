@@ -12,4 +12,9 @@ const logger = createLogger({
         };
     }
 });
+
+process.on('unhandledRejection', (error: Error) => {
+    logger.error(error.message);
+});
+
 export default logger;

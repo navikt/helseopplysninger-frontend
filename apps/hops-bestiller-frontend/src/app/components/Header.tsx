@@ -4,7 +4,7 @@ import {HeaderEnkel} from "@navikt/helse-frontend-header";
 import {useAppContext} from "../contexts/AppContext";
 
 export const Header = () => {
-    const user = useAppContext();
+    const {user} = useAppContext();
     return (
         <HeaderEnkel tittel={"Helseopplysninger"} brukerinfo={user}></HeaderEnkel>
     );

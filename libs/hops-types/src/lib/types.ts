@@ -1,4 +1,5 @@
 export type Brukerinfo = {
+    innlogget: Boolean;
     navn: string;
     ident: string;
     enhet?: string;
@@ -21,5 +22,5 @@ export enum BackendPaths {
     PATIENT_EVENT = '/api/patient-event/:eventId',
     PATIENT_STATUS_PRESENS = '/api/patient/:patientId/status-presens',
     PROMETHEUS_PATH = '/api/internal/prometheus',
-    USER_PATH = '/api/user',
+    USER_PATH = '/api/user'
 }

@@ -1,8 +1,3 @@
-/**
- * This is not a production server yet!
- * This is only a minimal backend to get started.
- */
-
 import * as express from 'express';
 import defaults from "./routes/defaults";
 import internals from "./routes/internals";
@@ -16,10 +11,6 @@ import path from "path";
 import patient from "./routes/patient";
 import {Server} from "http";
 import waitOn from "wait-on";
-
-process.on('unhandledRejection', (error: Error) => {
-    logger.error(error.message);
-});
 
 async function bootstrap(): Promise<Server> {
     logger.info("Bootstrap started");
