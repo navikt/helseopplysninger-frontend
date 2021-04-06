@@ -9,8 +9,7 @@ import Icon from "../../components/generic/Icon";
 import Nobr from "../../components/generic/Nobr";
 import {HoyreChevron} from "nav-frontend-chevron";
 import {Flatknapp, Hovedknapp} from "nav-frontend-knapper";
-import Lenke from "nav-frontend-lenker";
-import {generateViewPath, goToViewPath} from "../../utils/navigation";
+import {goToViewPath} from "../../utils/navigation";
 
 interface Props {
     patientId: string;
@@ -25,30 +24,28 @@ const PatientEventTable: React.FunctionComponent<Props> = ({events}) => {
                 <Periode periode={event.periode}/>,
                 <Nobr onClick={goToViewPath("event",event.id)}>
                     <Icon type={event.type.icon}/> {event.type.tekst}
-                </Nobr>
-                ,
+                </Nobr>,
                 event.status && (<EtikettBase mini type={event.status.type}>{event.status.tekst}</EtikettBase>),
-                "",
                 <div onClick={goToViewPath("event",event.id)}><HoyreChevron style={{float: "right"}}/></div>
             ]
         })
     });
-    const headere = ["Periode", "Type", "Status", "Aksjoner", ""];
+    const headere = ["Periode", "Type", "Status", ""];
     return (
         <>
             <h2>Hendelser</h2>
-            <Tabell
+            {events && <Tabell
                 headere={headere}
                 className={"patient-event-table"}
                 beskrivelse={"Pasient Hendelser"}
                 rader={rader}
-            />
+            />}
             <br/>
             <Hovedknapp className={"knapp-bestill-helseopplysninger"} onClick={goToViewPath("order")}>Bestill
                 helseopplysninger</Hovedknapp>
             <Flatknapp onClick={goToViewPath("nytt-notat")}>Skriv notat</Flatknapp>
         </>
     )
-}
+};
 
 export default PatientEventTable;

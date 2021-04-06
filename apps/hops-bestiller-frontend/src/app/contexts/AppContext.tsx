@@ -1,23 +1,34 @@
 import React, {useContext, useEffect, useState} from 'react'
 import axios from "axios";
-import {Brukerinfo, BackendPaths} from "@navikt/hops-types";
+import {BackendPaths, Brukerinfo} from "@navikt/hops-types";
 
-const AppContext = React.createContext(null);
+interface AppContextProps {
+    user?: Brukerinfo;
+    loading: Boolean;
+}
+
+const AppContext = React.createContext<Partial<AppContextProps>>({});
 
 const AppContextProvider = (props: any) => {
-    const [user, setUser] = useState<Brukerinfo>(null);
+    const [user, setUser] = useState<Brukerinfo>({
+        innlogget: false,
+        navn: null,
+        ident: null,
+    });
+    const [loading, isLoading] = useState<Boolean>(true);
     useEffect(() => {
         async function fetch() {
             const userRes = await axios.get(BackendPaths.USER_PATH);
             setUser(userRes.data);
         }
-        fetch().then(null);
+
+        fetch().finally(() => isLoading(false));
     }, [])
     return (
-        <AppContext.Provider value={user}>
+        <AppContext.Provider value={{user, loading}}>
             {props.children}
         </AppContext.Provider>
     );
 }
 const useAppContext = () => useContext(AppContext);
-export {useAppContext, AppContextProvider}
+export {useAppContext, AppContextProvider, AppContext}

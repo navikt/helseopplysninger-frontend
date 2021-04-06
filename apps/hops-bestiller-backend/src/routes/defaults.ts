@@ -21,9 +21,10 @@ function defaults(app: Express): void {
         if (req.user) {
             res.send(getUserFromToken(req.user.token.access_token));
         } else {
-            res.status(401).send({});
+            res.status(401).send({
+                innlogget: false,
+            });
         }
-
     });
 }
 
