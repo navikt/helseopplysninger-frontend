@@ -9,8 +9,8 @@ function bestillingRoutes(app: Express): void {
 
     app.post(BackendPaths.BESTILLING_PATH, async (req, res) => {
         res.set("Content-Security-Policy", "connect-src 'self'");
-        console.log(req.body);
-        const metadata = await bestilleHelseopplysning(kafkaClient, kafkaTopics.bestillinger, [req.body])
+        const metadata = await bestilleHelseopplysning(kafkaClient, kafkaTopics.bestillinger, [req.body]);
+        res.json(metadata).status(201);
     });
 
 }

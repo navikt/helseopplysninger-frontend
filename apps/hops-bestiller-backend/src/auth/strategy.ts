@@ -1,8 +1,8 @@
-import {Strategy} from "openid-client";
+import {Client, Strategy, StrategyOptions, TokenSet} from "openid-client";
 import {azureAd} from '../config';
 
 const createStrategy = client => {
-    return new Strategy({
+    const options: StrategyOptions<Client> = {
         client: client,
         params: {
             response_types: azureAd.responseTypes,
@@ -11,15 +11,20 @@ const createStrategy = client => {
         },
         passReqToCallback: false,
         usePKCE: 'S256'
-    }, (tokenSet, done) => {
+    }
+    const verify = (tokenSet: TokenSet, done: (err, user?: any) => void) => {
         if (tokenSet.expired()) {
-            return done(null, false)
+            return done(undefined, undefined)
         }
-        const user = {
-            'token': tokenSet,
-        };
-        return done(null, user);
-    });
+        done(undefined, {
+            claims: tokenSet.claims,
+            tokenSets: {
+                self: tokenSet,
+            },
+        });
+    }
+
+    return new Strategy(options, verify);
 };
 
 export default createStrategy;
