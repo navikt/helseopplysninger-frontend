@@ -1,5 +1,5 @@
 import {Pool} from 'pg';
-import {database} from "../config.js"
+import {database} from "../config"
 import logger from "../utils/logger";
 
 const dbPool = new Pool(database)
@@ -10,11 +10,12 @@ dbPool.on('connect', () => {
     })
 });
 process.on("exit", async (code) => {
-    await dbPool.end()
     logger.error("(pg) gracefully shutdown after exit("+code+")");
+    //await dbPool.end()
+
 })
 process.on('SIGTERM', async () => {
-    await dbPool.end();
     logger.error("(pg) gracefully shutdown after SIGTERM");
+    //await dbPool.end();
 });
 export default dbPool;

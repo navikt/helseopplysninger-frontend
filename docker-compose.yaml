@@ -9,8 +9,8 @@ services:
     ports:
      - 8002:2022
     environment:
-      - APP_INGRESS=http://localhost:8002
-      - DB_HOST=pg
+      APP_INGRESS: http://localhost:8002
+      DB_HOST: pg
     env_file:
       - .env
     depends_on:
@@ -45,7 +45,26 @@ services:
     expose:
       - ${DB_PORT}
     environment:
-      - POSTGRES_USER=${DB_USERNAME}
-      - POSTGRES_PASSWORD=${DB_PASSWORD}
-      - POSTGRES_DB=${DB_DATABASE}
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_DATABASE}
     command: -p ${DB_PORT}
+  zookeeper:
+    image: wurstmeister/zookeeper
+    ports:
+      - "2181:2181"
+  kafka:
+    image: wurstmeister/kafka
+    ports:
+      - "9092:9092"
+    depends_on:
+      - zookeeper
+    environment:
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: INSIDE://kafka:9093,OUTSIDE://localhost:9092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INSIDE:PLAINTEXT,OUTSIDE:PLAINTEXT
+      KAFKA_LISTENERS: INSIDE://:9093,OUTSIDE://:9092
+      KAFKA_INTER_BROKER_LISTENER_NAME: INSIDE
+      KAFKA_CREATE_TOPICS: "${KAFKA_TOPIC_BESTILLING}:1:1"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock

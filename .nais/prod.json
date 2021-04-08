@@ -1,4 +1,5 @@
 {
   "hops-ingress": "https://hops.intern.nav.no",
-  "sof-ingress": "https://sof.nav.no"
+  "sof-ingress": "https://sof.nav.no",
+  "kafka_pool": "nav-prod"
 }

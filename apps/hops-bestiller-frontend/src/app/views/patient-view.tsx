@@ -37,7 +37,7 @@ export const PatientView = () => {
                                 {
                                     'table': <PatientEventTable events={events} patientId={patientId}/>,
                                     'pretty': <PrettyPrint data={events}/>,
-                                    'order': <OrderPatientInfo/>,
+                                    'order': <OrderPatientInfo patientId={patientId}/>,
                                     'event': <PatientEventBox eventId={eventId}
                                                               nextEventId={nextEventId}
                                                               prevEventId={prevEventId}/>

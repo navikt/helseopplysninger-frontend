@@ -15,10 +15,11 @@ spec:
   azure:
     application:
       enabled: true
+      tenant: nav.no
       claims:
         extra:
           - "NAVident"
-  image: {{ image }}
+  image: {{image}}
   port: 2022
   team: helseopplysninger
   liveness:
@@ -44,6 +45,12 @@ spec:
   ingresses:
     - {{hops-ingress}}/api
     - {{hops-ingress}}/oauth2
+  kafka:
+    pool: {{kafka_pool}}
   env:
     - name: APP_INGRESS
       value: {{hops-ingress}}
+    - name: KAFKA_TOPIC_BESTILLING
+      value: "helseopplysninger.bestilling"
+    - name: KAFKA_SECURITY_ENABLED
+      value: "true"

@@ -22,5 +22,6 @@ export enum BackendPaths {
     PATIENT_EVENT = '/api/patient-event/:eventId',
     PATIENT_STATUS_PRESENS = '/api/patient/:patientId/status-presens',
     PROMETHEUS_PATH = '/api/internal/prometheus',
-    USER_PATH = '/api/user'
+    USER_PATH = '/api/user',
+    BESTILLING_PATH = '/api/patient/:patientId/bestillinger'
 }
