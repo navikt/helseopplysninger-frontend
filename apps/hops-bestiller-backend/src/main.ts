@@ -22,7 +22,7 @@ async function bootstrap(): Promise<Server> {
         "bestiller",
         kafkaTopics.bestillinger,
         message => {
-            console.log(message.value.toString());
+            console.log("KafkaReceivedMessage",message.value.toString());
         }).then(() => {
         logger.info("Bootstrap, kafka connected");
     });

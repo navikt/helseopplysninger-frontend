@@ -3,7 +3,7 @@
     "workspace.json": "*",
     "package.json": {
       "dependencies": "*",
-      "devDependencies": "*"
+      "devDependencies": {}
     },
     "tsconfig.base.json": "*",
     "tslint.json": "*",

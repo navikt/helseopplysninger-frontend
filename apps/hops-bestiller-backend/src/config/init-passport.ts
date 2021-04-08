@@ -25,16 +25,19 @@ async function initPassport(app: Express): Promise<void> {
     })
 
     app.get(BackendPaths.LOGIN_PATH, (req, res, next) => {
-        // @ts-ignore
-        passport.authenticate(strategyName, {response: res})(req, res, next);
+        passport.authenticate(strategyName, {
+            successRedirect: '/',
+            failureRedirect: '/error'
+        })(req, res, next);
     }, (req, res) => {
         res.send({result: 'succeeded'});
     });
 
     app.get(BackendPaths.CALLBACK_PATH, (req, res, next) => {
-        // @ts-ignore
-        passport.authenticate(strategyName, {response: res})(req, res, next);
-
+        passport.authenticate(strategyName, {
+            successRedirect: '/',
+            failureRedirect: '/error'
+        })(req, res, next);
     }, (req, res) => {
         res.redirect(BackendPaths.PATH);
     });
