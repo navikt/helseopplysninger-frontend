@@ -44,6 +44,7 @@ const PatientContextProvider = (props: any) => {
             const statusRes = await axios.get(BackendPaths.PATIENT_STATUS_PRESENS.replace(":patientId", patientId));
             const eventRes = await axios.get(BackendPaths.PATIENT_EVENTS.replace(":patientId", patientId));
             setPatient({
+                patientId: patientId,
                 statusPresens: statusRes.data,
                 events: eventRes.data,
             });

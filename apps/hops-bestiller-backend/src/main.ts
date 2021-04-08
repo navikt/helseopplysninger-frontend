@@ -3,7 +3,7 @@ import defaults from "./routes/defaults";
 import internals from "./routes/internals";
 import {initPassport} from "./config/init-passport"
 import initSession from "./config/init-session";
-import {database, server} from "./config.js";
+import {database, kafkaTopics, server} from "./config";
 import logger from "./utils/logger";
 import dbPool from "./database/connection";
 import runMigrations from "./database/run-migration";
@@ -11,9 +11,21 @@ import path from "path";
 import patient from "./routes/patient";
 import {Server} from "http";
 import waitOn from "wait-on";
+import {kafkaConsumer} from "./kafka/kafka-consumer";
+import {kafkaClient} from "./kafka/kafka-client";
+import bestill from "./routes/bestill";
 
 async function bootstrap(): Promise<Server> {
     logger.info("Bootstrap started");
+    kafkaConsumer(
+        kafkaClient,
+        "bestiller",
+        kafkaTopics.bestillinger,
+        message => {
+            console.log(message.value.toString());
+        }).then(() => {
+        logger.info("Bootstrap, kafka connected");
+    });
     await waitOn({
         resources: [
             ["tcp", database.host, database.port].join(":")
@@ -28,9 +40,10 @@ async function bootstrap(): Promise<Server> {
     initSession(app);
     await initPassport(app);
     [
+        bestill,
         defaults,
         internals,
-        patient
+        patient,
     ].forEach(f => f(app))
 
     const {port, ingress} = server;

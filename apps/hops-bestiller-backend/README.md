@@ -1,5 +1,13 @@
 # Bestiller backend
 
+```
+fetch('/api/patient/123/bestillinger', {
+    method: 'post',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({hello:"world"})
+  })
+```
+
 
 ## ingresser:
 

@@ -14,6 +14,7 @@ const createAzureClient = async () => {
     logger.info(`Discovered issuer ${issuer.issuer}`);
     return new issuer.Client({
         client_id: azureAd.clientId,
+        client_secret: azureAd.clientSecret,
         redirect_uris: [azureAd.redirectUri],
         token_endpoint_auth_method: azureAd.tokenEndpointAuthMethod,
         token_endpoint_auth_signing_alg: azureAd.tokenEndpointAuthSigningAlg,
