@@ -1,8 +1,9 @@
 const cookieParser = require('cookie-parser');
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
 const statusPresens = require('../../fixtures/bestiller/status-presens.json');
 const events = require('../../fixtures/bestiller/events.json');
 const brukerinfo = require('../../fixtures/bestiller/brukerinfo.json');
+const items = require('../../fixtures/items.json');
 require('ts-node').register();
 const {BackendPaths} = require('../../libs/hops-types/src');
 
@@ -34,6 +35,10 @@ module.exports = (app) => {
 
   app.post(BackendPaths.BESTILLING_PATH, (req, res) => {
     res.json({});
+  });
+
+  app.get(BackendPaths.ITEMS_PATH, (req, res) => {
+    res.json(items);
   });
 
 };

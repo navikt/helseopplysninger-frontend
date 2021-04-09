@@ -1,7 +1,9 @@
 import {JWT} from 'jose';
 import {AccessToken, Brukerinfo} from '@navikt/hops-types';
 
-function getUserFromToken(accessToken): Brukerinfo {
+function getUserInfoFromRequest(request: Express.Request): Brukerinfo {
+    const user = request.user as any;
+    const accessToken = user.tokenSets?.self?.access_token;
     const tokenContent = JWT.decode(accessToken) as AccessToken;
     return {
         innlogget: true,
@@ -11,4 +13,4 @@ function getUserFromToken(accessToken): Brukerinfo {
 
 }
 
-export default getUserFromToken;
+export default getUserInfoFromRequest;
