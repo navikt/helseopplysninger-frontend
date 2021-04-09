@@ -1,21 +1,43 @@
-import React, {useState} from "react";
+import React, {ChangeEvent, useState} from "react";
 import {Checkbox, CheckboxGruppe, Select} from "nav-frontend-skjema";
 import "./OrderPatientInfo.less"
 import {Flatknapp, Hovedknapp} from "nav-frontend-knapper";
 import {goToViewPath} from "../../utils/navigation";
 import {sendBestilling} from "../../commands/send-bestilling";
+import {useAppContext} from "../../contexts/AppContext";
 
 interface Props {
     patientId: string;
 }
 
 const OrderPatientInfo: React.FunctionComponent<Props> = ({patientId}) => {
+    const {items} = useAppContext();
     const [skjema, setSkjema] = useState({
         purpose: "hello world",
+        items: [],
     });
     const onSubmit = async () => {
+        console.log({sender:skjema});
         await sendBestilling(patientId, skjema);
     }
+
+    const onCheckbox = (e: ChangeEvent<HTMLInputElement>) => {
+        const skjemaItems = [...skjema.items];
+        const {checked, name} = e.target;
+        if (checked) {
+            skjemaItems.push(name);
+        } else {
+            const index = skjemaItems.indexOf(name);
+            if (index > -1) {
+                skjemaItems.splice(index, 1);
+            }
+        }
+        setSkjema(prevState => ({
+            ...prevState,
+            items: skjemaItems
+        }))
+    }
+
     return (
         <div className={"order-patient-info"}>
             <h2>Bestill helseopplysninger</h2>
@@ -36,11 +58,9 @@ const OrderPatientInfo: React.FunctionComponent<Props> = ({patientId}) => {
             </Select>
             <br/>
             <CheckboxGruppe legend="Hvilke opplysninger skal etterspørres?">
-                <Checkbox label={"Oppdatert diagnose"}/>
-                <Checkbox label={"Utydpende informasjon om funksjonsevne"}/>
-                <Checkbox label={"Oppdatert behandlingsplan"}/>
-                <Checkbox label={"Prognose for å komme tilbake til samme arbeidsgiver"}/>
-                <Checkbox label={"Prognose for å komme tilbake til annen arbeidsgiver"}/>
+                {items.map((item) =>
+                    <Checkbox key={"item-" + item.linkId} name={item.linkId} onChange={onCheckbox} label={item.text}/>
+                )}
             </CheckboxGruppe>
             <Select bredde={"m"} label={"Ytterligere spesifisering til legen"}>
                 <option>Velg</option>

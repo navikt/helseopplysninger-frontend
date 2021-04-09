@@ -9,6 +9,7 @@ dbPool.on('connect', () => {
         logger.error("(pg)" + error.name + ": " + error.message);
     })
 });
+/*
 process.on("exit", async (code) => {
     logger.error("(pg) gracefully shutdown after exit("+code+")");
     //await dbPool.end()
@@ -18,4 +19,5 @@ process.on('SIGTERM', async () => {
     logger.error("(pg) gracefully shutdown after SIGTERM");
     //await dbPool.end();
 });
+ */
 export default dbPool;

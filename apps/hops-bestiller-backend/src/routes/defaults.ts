@@ -1,5 +1,5 @@
 import {Express} from "express";
-import getUserFromToken from "../auth/get-user-from-token";
+import getUserInfoFromRequest from "../auth/get-user-info-from-request";
 import {azureAd, server} from "../config";
 import {BackendPaths} from "@navikt/hops-types";
 
@@ -18,9 +18,9 @@ function defaults(app: Express): void {
     app.get("/api/azure-ad/config", (req: any, res) => {
         res.json(azureAd);
     });
-    app.get(BackendPaths.USER_PATH, (req: any, res) => {
+    app.get(BackendPaths.USER_PATH, (req, res) => {
         if (req.user) {
-            res.send(getUserFromToken(req.user.tokenSets.self.access_token));
+            res.send(getUserInfoFromRequest(req));
         } else {
             res.status(401).send({
                 innlogget: false,

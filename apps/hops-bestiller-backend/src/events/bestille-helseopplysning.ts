@@ -1,18 +1,15 @@
-import {BundleTypeKind, IBundle} from "@ahryman40k/ts-fhir-types/lib/R4";
-import { v4 as uuidv4 } from 'uuid';
+import {IResourceList} from "@ahryman40k/ts-fhir-types/lib/R4";
 import {kafkaProducer} from "../kafka/kafka-producer";
 import {Kafka} from "kafkajs";
+import {createFhirMessageBundle} from "../utils/fhir";
 
-export const bestilleHelseopplysning = async (kafkaClient: Kafka, topic: string, bestilling:any[]) => {
-    const bundle: IBundle = {
-        id: uuidv4(),
-        resourceType: "Bundle",
-        link: [],
-        type: BundleTypeKind._message,
-        timestamp: (new Date()).toISOString(),
-        entry: bestilling
-    }
+export const bestilleHelseopplysning = async (
+    kafkaClient: Kafka,
+    topic: string,
+    resources: IResourceList[]
+) => {
 
+    const bundle = createFhirMessageBundle(resources);
     const recordMetadata = await kafkaProducer(
         kafkaClient,
         topic,
