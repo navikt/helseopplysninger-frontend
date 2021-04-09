@@ -12,13 +12,13 @@ spec:
         databases:
           - name: hops-bestiller
             envVarPrefix: DB
-#  azure:
-#    application:
-#      enabled: true
-#      tenant: nav.no
-#      claims:
-#        extra:
-#          - "NAVident"
+  azure:
+    application:
+      enabled: true
+      tenant: nav.no
+      claims:
+        extra:
+          - "NAVident"
   image: {{image}}
   port: 2022
   team: helseopplysninger
