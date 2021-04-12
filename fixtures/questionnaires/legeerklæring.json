@@ -1,8 +1,8 @@
 {
   "resourceType": "Questionnaire",
-  "title": "Legeerklæring",
+  "title": "Legeerklæring om arbeidsoppgaver som krever løft over hodet.",
   "purpose": "Få informasjon om x,y,z",
-  "copyright": "NAV 2020",
+  "copyright": "NAV 2021",
   "approvalDate": "2020-12-04",
   "lastReviewDate": "2020-12-04",
   "item": [
@@ -17,29 +17,29 @@
     {
       "linkId": "kan-pasientent-jobbe",
       "definition": "Definisjon",
-      "prefix": "3.4",
+      "prefix": "3.4.1",
       "text": "Kan pasienten jobbe?",
       "type": "boolean",
       "repeats": false
     },
     {
-      "linkId": "kan-pasientent-lofte-over",
+      "linkId": "kan-pasientent-lofte-over-hodet",
       "definition": "Definisjon",
-      "prefix": "3.5",
-      "text": "Kan pasienten løfte over 40kg over hodet?",
+      "prefix": "3.5.2",
+      "text": "Kan pasienten løfte mer enn 40kg over hodet?",
       "type": "boolean",
       "repeats": false
     },
     {
-      "linkId": "kan-pasientent-lofte-over-hodet-hvor-mye",
+      "linkId": "kan-pasientent-lofte-beskrivelse",
       "definition": "Definisjon",
-      "prefix": "3.5.2",
-      "text": "Hvor mye kan pasienten løfte over hodet?",
+      "prefix": "3.5.3",
+      "text": "Beskriv hvordan pasienten kan utføre arbeidet:",
       "type": "string",
       "repeats": false,
       "enableWhen": [
         {
-          "question": "kan-pasientent-lofte-over",
+          "question": "kan-pasientent-lofte-over-hodet",
           "answerBoolean": true
         }
       ]

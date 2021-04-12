@@ -7,7 +7,7 @@ import {
     IQuestionnaire_Item,
     IResourceList,
     ITask,
-    QuestionnaireStatusKind,
+    QuestionnaireStatusKind, RTTI_MessageHeader,
     TaskIntentKind,
     TaskStatusKind
 } from "@ahryman40k/ts-fhir-types/lib/R4";
