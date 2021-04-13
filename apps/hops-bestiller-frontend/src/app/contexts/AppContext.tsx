@@ -30,7 +30,8 @@ const AppContextProvider = (props: any) => {
 
         fetch().finally(() => isLoading(false));
         wsClient(window.location, (message) => {
-            setMessages([...messages, message])
+            const parsedMessage = JSON.parse(message.data);
+            setMessages([...messages, parsedMessage])
         });
     }, [])
     useEffect(() => {

@@ -23,9 +23,11 @@ export const attatchWsServer = (server: Server) => {
 
 
 export const wsBroadcast = (data) => {
-    wsServer.clients.forEach(function each(client) {
+    wsServer.clients.forEach(client => {
+        console.log(client);
+        // @ts-ignore
         if (client !== ws && client.readyState === 1) {
-            client.send(data);
+            client.send(JSON.stringify(data));
         }
     });
 }
