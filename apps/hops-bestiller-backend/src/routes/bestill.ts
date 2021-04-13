@@ -27,7 +27,6 @@ function bestillingRoutes(app: Express): void {
                 items.push(found);
             }
         });
-        console.log(items);
         const questionnaire = createFhirQuestionaire(description, items);
         const metadata = await bestilleHelseopplysning(
             kafkaClient,

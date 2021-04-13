@@ -2,8 +2,9 @@ import {Server} from "http";
 import ws from "ws";
 import logger from "../utils/logger";
 
-export const wsServer = (server: Server) => {
-    const wsServer = new ws.Server({noServer: true});
+export const wsServer = new ws.Server({noServer: true});
+
+export const attatchWsServer = (server: Server) => {
     wsServer.on('connection', socket => {
         socket.on('message', message => {
             logger.info("Websocket received message: " + message);
@@ -19,3 +20,5 @@ export const wsServer = (server: Server) => {
         });
     });
 }
+
+
