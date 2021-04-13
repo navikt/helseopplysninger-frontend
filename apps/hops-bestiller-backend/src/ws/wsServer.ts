@@ -22,3 +22,10 @@ export const attatchWsServer = (server: Server) => {
 }
 
 
+export const wsBroadcast = (data) =>{
+    wsServer.clients.forEach(function each(client) {
+        if (client !== ws && client.readyState === WebSocket.OPEN) {
+            client.send(data);
+        }
+    });
+}
