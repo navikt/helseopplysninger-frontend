@@ -8,7 +8,6 @@ export const bestilleHelseopplysning = async (
     topic: string,
     resources: IResourceList[]
 ) => {
-
     const bundle = createFhirMessageBundle(resources);
     const recordMetadata = await kafkaProducer(
         kafkaClient,

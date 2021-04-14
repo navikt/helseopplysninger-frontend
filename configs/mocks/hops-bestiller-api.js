@@ -1,5 +1,7 @@
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
+const ws = require('ws');
+const http = require('http');
 const statusPresens = require('../../fixtures/bestiller/status-presens.json');
 const events = require('../../fixtures/bestiller/events.json');
 const brukerinfo = require('../../fixtures/bestiller/brukerinfo.json');
@@ -7,7 +9,8 @@ const items = require('../../fixtures/items.json');
 require('ts-node').register();
 const {BackendPaths} = require('../../libs/hops-types/src');
 
-module.exports = (app) => {
+module.exports = (app, server) => {
+  let websocket;
   app.use(cookieParser());
   app.use(bodyParser.json());
   app.get(BackendPaths.USER_PATH, function(req, res) {
@@ -34,11 +37,31 @@ module.exports = (app) => {
   });
 
   app.post(BackendPaths.BESTILLING_PATH, (req, res) => {
+    if(websocket){
+      websocket.send("Tok i mot data!");
+    }
     res.json({});
   });
 
   app.get(BackendPaths.ITEMS_PATH, (req, res) => {
     res.json(items);
   });
+
+  const wsServer = new ws.Server({noServer: true});
+
+  wsServer.on('connection', socket => {
+    websocket = socket;
+    socket.on('message', message => console.info('Websocket received message: ' + message));
+  });
+
+  server.options.onListening = (s) => {
+    s.listeningApp.on('upgrade', function(req, socket, head) {
+      if (req.url === '/ws') {
+        wsServer.handleUpgrade(req, socket, head, socket => {
+          wsServer.emit('connection', socket, req);
+        });
+      }
+    });
+  };
 
 };

@@ -15,9 +15,7 @@ function defaults(app: Express): void {
             user: req.user || null
         });
     });
-    app.get("/api/azure-ad/config", (req: any, res) => {
-        res.json(azureAd);
-    });
+
     app.get(BackendPaths.USER_PATH, (req, res) => {
         if (req.user) {
             res.send(getUserInfoFromRequest(req));

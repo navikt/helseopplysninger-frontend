@@ -45,6 +45,7 @@ spec:
   ingresses:
     - {{hops-ingress}}/api
     - {{hops-ingress}}/oauth2
+    - {{hops-ingress}}/ws
   kafka:
     pool: {{kafka_pool}}
   env:

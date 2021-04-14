@@ -5,7 +5,7 @@ module.exports = (config, mock) => {
   const defaultConfig = getWebpackConfig(config);
   defaultConfig.devServer = defaultConfig.devServer || {};
   defaultConfig.devServer.before = (app, server, compiler) => {
-    mock(app);
+    mock(app, server);
   };
   return {
     ...defaultConfig,
