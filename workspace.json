@@ -1,23 +1,12 @@
 {
   "version": 2,
-  "cli": {
-    "defaultCollection": "@nrwl/react"
-  },
+  "cli": { "defaultCollection": "@nrwl/react" },
   "defaultProject": "sof-questionnaire",
   "generators": {
     "@nrwl/react": {
-      "application": {
-        "style": "less",
-        "linter": "eslint",
-        "babel": true
-      },
-      "component": {
-        "style": "less"
-      },
-      "library": {
-        "style": "less",
-        "linter": "eslint"
-      }
+      "application": { "style": "less", "linter": "eslint", "babel": true },
+      "component": { "style": "less" },
+      "library": { "style": "less", "linter": "eslint" }
     }
   },
   "projects": {
@@ -70,9 +59,7 @@
         },
         "serve": {
           "executor": "@nrwl/web:dev-server",
-          "options": {
-            "buildTarget": "sof-questionnaire:build"
-          },
+          "options": { "buildTarget": "sof-questionnaire:build" },
           "configurations": {
             "production": {
               "buildTarget": "sof-questionnaire:build:production"
@@ -132,9 +119,7 @@
         },
         "serve": {
           "executor": "@nrwl/node:execute",
-          "options": {
-            "buildTarget": "hops-bestiller-backend:build"
-          }
+          "options": { "buildTarget": "hops-bestiller-backend:build" }
         },
         "lint": {
           "executor": "@nrwl/linter:eslint",
@@ -180,9 +165,7 @@
       "targets": {
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["libs/fixtures/**/*.ts"]
-          }
+          "options": { "lintFilePatterns": ["libs/fixtures/**/*.ts"] }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
@@ -243,9 +226,7 @@
         },
         "serve": {
           "executor": "@nrwl/web:dev-server",
-          "options": {
-            "buildTarget": "hops-bestiller-frontend:build"
-          },
+          "options": { "buildTarget": "hops-bestiller-frontend:build" },
           "configurations": {
             "production": {
               "buildTarget": "hops-bestiller-frontend:build:production"
@@ -277,15 +258,32 @@
       "targets": {
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["libs/hops-types/**/*.ts"]
-          }
+          "options": { "lintFilePatterns": ["libs/hops-types/**/*.ts"] }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
           "outputs": ["coverage/libs/hops-types"],
           "options": {
             "jestConfig": "libs/hops-types/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "fkr-client": {
+      "root": "libs/fkr-client",
+      "sourceRoot": "libs/fkr-client/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": { "lintFilePatterns": ["libs/fkr-client/**/*.ts"] }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/fkr-client"],
+          "options": {
+            "jestConfig": "libs/fkr-client/jest.config.js",
             "passWithNoTests": true
           }
         }

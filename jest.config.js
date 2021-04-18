@@ -6,5 +6,6 @@ module.exports = {
     '<rootDir>/libs/fixtures',
     '<rootDir>/apps/hops-bestiller-frontend',
     '<rootDir>/libs/hops-types',
+    '<rootDir>/libs/fkr-client',
   ],
 };

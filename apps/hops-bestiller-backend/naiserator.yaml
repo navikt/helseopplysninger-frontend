@@ -55,3 +55,5 @@ spec:
       value: "helseopplysninger.bestilling"
     - name: KAFKA_SECURITY_ENABLED
       value: "true"
+  envFrom:
+    - secret: oppslag

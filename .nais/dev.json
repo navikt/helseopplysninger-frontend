@@ -1,5 +1,7 @@
 {
   "hops-ingress": "https://hops.dev.intern.nav.no",
   "sof-ingress": "https://sof.dev.nav.no",
-  "kafka_pool": "nav-dev"
+  "kafka_pool": "nav-dev",
+  "fkr-sts-url": "https://helseid-sts.test.nhn.no/connect/token",
+  "fkr-fhir-url": "https://hint-inet.utv.helsedir.no/kontaktregister/ekstern"
 }
