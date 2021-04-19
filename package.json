@@ -23,7 +23,7 @@
     "workspace-generator": "nx workspace-generator",
     "dep-graph": "nx dep-graph",
     "help": "nx help",
-    "gen": "ts-node --project tools/tsconfig.json tools/src/test-data",
+    "gen": "ts-node --skip-project tools/test-data",
     "matrix": "nx affected:apps --plain --base=remotes/origin/main$NX_BASE|tr -d '\\n'|jq -cRs 'split(\" \")'",
     "up": "npm run affected:build && docker-compose -p hops --env-file ./.env up -d --build --remove-orphans"
   },
