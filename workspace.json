@@ -101,7 +101,8 @@
             "assets": [
               "apps/hops-bestiller-backend/src/assets",
               "apps/hops-bestiller-backend/src/migrations"
-            ]
+            ],
+            "webpackConfig": "configs/webpack.config.node.js"
           },
           "configurations": {
             "production": {
