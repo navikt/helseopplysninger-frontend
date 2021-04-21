@@ -19,7 +19,7 @@ async function bootstrap(): Promise<Server> {
     logger.info("Bootstrap started");
     kafkaConsumer(
         kafkaClient,
-        "bestiller2",
+        "bestiller",
         kafkaTopics.bestillinger,
         message => {
             logger.info("KafkaReceivedMessage", message.value.toString());
