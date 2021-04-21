@@ -2,7 +2,6 @@ import React, {ChangeEvent, useState} from "react";
 import {Checkbox, CheckboxGruppe, Select} from "nav-frontend-skjema";
 import "./OrderPatientInfo.less"
 import {Flatknapp, Hovedknapp} from "nav-frontend-knapper";
-import {goToViewPath} from "../../utils/navigation";
 import {sendBestilling} from "../../commands/send-bestilling";
 import {useAppContext} from "../../contexts/AppContext";
 
@@ -11,13 +10,13 @@ interface Props {
 }
 
 const OrderPatientInfo: React.FunctionComponent<Props> = ({patientId}) => {
-    const {items} = useAppContext();
+    const {items, goto} = useAppContext();
     const [skjema, setSkjema] = useState({
         purpose: "hello world",
         items: [],
     });
     const onSubmit = async () => {
-        console.log({sender:skjema});
+        console.log({sender: skjema});
         await sendBestilling(patientId, skjema);
     }
 
@@ -67,7 +66,7 @@ const OrderPatientInfo: React.FunctionComponent<Props> = ({patientId}) => {
             </Select>
             <br/>
             <Hovedknapp className={"knapp-order-patient-info"} onClick={onSubmit}>Send melding</Hovedknapp>
-            <Flatknapp onClick={goToViewPath("table")}>Avbryt</Flatknapp>
+            <Flatknapp onClick={goto.viewPath("table")}>Avbryt</Flatknapp>
         </div>
     );
 }

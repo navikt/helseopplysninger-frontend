@@ -17,8 +17,8 @@ export const PatientView = () => {
     const {view, eventId} = useParams<any>()
     const {events, statusPresens, patientId} = usePatientContext();
 
-    const nextEventId = nextId(events,eventId);
-    const prevEventId = prevId(events,eventId);
+    const nextEventId = nextId(events, eventId);
+    const prevEventId = prevId(events, eventId);
     return (
         <AppContainer>
             <Container fluid>

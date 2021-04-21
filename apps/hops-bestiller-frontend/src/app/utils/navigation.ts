@@ -1,30 +1,42 @@
-import {generatePath, useHistory, useRouteMatch} from "react-router-dom";
+import {generatePath, match} from "react-router-dom";
+import * as H from "history";
 
 
-export function generateViewPath(view, eventId?) {
-    const location = useRouteMatch();
-    const copiedParams = {
-        eventId: undefined,
-        ...location.params,
-        view,
-    };
-    if (eventId) {
-        copiedParams.eventId = eventId;
+export class Goto {
+    history: H.History<H.LocationState>;
+    routeMatch: match;
+
+    constructor(history, routeMatch) {
+        this.history = history;
+        this.routeMatch = routeMatch;
     }
-    const parts = [generatePath(location.path, copiedParams)];
-    // @ts-ignore
-    if (eventId && !location.params.eventId) {
-        parts.push(eventId)
-    }
-    return parts.join("/");
-}
 
-export function goToViewPath(view, eventId?) {
-    const history = useHistory();
-    const viewPath = generateViewPath(view, eventId);
-    return () => {
-        if(history.location.pathname !== viewPath){
-            history.push(viewPath);
+    generateViewPath(view, eventId?) {
+        const {params, path} = this.routeMatch;
+        const {location} = this.history;
+        const copiedParams = {
+            eventId: undefined,
+            ...params,
+            view,
+        };
+        if (eventId) {
+            copiedParams.eventId = eventId;
+        }
+        const parts = [generatePath(path, copiedParams)];
+        // @ts-ignore
+        if (eventId && !params.eventId) {
+            parts.push(eventId)
+        }
+        return parts.join("/");
+    }
+
+    viewPath(view, eventId?) {
+        const viewPath = this.generateViewPath(view, eventId);
+        const {pathname} = this.history.location;
+        return () => {
+            if (pathname !== viewPath) {
+                this.history.push(viewPath);
+            }
         }
     }
 }
