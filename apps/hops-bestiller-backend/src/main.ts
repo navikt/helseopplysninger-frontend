@@ -14,13 +14,12 @@ import waitOn from "wait-on";
 import {kafkaConsumer} from "./kafka/kafka-consumer";
 import {kafkaClient} from "./kafka/kafka-client";
 import bestill from "./routes/bestill";
-import {attatchWsServer, wsBroadcast, wsServer} from "./ws/wsServer";
-
+import {attatchWsServer, wsBroadcast} from "./ws/wsServer";
 async function bootstrap(): Promise<Server> {
     logger.info("Bootstrap started");
     kafkaConsumer(
         kafkaClient,
-        "bestiller",
+        "bestiller2",
         kafkaTopics.bestillinger,
         message => {
             logger.info("KafkaReceivedMessage", message.value.toString());

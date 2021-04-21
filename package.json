@@ -25,7 +25,8 @@
     "help": "nx help",
     "gen": "ts-node --skip-project tools/test-data",
     "matrix": "nx affected:apps --plain --base=remotes/origin/main$NX_BASE|tr -d '\\n'|jq -cRs 'split(\" \")'",
-    "up": "npm run affected:build && docker-compose -p hops --env-file ./.env up -d --build --remove-orphans"
+    "up": "npm run affected:build && docker compose -p hops --env-file ./.env up -d --build --remove-orphans",
+    "down": "docker compose -p hops down"
   },
   "dependencies": {
     "@microsoft/microsoft-graph-client": "^2.2.1",
