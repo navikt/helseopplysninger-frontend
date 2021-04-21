@@ -3,12 +3,15 @@ import axios from "axios";
 import {BackendPaths, Brukerinfo} from "@navikt/hops-types";
 import {IQuestionnaire_Item} from "@ahryman40k/ts-fhir-types/lib/R4";
 import {wsClient} from "../ws/wsClient";
+import {Goto} from "../utils/navigation";
+import {useHistory, useRouteMatch} from "react-router-dom";
 
 interface AppContextProps {
     user?: Brukerinfo;
     loading: Boolean;
     items: IQuestionnaire_Item[];
     messages: MessageEvent[];
+    goto: Goto;
 }
 
 const AppContext = React.createContext<Partial<AppContextProps>>({});
@@ -39,8 +42,10 @@ const AppContextProvider = (props: any) => {
             setItems(res.data);
         })
     }, [])
+
+    const goto = new Goto(useHistory(),useRouteMatch());
     const context: AppContextProps = {
-        user, loading, items, messages
+        user, loading, items, messages, goto
     }
     return (
         <AppContext.Provider value={context}>

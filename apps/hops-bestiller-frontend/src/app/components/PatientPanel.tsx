@@ -3,10 +3,10 @@ import "./PatientPanel.less"
 import Panel from "nav-frontend-paneler";
 import {VenstreChevron} from "nav-frontend-chevron";
 import classNames from "classnames";
-import {goToViewPath} from "../utils/navigation";
+import {useAppContext} from "../contexts/AppContext";
 
 export const PatientPanel = ({isForm, showBackArrow, children}) => {
-
+    const {goto} = useAppContext()
     const className = classNames({
         "patient-panel": true,
         "patient-panel-blue": isForm,
@@ -15,7 +15,7 @@ export const PatientPanel = ({isForm, showBackArrow, children}) => {
     })
     return (
         <Panel className={className}>
-            <div className={"patient-panel-left"} onClick={goToViewPath("table")}>
+            <div className={"patient-panel-left"} onClick={goto.viewPath(history, "table")}>
                 <VenstreChevron></VenstreChevron>
             </div>
             <div className={"patient-panel-right"}>

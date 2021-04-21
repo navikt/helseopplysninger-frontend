@@ -1,10 +1,11 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import {render} from '@testing-library/react';
 
-import { BrowserRouter } from 'react-router-dom';
+import {BrowserRouter} from 'react-router-dom';
 
 import App from './app';
 import {AppContext} from "./contexts/AppContext";
+
 const brukerinfo =require('../../../../fixtures/bestiller/brukerinfo.json');
 const context = {
   user: brukerinfo,
