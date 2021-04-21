@@ -1,11 +1,12 @@
 import {bestilleHelseopplysning} from "./bestille-helseopplysning";
 import {Kafka} from "kafkajs";
+import {fhirBestilling} from "../utils/fhir";
 
 test("it should bestille helseopplysninger", async () => {
     const topic = "fsadfasfd";
     let result = {
-        topic:null,
-        messages:[],
+        topic: null,
+        messages: [],
     };
     const kafkaClient = {
         producer: () => {
@@ -16,6 +17,14 @@ test("it should bestille helseopplysninger", async () => {
             };
         }
     } as unknown as Kafka;
-    const metadata = await bestilleHelseopplysning(kafkaClient, topic,[]);
+    const bestilling: fhirBestilling = {
+        description: "",
+        patientIdentifier: undefined,
+        practionerIdentifier: undefined,
+        questionnaireItems: [],
+        saksbehandlerIdentifier: ""
+
+    }
+    const metadata = await bestilleHelseopplysning(kafkaClient, topic, bestilling);
     expect(result.topic).toBe(topic)
 })

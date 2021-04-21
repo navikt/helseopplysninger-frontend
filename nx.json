@@ -1,35 +1,20 @@
 {
   "implicitDependencies": {},
-  "affected": {
-    "defaultBase": "main"
-  },
+  "affected": { "defaultBase": "main" },
   "npmScope": "navikt",
   "tasksRunnerOptions": {
     "default": {
       "runner": "@nrwl/workspace/tasks-runners/default",
-      "options": {
-        "cacheableOperations": ["build", "lint", "test", "e2e"]
-      }
+      "options": { "cacheableOperations": ["build", "lint", "test", "e2e"] }
     }
   },
   "projects": {
-    "sof-questionnaire": {
-      "tags": []
-    },
-    "hops-bestiller-backend": {
-      "tags": []
-    },
-    "fhir-questionnaire": {
-      "tags": []
-    },
-    "fixtures": {
-      "tags": []
-    },
-    "hops-bestiller-frontend": {
-      "tags": []
-    },
-    "hops-types": {
-      "tags": []
-    }
+    "sof-questionnaire": { "tags": [] },
+    "hops-bestiller-backend": { "tags": [] },
+    "fhir-questionnaire": { "tags": [] },
+    "fixtures": { "tags": [] },
+    "hops-bestiller-frontend": { "tags": [] },
+    "hops-types": { "tags": [] },
+    "fkr-client": { "tags": [] }
   }
 }

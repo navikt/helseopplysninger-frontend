@@ -3,9 +3,10 @@ import {BackendPaths} from "@navikt/hops-types";
 import {bestilleHelseopplysning} from "../events/bestille-helseopplysning";
 import {kafkaClient} from "../kafka/kafka-client";
 import {kafkaTopics} from "../config";
-import {createFhirQuestionaire, createFhirTask} from "../utils/fhir";
+import {fhirBestilling} from "../utils/fhir";
 import getUserInfoFromRequest from "../auth/get-user-info-from-request";
 import {getFhirItems} from "../database/get-items";
+import {getPatientIdentifier} from "../database/get-patient";
 
 
 function bestillingRoutes(app: Express): void {
@@ -17,21 +18,33 @@ function bestillingRoutes(app: Express): void {
 
     app.post(BackendPaths.BESTILLING_PATH, async (req, res) => {
         res.set("Content-Security-Policy", "connect-src 'self'");
-        const user = getUserInfoFromRequest(req);
+        const {patientId} = req.params;
+        const {ident} = getUserInfoFromRequest(req);
         const description = req.body.purpose + " bestilling fra saksbehandler "
-        const task = createFhirTask(description, user.ident);
-        const items = [];
+        const patientIdentifier = getPatientIdentifier(patientId);
+        const questionnaireItems = [];
         req.body.items.forEach(linkId => {
             const found = fhirItems.find(i => i.linkId === linkId);
             if (found) {
-                items.push(found);
+                questionnaireItems.push(found);
             }
         });
-        const questionnaire = createFhirQuestionaire(description, items);
+        const practionerIdentifier = {
+            system: "urn:oid:2.16.578.1.12.4.1.4.1",
+            value: "15097902396"
+        };
+        const bestilling: fhirBestilling = {
+            description,
+            patientIdentifier,
+            practionerIdentifier,
+            questionnaireItems,
+            saksbehandlerIdentifier: ident
+        }
         const metadata = await bestilleHelseopplysning(
             kafkaClient,
             kafkaTopics.bestillinger,
-            [task, questionnaire]);
+            bestilling
+        );
         res.json(metadata).status(201);
     });
 

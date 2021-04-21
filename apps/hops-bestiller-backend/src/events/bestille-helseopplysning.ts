@@ -1,14 +1,13 @@
-import {IResourceList} from "@ahryman40k/ts-fhir-types/lib/R4";
 import {kafkaProducer} from "../kafka/kafka-producer";
 import {Kafka} from "kafkajs";
-import {createFhirMessageBundle} from "../utils/fhir";
+import {createFhirBestilling, fhirBestilling} from "../utils/fhir";
 
 export const bestilleHelseopplysning = async (
     kafkaClient: Kafka,
     topic: string,
-    resources: IResourceList[]
+    fhirBestilling: fhirBestilling
 ) => {
-    const bundle = createFhirMessageBundle(resources);
+    const bundle = createFhirBestilling(fhirBestilling);
     const recordMetadata = await kafkaProducer(
         kafkaClient,
         topic,
