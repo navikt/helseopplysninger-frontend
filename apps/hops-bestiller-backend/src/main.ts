@@ -17,16 +17,6 @@ import bestill from "./routes/bestill";
 import {attatchWsServer, wsBroadcast} from "./ws/wsServer";
 async function bootstrap(): Promise<Server> {
     logger.info("Bootstrap started");
-    kafkaConsumer(
-        kafkaClient,
-        "bestiller",
-        kafkaTopics.bestillinger,
-        message => {
-            logger.info("KafkaReceivedMessage", message.value.toString());
-            wsBroadcast(message);
-        }).then(() => {
-        logger.info("Bootstrap, kafka connected");
-    });
     await waitOn({
         resources: [
             ["tcp", database.host, database.port].join(":")
@@ -37,6 +27,16 @@ async function bootstrap(): Promise<Server> {
     })
     const result = await dbPool.query('SELECT NOW() as message');
     logger.info("Bootstrap, db connected servertime: " + result.rows[0].message);
+    kafkaConsumer(
+        kafkaClient,
+        "bestiller",
+        kafkaTopics.bestillinger,
+        message => {
+            logger.info("KafkaReceivedMessage", message.value.toString());
+            wsBroadcast(JSON.parse(message.value.toString()));
+        }).then(() => {
+        logger.info("Bootstrap, kafka connected");
+    });
     const app = express();
     initSession(app);
     await initPassport(app);
