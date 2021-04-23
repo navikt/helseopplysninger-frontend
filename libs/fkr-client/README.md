@@ -1,6 +1,5 @@
 # fkr-client
-
-This library was generated with [Nx](https://nx.dev).
+Enkel klient for FKR (Felles kontaktregister).
 
 ## Running unit tests
 
