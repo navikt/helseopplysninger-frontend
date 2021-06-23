@@ -1,143 +1,26 @@
 {
   "version": 2,
-  "cli": { "defaultCollection": "@nrwl/react" },
+  "cli": {
+    "defaultCollection": "@nrwl/react"
+  },
   "defaultProject": "sof-questionnaire",
   "generators": {
     "@nrwl/react": {
-      "application": { "style": "less", "linter": "eslint", "babel": true },
-      "component": { "style": "less" },
-      "library": { "style": "less", "linter": "eslint" }
+      "application": {
+        "style": "less",
+        "linter": "eslint",
+        "babel": true
+      },
+      "component": {
+        "style": "less"
+      },
+      "library": {
+        "style": "less",
+        "linter": "eslint"
+      }
     }
   },
   "projects": {
-    "sof-questionnaire": {
-      "root": "apps/sof-questionnaire",
-      "sourceRoot": "apps/sof-questionnaire/src",
-      "projectType": "application",
-      "targets": {
-        "build": {
-          "executor": "@nrwl/web:build",
-          "outputs": ["{options.outputPath}"],
-          "options": {
-            "outputPath": "dist/apps/sof-questionnaire",
-            "index": "apps/sof-questionnaire/src/index.html",
-            "main": "apps/sof-questionnaire/src/main.tsx",
-            "polyfills": "apps/sof-questionnaire/src/polyfills.ts",
-            "tsConfig": "apps/sof-questionnaire/tsconfig.app.json",
-            "assets": [
-              "apps/sof-questionnaire/src/favicon.ico",
-              "apps/sof-questionnaire/src/assets"
-            ],
-            "styles": ["apps/sof-questionnaire/src/styles.less"],
-            "scripts": [],
-            "webpackConfig": "configs/webpack.config.sof.js"
-          },
-          "configurations": {
-            "production": {
-              "fileReplacements": [
-                {
-                  "replace": "apps/sof-questionnaire/src/environments/environment.ts",
-                  "with": "apps/sof-questionnaire/src/environments/environment.prod.ts"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
-                }
-              ]
-            }
-          }
-        },
-        "serve": {
-          "executor": "@nrwl/web:dev-server",
-          "options": { "buildTarget": "sof-questionnaire:build" },
-          "configurations": {
-            "production": {
-              "buildTarget": "sof-questionnaire:build:production"
-            }
-          }
-        },
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["apps/sof-questionnaire/**/*.{ts,tsx,js,jsx}"]
-          }
-        },
-        "test": {
-          "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/sof-questionnaire"],
-          "options": {
-            "jestConfig": "apps/sof-questionnaire/jest.config.js",
-            "passWithNoTests": true
-          }
-        }
-      }
-    },
-    "hops-bestiller-backend": {
-      "root": "apps/hops-bestiller-backend",
-      "sourceRoot": "apps/hops-bestiller-backend/src",
-      "projectType": "application",
-      "prefix": "hops-bestiller-backend",
-      "targets": {
-        "build": {
-          "executor": "@nrwl/node:build",
-          "outputs": ["{options.outputPath}"],
-          "options": {
-            "externalDependencies": "none",
-            "generatePackageJson": true,
-            "showCircularDependencies": false,
-            "outputPath": "dist/apps/hops-bestiller-backend",
-            "main": "apps/hops-bestiller-backend/src/main.ts",
-            "tsConfig": "apps/hops-bestiller-backend/tsconfig.app.json",
-            "assets": [
-              "apps/hops-bestiller-backend/src/assets",
-              "apps/hops-bestiller-backend/src/migrations"
-            ],
-            "webpackConfig": "configs/webpack.config.node.js"
-          },
-          "configurations": {
-            "production": {
-              "optimization": true,
-              "extractLicenses": true,
-              "inspect": false,
-              "fileReplacements": [
-                {
-                  "replace": "apps/hops-bestiller-backend/src/environments/environment.ts",
-                  "with": "apps/hops-bestiller-backend/src/environments/environment.prod.ts"
-                }
-              ]
-            }
-          }
-        },
-        "serve": {
-          "executor": "@nrwl/node:execute",
-          "options": { "buildTarget": "hops-bestiller-backend:build" }
-        },
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["apps/hops-bestiller-backend/**/*.ts"]
-          }
-        },
-        "test": {
-          "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/hops-bestiller-backend"],
-          "options": {
-            "jestConfig": "apps/hops-bestiller-backend/jest.config.js",
-            "passWithNoTests": true
-          }
-        }
-      }
-    },
     "fhir-questionnaire": {
       "root": "libs/fhir-questionnaire",
       "sourceRoot": "libs/fhir-questionnaire/src",
@@ -166,13 +49,93 @@
       "targets": {
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "options": { "lintFilePatterns": ["libs/fixtures/**/*.ts"] }
+          "options": {
+            "lintFilePatterns": ["libs/fixtures/**/*.ts"]
+          }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
           "outputs": ["coverage/libs/fixtures"],
           "options": {
             "jestConfig": "libs/fixtures/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "fkr-client": {
+      "root": "libs/fkr-client",
+      "sourceRoot": "libs/fkr-client/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/fkr-client/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/fkr-client"],
+          "options": {
+            "jestConfig": "libs/fkr-client/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "hops-bestiller-backend": {
+      "root": "apps/hops-bestiller-backend",
+      "sourceRoot": "apps/hops-bestiller-backend/src",
+      "projectType": "application",
+      "prefix": "hops-bestiller-backend",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "externalDependencies": "none",
+            "generatePackageJson": true,
+            "outputPath": "dist/apps/hops-bestiller-backend",
+            "main": "apps/hops-bestiller-backend/src/main.ts",
+            "tsConfig": "apps/hops-bestiller-backend/tsconfig.app.json",
+            "assets": [
+              "apps/hops-bestiller-backend/src/assets",
+              "apps/hops-bestiller-backend/src/migrations"
+            ],
+            "webpackConfig": "configs/webpack.config.node.js"
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/hops-bestiller-backend/src/environments/environment.ts",
+                  "with": "apps/hops-bestiller-backend/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "hops-bestiller-backend:build"
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/hops-bestiller-backend/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/hops-bestiller-backend"],
+          "options": {
+            "jestConfig": "apps/hops-bestiller-backend/jest.config.js",
             "passWithNoTests": true
           }
         }
@@ -227,7 +190,9 @@
         },
         "serve": {
           "executor": "@nrwl/web:dev-server",
-          "options": { "buildTarget": "hops-bestiller-frontend:build" },
+          "options": {
+            "buildTarget": "hops-bestiller-frontend:build"
+          },
           "configurations": {
             "production": {
               "buildTarget": "hops-bestiller-frontend:build:production"
@@ -259,7 +224,9 @@
       "targets": {
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "options": { "lintFilePatterns": ["libs/hops-types/**/*.ts"] }
+          "options": {
+            "lintFilePatterns": ["libs/hops-types/**/*.ts"]
+          }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
@@ -271,20 +238,75 @@
         }
       }
     },
-    "fkr-client": {
-      "root": "libs/fkr-client",
-      "sourceRoot": "libs/fkr-client/src",
-      "projectType": "library",
+    "sof-questionnaire": {
+      "root": "apps/sof-questionnaire",
+      "sourceRoot": "apps/sof-questionnaire/src",
+      "projectType": "application",
       "targets": {
+        "build": {
+          "executor": "@nrwl/web:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/sof-questionnaire",
+            "index": "apps/sof-questionnaire/src/index.html",
+            "main": "apps/sof-questionnaire/src/main.tsx",
+            "polyfills": "apps/sof-questionnaire/src/polyfills.ts",
+            "tsConfig": "apps/sof-questionnaire/tsconfig.app.json",
+            "assets": [
+              "apps/sof-questionnaire/src/favicon.ico",
+              "apps/sof-questionnaire/src/assets"
+            ],
+            "styles": ["apps/sof-questionnaire/src/styles.less"],
+            "scripts": [],
+            "webpackConfig": "@nrwl/react/plugins/webpack"
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/sof-questionnaire/src/environments/environment.ts",
+                  "with": "apps/sof-questionnaire/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/web:dev-server",
+          "options": {
+            "buildTarget": "sof-questionnaire:build"
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "sof-questionnaire:build:production"
+            }
+          }
+        },
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "options": { "lintFilePatterns": ["libs/fkr-client/**/*.ts"] }
+          "options": {
+            "lintFilePatterns": ["apps/sof-questionnaire/**/*.{ts,tsx,js,jsx}"]
+          }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/fkr-client"],
+          "outputs": ["coverage/apps/sof-questionnaire"],
           "options": {
-            "jestConfig": "libs/fkr-client/jest.config.js",
+            "jestConfig": "apps/sof-questionnaire/jest.config.js",
             "passWithNoTests": true
           }
         }
