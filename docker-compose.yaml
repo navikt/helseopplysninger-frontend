@@ -54,6 +54,14 @@ services:
       POSTGRES_DB: ${DB_DATABASE}
     command: -p ${DB_PORT}
 
+  hapi:
+    image: hapiproject/hapi
+    ports:
+      - ${FHIR_SERVER_PORT}:8080
+    environment:
+      hapi.fhir.server_address: http://host.docker.internal:${FHIR_SERVER_PORT}/fhir
+
+
   zookeeper:
     image: wurstmeister/zookeeper
     ports:

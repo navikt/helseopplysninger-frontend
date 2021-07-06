@@ -18,7 +18,8 @@
       "@navikt/fhir-questionnaire": ["libs/fhir-questionnaire/src/index.ts"],
       "@navikt/fixtures": ["libs/fixtures/src/index.ts"],
       "@navikt/fkr-client": ["libs/fkr-client/src/index.ts"],
-      "@navikt/hops-types": ["libs/hops-types/src/index.ts"]
+      "@navikt/hops-types": ["libs/hops-types/src/index.ts"],
+      "@navikt/sof-common": ["libs/sof-common/src/index.ts"]
     },
     "types": ["jest", "node"],
     "allowSyntheticDefaultImports": true
