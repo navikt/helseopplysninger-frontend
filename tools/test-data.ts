@@ -1,5 +1,5 @@
 import {loadEnv} from "./utils/func";
-import {fkrGetPatient} from "../libs/fkr-client/src";
+import {fkrGetPatient} from "@navikt/fkr-client";
 import {writeFileSync} from "fs";
 import {fileExists} from "@nrwl/workspace/src/utils/fileutils";
 import {join} from "path";

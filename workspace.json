@@ -29,12 +29,16 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["libs/fhir-questionnaire/**/*.{ts,tsx,js,jsx}"]
+            "lintFilePatterns": [
+              "libs/fhir-questionnaire/**/*.{ts,tsx,js,jsx}"
+            ]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/fhir-questionnaire"],
+          "outputs": [
+            "coverage/libs/fhir-questionnaire"
+          ],
           "options": {
             "jestConfig": "libs/fhir-questionnaire/jest.config.js",
             "passWithNoTests": true
@@ -50,12 +54,16 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["libs/fixtures/**/*.ts"]
+            "lintFilePatterns": [
+              "libs/fixtures/**/*.ts"
+            ]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/fixtures"],
+          "outputs": [
+            "coverage/libs/fixtures"
+          ],
           "options": {
             "jestConfig": "libs/fixtures/jest.config.js",
             "passWithNoTests": true
@@ -71,12 +79,16 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["libs/fkr-client/**/*.ts"]
+            "lintFilePatterns": [
+              "libs/fkr-client/**/*.ts"
+            ]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/fkr-client"],
+          "outputs": [
+            "coverage/libs/fkr-client"
+          ],
           "options": {
             "jestConfig": "libs/fkr-client/jest.config.js",
             "passWithNoTests": true
@@ -92,7 +104,9 @@
       "targets": {
         "build": {
           "executor": "@nrwl/node:build",
-          "outputs": ["{options.outputPath}"],
+          "outputs": [
+            "{options.outputPath}"
+          ],
           "options": {
             "externalDependencies": "none",
             "generatePackageJson": true,
@@ -128,12 +142,16 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["apps/hops-bestiller-backend/**/*.ts"]
+            "lintFilePatterns": [
+              "apps/hops-bestiller-backend/**/*.ts"
+            ]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/hops-bestiller-backend"],
+          "outputs": [
+            "coverage/apps/hops-bestiller-backend"
+          ],
           "options": {
             "jestConfig": "apps/hops-bestiller-backend/jest.config.js",
             "passWithNoTests": true
@@ -148,7 +166,9 @@
       "targets": {
         "build": {
           "executor": "@nrwl/web:build",
-          "outputs": ["{options.outputPath}"],
+          "outputs": [
+            "{options.outputPath}"
+          ],
           "options": {
             "outputPath": "dist/apps/hops-bestiller-frontend",
             "index": "apps/hops-bestiller-frontend/src/index.html",
@@ -159,7 +179,9 @@
               "apps/hops-bestiller-frontend/src/favicon.ico",
               "apps/hops-bestiller-frontend/src/assets"
             ],
-            "styles": ["apps/hops-bestiller-frontend/src/styles.less"],
+            "styles": [
+              "apps/hops-bestiller-frontend/src/styles.less"
+            ],
             "scripts": [],
             "webpackConfig": "configs/webpack.config.hops.js"
           },
@@ -209,7 +231,9 @@
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/hops-bestiller-frontend"],
+          "outputs": [
+            "coverage/apps/hops-bestiller-frontend"
+          ],
           "options": {
             "jestConfig": "apps/hops-bestiller-frontend/jest.config.js",
             "passWithNoTests": true
@@ -225,14 +249,43 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["libs/hops-types/**/*.ts"]
+            "lintFilePatterns": [
+              "libs/hops-types/**/*.ts"
+            ]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/hops-types"],
+          "outputs": [
+            "coverage/libs/hops-types"
+          ],
           "options": {
             "jestConfig": "libs/hops-types/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "sof-common": {
+      "root": "libs/sof-common",
+      "sourceRoot": "libs/sof-common/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/sof-common/**/*.ts"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/sof-common"
+          ],
+          "options": {
+            "jestConfig": "libs/sof-common/jest.config.js",
             "passWithNoTests": true
           }
         }
@@ -245,7 +298,9 @@
       "targets": {
         "build": {
           "executor": "@nrwl/web:build",
-          "outputs": ["{options.outputPath}"],
+          "outputs": [
+            "{options.outputPath}"
+          ],
           "options": {
             "outputPath": "dist/apps/sof-questionnaire",
             "index": "apps/sof-questionnaire/src/index.html",
@@ -256,7 +311,9 @@
               "apps/sof-questionnaire/src/favicon.ico",
               "apps/sof-questionnaire/src/assets"
             ],
-            "styles": ["apps/sof-questionnaire/src/styles.less"],
+            "styles": [
+              "apps/sof-questionnaire/src/styles.less"
+            ],
             "scripts": [],
             "webpackConfig": "@nrwl/react/plugins/webpack"
           },
@@ -299,16 +356,99 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["apps/sof-questionnaire/**/*.{ts,tsx,js,jsx}"]
+            "lintFilePatterns": [
+              "apps/sof-questionnaire/**/*.{ts,tsx,js,jsx}"
+            ]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/sof-questionnaire"],
+          "outputs": [
+            "coverage/apps/sof-questionnaire"
+          ],
           "options": {
             "jestConfig": "apps/sof-questionnaire/jest.config.js",
             "passWithNoTests": true
           }
+        }
+      }
+    },
+    "sof-resource-puller": {
+      "root": "apps/sof-resource-puller",
+      "sourceRoot": "apps/sof-resource-puller/src",
+      "projectType": "application",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:build",
+          "outputs": [
+            "{options.outputPath}"
+          ],
+          "options": {
+            "outputPath": "dist/apps/sof-resource-puller",
+            "main": "apps/sof-resource-puller/src/main.ts",
+            "tsConfig": "apps/sof-resource-puller/tsconfig.app.json",
+            "assets": [
+              "apps/sof-resource-puller/src/assets"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/sof-resource-puller/src/environments/environment.ts",
+                  "with": "apps/sof-resource-puller/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "start-hapi": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "docker-compose up -d hapi",
+              "wait-on http://localhost:8096"
+            ]
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "sof-resource-puller:build"
+          },
+          "dependsOn": [
+            {
+              "target": "start-hapi",
+              "projects": "self"
+            }
+          ]
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/sof-resource-puller/**/*.ts"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/apps/sof-resource-puller"
+          ],
+          "options": {
+            "jestConfig": "apps/sof-resource-puller/jest.config.js",
+            "passWithNoTests": true
+          },
+          "dependsOn": [
+            {
+              "target": "start-hapi",
+              "projects": "self"
+            }
+          ]
         }
       }
     }
