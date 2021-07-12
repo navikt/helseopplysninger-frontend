@@ -80,7 +80,7 @@ jobs:
             --tag ${{ steps.tag.outputs.base }}:${{ steps.tag.outputs.sha }} \
             --tag ${{ steps.tag.outputs.base }}:latest --build-arg APPNAME=${{ matrix.appname }} .
       - name: Push docker image
-        #if: ${{ github.ref == 'refs/heads/main' }}
+        if: ${{ github.ref == 'refs/heads/main' }}
         run: |
           docker push --all-tags ${{ steps.tag.outputs.base }}
       - name: Deploy to Dev
@@ -88,6 +88,6 @@ jobs:
         env:
           IMAGE: ${{ steps.tag.outputs.base }}:${{ steps.tag.outputs.sha }}
           CLUSTER: dev-gcp
-          #DRY_RUN: ${{ github.ref != 'refs/heads/main' }}
+          DRY_RUN: ${{ github.ref != 'refs/heads/main' }}
           VARS: .nais/dev.json
           RESOURCE: apps/${{ matrix.appname }}/naiserator.yaml

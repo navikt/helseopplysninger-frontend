@@ -9,5 +9,7 @@ module.exports = {
     '<rootDir>/libs/fkr-client',
     '<rootDir>/libs/hops-types',
     '<rootDir>/libs/sof-common',
+    '<rootDir>/apps/hops-behandler-backend',
+    '<rootDir>/libs/helseid',
   ],
 };

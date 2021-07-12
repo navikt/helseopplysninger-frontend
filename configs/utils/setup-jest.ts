@@ -1,5 +1,8 @@
 const path = require('path');
 
-require('dotenv').config({
-  path: path.join(__dirname, '..', '..', '.env'),
-});
+[".env", ".local.env"].forEach(filename => {
+    require('dotenv').config({
+        path: path.join(__dirname, '..', '..', filename),
+    });
+})
+
