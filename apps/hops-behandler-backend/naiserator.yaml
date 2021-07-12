@@ -1,0 +1,31 @@
+apiVersion: "nais.io/v1alpha1"
+kind: "Application"
+metadata:
+  name: hops-behandler-backend
+  namespace: helseopplysninger
+  labels:
+    team: helseopplysninger
+spec:
+  image: {{image}}
+  port: 2022
+  team: helseopplysninger
+  liveness:
+    path: /behandler/internal/health
+  readiness:
+    path: /behandler/internal/health
+  resources:
+    limits:
+      cpu: 200m
+      memory: 512Mi
+    requests:
+      cpu: 100m
+      memory: 256Mi
+  replicas:
+    min: 1
+    max: 2
+    cpuThresholdPercentage: 90
+  prometheus:
+    enabled: false
+    path: /behandler/internal/prometheus
+  ingresses:
+    - {{hops-ingress}}/behandler

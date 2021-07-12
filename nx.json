@@ -8,12 +8,7 @@
     "default": {
       "runner": "@nrwl/workspace/tasks-runners/default",
       "options": {
-        "cacheableOperations": [
-          "build",
-          "lint",
-          "test",
-          "e2e"
-        ]
+        "cacheableOperations": ["build", "lint", "test", "e2e"]
       }
     }
   },
@@ -25,6 +20,12 @@
       "tags": []
     },
     "fkr-client": {
+      "tags": []
+    },
+    "helseid": {
+      "tags": []
+    },
+    "hops-behandler-backend": {
       "tags": []
     },
     "hops-bestiller-backend": {
