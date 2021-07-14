@@ -1,5 +1,5 @@
 module.exports = {
-  displayName: 'fhir-questionnaire',
+  displayName: 'fhir-components',
   preset: '../../jest.preset.js',
   transform: {
     '^.+\\.[tj]sx?$': [
@@ -8,5 +8,5 @@ module.exports = {
     ],
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
-  coverageDirectory: '../../coverage/libs/fhir-questionnaire',
+  coverageDirectory: '../../coverage/libs/fhir-components',
 };

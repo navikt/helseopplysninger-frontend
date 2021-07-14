@@ -1,6 +1,6 @@
 import {Express} from "express";
-import {SofPaths, validatePullResourceRequest} from '@navikt/sof-common';
-import pullResource from "../utils/pull-resource";
+import {SofPaths} from '@navikt/sof-common';
+import {pullBundleSendQuestionnaire} from "../commands/pull-bundle-send-questionnaire";
 
 /**
  * This route will pull and bundle a resource.
@@ -9,17 +9,15 @@ import pullResource from "../utils/pull-resource";
  */
 function pullResourceRoute(app: Express) {
     app.post(SofPaths.PULL_RESOURCE, async (req, res) => {
-        const {resource, token} = req.body;
-        const errors = validatePullResourceRequest(resource, token);
-        console.log(req.body);
-        if (errors.length) {
-            res.status(400).send(errors);
-        } else {
-            const resourceUrl = new URL(resource);
-            const pulledResource = await pullResource(resourceUrl, token);
-
-            res.send({message: 'I pull that resource', resource: pulledResource});
-        }
+        const {fhirServerUrl, canonical, token} = req.body;
+        const operationOutcome = await pullBundleSendQuestionnaire({
+            fhirServerUrl,
+            canonical,
+            token,
+            kafkaTopic: "3234",
+            kafkaProducer: null,
+        })
+        res.json(operationOutcome)
     })
 }
 

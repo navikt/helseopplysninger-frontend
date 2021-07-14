@@ -1,9 +1,13 @@
 import {IResourceList} from "@ahryman40k/ts-fhir-types/lib/R4";
 import axios from "axios";
 
-async function pullResource(resourceUrl: URL, token: string): Promise<IResourceList> {
+async function pullResource(
+    fhirServerUrl: URL,
+    resource: string,
+    token: string
+): Promise<IResourceList> {
     const result = await axios.request({
-        url: resourceUrl.toString(),
+        url: [fhirServerUrl.toString(), resource].join("/"),
         method: 'get',
         headers: {
             'Authorization': 'Bearer ' + token,

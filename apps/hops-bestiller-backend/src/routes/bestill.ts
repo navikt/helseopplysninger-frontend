@@ -3,7 +3,7 @@ import {BackendPaths} from "@navikt/hops-types";
 import {bestilleHelseopplysning} from "../events/bestille-helseopplysning";
 import {kafkaClient} from "../kafka/kafka-client";
 import {kafkaTopics} from "../config";
-import {fhirBestilling} from "../utils/fhir";
+import {fhirBestilling} from "@navikt/fhir";
 import getUserInfoFromRequest from "../auth/get-user-info-from-request";
 import {getFhirItems} from "../database/get-items";
 import {getPatientIdentifier} from "../database/get-patient";

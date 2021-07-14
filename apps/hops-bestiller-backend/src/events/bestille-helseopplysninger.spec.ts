@@ -1,6 +1,6 @@
 import {bestilleHelseopplysning} from "./bestille-helseopplysning";
 import {Kafka} from "kafkajs";
-import {fhirBestilling} from "../utils/fhir";
+import {fhirBestilling} from "@navikt/fhir";
 
 test("it should bestille helseopplysninger", async () => {
     const topic = "fsadfasfd";

@@ -8,6 +8,8 @@ import {
     IQuestionnaire,
     IQuestionnaire_Item,
     IQuestionnaireResponse,
+    IQuestionnaireResponse_Item,
+    IReference,
     IResourceList,
     ITask,
     QuestionnaireResponseStatusKind,
@@ -16,16 +18,21 @@ import {
     TaskStatusKind
 } from "@ahryman40k/ts-fhir-types/lib/R4";
 import {v4 as uuidv4} from "uuid";
+import {OID_FNR, OID_HPR_NR} from "./constants";
 
-export const createFhirMessageBundle = (resources: IResourceList[], authorIdent): IBundle => {
+export const createFhirMessageBundle = (resources: IResourceList[], authorReference): IBundle => {
     const timestamp = (new Date()).toISOString();
+    const sourceName = process.env.NAIS_APP_NAME || "local-dev"
+    const namespace = process.env.NAIS_NAMESPACE || "local"
     const messageHeader: IMessageHeader = {
         id: uuidv4(),
         resourceType: "MessageHeader",
         source: {
-            endpoint: "http://hops-bestiller-backend"
+            name: sourceName,
+            version: process.env.NAIS_APP_IMAGE,
+            endpoint: `http://${sourceName}.${namespace}.svc.cluster.local`
         },
-        eventUri: "bestilling",
+        eventUri: sourceName,
         focus: []
     }
     const provenance: IProvenance = {
@@ -34,7 +41,7 @@ export const createFhirMessageBundle = (resources: IResourceList[], authorIdent)
         recorded: timestamp,
         agent: [{
             "who": {
-                "reference": "Practitioner/" + authorIdent
+                "reference": authorReference
             }
         }],
         target: []
@@ -94,16 +101,15 @@ export const createFhirQuestionnaire = (name, items: IQuestionnaire_Item[]): IQu
 
 }
 
-export const createFhirQuestionnaireResponse = (questionaire: IQuestionnaire, practionerIdentifier: IIdentifier): IQuestionnaireResponse => {
+export const createFhirQuestionnaireResponse = (questionaire: IQuestionnaire, practioner: IReference, patient: IReference, items: IQuestionnaireResponse_Item[]): IQuestionnaireResponse => {
     return {
         resourceType: "QuestionnaireResponse",
         id: uuidv4(),
-        questionnaire: "urn:uuid:" + questionaire.id,
+        questionnaire: questionaire.resourceType + "/" + questionaire.id,
         status: QuestionnaireResponseStatusKind._inProgress,
-        source: {
-            type: "Practitioner",
-            identifier: practionerIdentifier,
-        }
+        source: practioner,
+        subject: patient,
+        item: items
     };
 }
 export type fhirBestilling = {
@@ -124,11 +130,41 @@ export const createFhirBestilling = (data: fhirBestilling) => {
     } = data
     const task = createFhirTask(description, patientIdentifier);
     const questionnaire = createFhirQuestionnaire(description, questionnaireItems);
-    const questionnaireResponse = createFhirQuestionnaireResponse(questionnaire, practionerIdentifier)
+    const questionnaireResponse = createFhirQuestionnaireResponse(questionnaire, {
+        type: "Practitioner",
+        identifier: practionerIdentifier
+    }, {}, [])
 
     return createFhirMessageBundle([
         task,
         questionnaire,
         questionnaireResponse
     ], saksbehandlerIdentifier);
+}
+
+export const createFhirPatientReference = (fnr: string, display?: string) => {
+    const reference: IReference = {
+        type: "Patient",
+        identifier: {
+            system: OID_FNR,
+            value: fnr,
+        },
+        display
+    }
+    return reference;
+}
+export const createFhirPractitionerReference = (hernr: string, display?: string) => {
+    const reference: IReference = {
+        type: "Practitioner",
+        identifier: {
+            system: OID_HPR_NR,
+            value: hernr,
+        },
+        display
+    }
+    return reference;
+}
+
+export const createFhirCanonical = (resource:IResourceList) => {
+    return resource.resourceType + "/" + resource.id
 }

@@ -1,6 +1,6 @@
 import {kafkaProducer} from "../kafka/kafka-producer";
 import {Kafka} from "kafkajs";
-import {createFhirBestilling, fhirBestilling} from "../utils/fhir";
+import {createFhirBestilling, fhirBestilling} from "@navikt/fhir";
 
 export const bestilleHelseopplysning = async (
     kafkaClient: Kafka,

@@ -9,11 +9,11 @@ export enum SofPaths {
     PULL_RESOURCE = '/sof-resource-puller/pull-resource'
 }
 
-export function validatePullResourceRequest(resource, token): string[] {
+export function validatePullResourceRequest(resourceUrl: URL, token): string[] {
     const errors = []
-    if (errors.length === 0 && !resource) errors.push("resource need to be set");
-    if (errors.length === 0 && !isURL(resource, {require_tld: false})) errors.push("resource must be an url");
-    if (errors.length === 0 && !token) errors.push("token must be set");
-    if (errors.length === 0 && !isJWT(token)) errors.push("token must be of type JWT");
+    if (!resourceUrl) errors.push("resourceurl need to be set");
+    if (resourceUrl && !isURL(resourceUrl.toString(), {require_tld: false})) errors.push("resourceurl must be an url");
+    if (!token) errors.push("token must be set");
+    if (!isJWT(token)) errors.push("token must be of type JWT");
     return errors;
 }
