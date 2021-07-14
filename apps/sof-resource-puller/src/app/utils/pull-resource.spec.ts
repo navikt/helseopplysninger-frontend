@@ -1,9 +1,14 @@
 import pullResource from "./pull-resource";
-import {IBundle} from "@ahryman40k/ts-fhir-types/lib/R4";
+import {IBundle, IQuestionnaire, IQuestionnaireResponse} from "@ahryman40k/ts-fhir-types/lib/R4";
+import {nockFhirResource, pushResource, testFhirQuestionnaire} from "@navikt/hops-testutils";
+import {fixtures} from "@navikt/fixtures";
+import {createFhirCanonical} from "@navikt/fhir";
 
 test("it should pull a resource", async () => {
-
-    const url = new URL(`${process.env.FHIR_SERVER_ADDRESS}/CapabilityStatement`);
-    const result = await pullResource(url,"token123") as IBundle;
-    expect(result.resourceType).toBe("Bundle");
+    const patient = fixtures().Patient;
+    nockFhirResource(patient)
+    const result = await pullResource(
+        new URL(process.env.FHIR_SERVER_ADDRESS),
+        createFhirCanonical(patient), "token123") as IBundle;
+    expect(result.resourceType).toBe("Patient");
 })

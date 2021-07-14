@@ -1,4 +1,4 @@
-import {createLogger, LogContexts, LogLevels,logLevelNameFor} from 'bs-logger';
+import {createLogger, LogContexts, logLevelNameFor, LogLevels} from 'bs-logger';
 
 const logger = createLogger({
     context: {namespace: 'http'},

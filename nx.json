@@ -13,7 +13,10 @@
     }
   },
   "projects": {
-    "fhir-questionnaire": {
+    "fhir": {
+      "tags": []
+    },
+    "fhir-components": {
       "tags": []
     },
     "fixtures": {
@@ -32,6 +35,9 @@
       "tags": []
     },
     "hops-bestiller-frontend": {
+      "tags": []
+    },
+    "hops-testutils": {
       "tags": []
     },
     "hops-types": {

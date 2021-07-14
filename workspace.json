@@ -21,22 +21,43 @@
     }
   },
   "projects": {
-    "fhir-questionnaire": {
-      "root": "libs/fhir-questionnaire",
-      "sourceRoot": "libs/fhir-questionnaire/src",
+    "fhir": {
+      "root": "libs/fhir",
+      "sourceRoot": "libs/fhir/src",
       "projectType": "library",
       "targets": {
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["libs/fhir-questionnaire/**/*.{ts,tsx,js,jsx}"]
+            "lintFilePatterns": ["libs/fhir/**/*.ts"]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/fhir-questionnaire"],
+          "outputs": ["coverage/libs/fhir"],
           "options": {
-            "jestConfig": "libs/fhir-questionnaire/jest.config.js",
+            "jestConfig": "libs/fhir/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "fhir-components": {
+      "root": "libs/fhir-components",
+      "sourceRoot": "libs/fhir-components/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/fhir-components/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/fhir-components"],
+          "options": {
+            "jestConfig": "libs/fhir-components/jest.config.js",
             "passWithNoTests": true
           }
         }
@@ -114,6 +135,8 @@
           "executor": "@nrwl/node:build",
           "outputs": ["{options.outputPath}"],
           "options": {
+            "externalDependencies": "none",
+            "generatePackageJson": true,
             "outputPath": "dist/apps/hops-behandler-backend",
             "main": "apps/hops-behandler-backend/src/main.ts",
             "tsConfig": "apps/hops-behandler-backend/tsconfig.app.json",
@@ -288,6 +311,27 @@
         }
       }
     },
+    "hops-testutils": {
+      "root": "libs/hops-testutils",
+      "sourceRoot": "libs/hops-testutils/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/hops-testutils/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/hops-testutils"],
+          "options": {
+            "jestConfig": "libs/hops-testutils/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
     "hops-types": {
       "root": "libs/hops-types",
       "sourceRoot": "libs/hops-types/src",
@@ -436,8 +480,8 @@
           "executor": "@nrwl/workspace:run-commands",
           "options": {
             "commands": [
-              "docker-compose up -d hapi",
-              "wait-on http://localhost:8096"
+              "# docker-compose up -d hapi",
+              "# wait-on http://localhost:8096"
             ]
           }
         },
