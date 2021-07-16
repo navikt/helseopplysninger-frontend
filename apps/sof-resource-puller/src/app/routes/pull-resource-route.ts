@@ -19,6 +19,16 @@ function pullResourceRoute(app: Express) {
         })
         res.json(operationOutcome)
     })
+    app.get(SofPaths.PULL_RESOURCE, async (req, res) => {
+        res.send({
+            "required method": "POST",
+            "required body": {
+                fhirServerUrl: "The url to the fhir server. Need to be whitelisted",
+                canonical: "Canonical reference to QuestionnaireResponse",
+                token: "Access Token",
+            },
+        })
+    })
 }
 
 export default pullResourceRoute;
