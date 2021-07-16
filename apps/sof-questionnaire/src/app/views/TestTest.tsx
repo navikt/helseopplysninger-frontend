@@ -29,6 +29,6 @@ function TestTest() {
             </a>
         </AppContainer>
     )
-};
+}
 
 export default TestTest;

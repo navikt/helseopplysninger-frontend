@@ -1,6 +1,7 @@
 import * as express from 'express';
 import pullResourceRoute from "./app/routes/pull-resource-route";
 import welcomeRoute from "./app/routes/welcome-route";
+import internalRoutes from "./app/routes/internals";
 
 
 const app = express();
@@ -8,8 +9,8 @@ const app = express();
 app.use(express.json())
 pullResourceRoute(app);
 welcomeRoute(app);
-
-const port = process.env.port || 3333;
+internalRoutes(app);
+const port = process.env.SERVER_PORT || 3333;
 const server = app.listen(port, () => {
   console.log(`Listening at http://localhost:${port}`);
 });

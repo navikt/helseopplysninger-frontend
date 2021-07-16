@@ -10,9 +10,9 @@ spec:
   port: 2022
   team: helseopplysninger
   liveness:
-    path: /resource-puller/internal/health
+    path: /internal/health
   readiness:
-    path: /resource-puller/internal/health
+    path: /internal/health
   resources:
     limits:
       cpu: 200m
@@ -26,6 +26,6 @@ spec:
     cpuThresholdPercentage: 90
   prometheus:
     enabled: false
-    path: /resource-puller/internal/prometheus
+    path: /internal/prometheus
   ingresses:
     - {{sof-ingress}}/resource-puller

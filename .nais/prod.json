@@ -1,7 +1,9 @@
 {
   "hops-ingress": "https://hops.intern.nav.no",
   "sof-ingress": "https://sof.nav.no",
-  "kafka_pool": "nav-prod",
+  "behandler-ingress": "https://behandler.nav.no",
+  "kafka-pool": "nav-prod",
+  "kafka-topic-bestilling": "helseopplysninger.bestilling",
   "fkr-sts-url": "https://helseid-sts.test.nhn.no/connect/token",
   "fkr-fhir-url": "https://hint-inet.utv.helsedir.no/kontaktregister/ekstern"
 }

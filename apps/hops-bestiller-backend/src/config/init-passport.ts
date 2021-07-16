@@ -5,7 +5,7 @@ import createStrategy from "../auth/strategy";
 import bodyParser from "body-parser";
 import {BackendPaths} from "@navikt/hops-types";
 
-async function initPassport(app: Express): Promise<void> {
+export async function initPassport(app: Express): Promise<void> {
     app.use(bodyParser.urlencoded({extended: false}));
     app.use(bodyParser.json());
     app.use(passport.initialize());
@@ -43,5 +43,3 @@ async function initPassport(app: Express): Promise<void> {
     });
 
 }
-
-export {initPassport}

@@ -23,11 +23,9 @@ spec:
   port: 2022
   team: helseopplysninger
   liveness:
-    path: /api/internal/is-alive
-    initialDelay: 90
+    path: /internal/health
   readiness:
-    path: /api/internal/is-ready
-    initialDelay: 90
+    path: /internal/health
   resources:
     limits:
       cpu: 400m
@@ -41,18 +39,18 @@ spec:
     cpuThresholdPercentage: 50
   prometheus:
     enabled: false
-    path: /api/internal/prometheus
+    path: /internal/prometheus
   ingresses:
     - {{hops-ingress}}/api
     - {{hops-ingress}}/oauth2
     - {{hops-ingress}}/ws
   kafka:
-    pool: {{kafka_pool}}
+    pool: {{kafka-pool}}
   env:
     - name: APP_INGRESS
       value: {{hops-ingress}}
     - name: KAFKA_TOPIC_BESTILLING
-      value: "helseopplysninger.bestilling"
+      value: {{kafka-topic-bestilling}}
     - name: KAFKA_SECURITY_ENABLED
       value: "true"
   envFrom:

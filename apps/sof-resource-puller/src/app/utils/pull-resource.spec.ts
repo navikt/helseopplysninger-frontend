@@ -1,6 +1,6 @@
 import pullResource from "./pull-resource";
-import {IBundle, IQuestionnaire, IQuestionnaireResponse} from "@ahryman40k/ts-fhir-types/lib/R4";
-import {nockFhirResource, pushResource, testFhirQuestionnaire} from "@navikt/hops-testutils";
+import {IBundle} from "@ahryman40k/ts-fhir-types/lib/R4";
+import {nockFhirResource} from "@navikt/hops-testutils";
 import {fixtures} from "@navikt/fixtures";
 import {createFhirCanonical} from "@navikt/fhir";
 

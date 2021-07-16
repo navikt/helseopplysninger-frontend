@@ -44,6 +44,6 @@ function BestillingSkjema() {
             }}>lagre</Knapp>
         </div>
     )
-};
+}
 
 export default BestillingSkjema;

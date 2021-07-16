@@ -2,7 +2,7 @@ import * as express from 'express';
 import defaults from "./routes/defaults";
 import internals from "./routes/internals";
 import {initPassport} from "./config/init-passport"
-import initSession from "./config/init-session";
+import {initSession} from "./config/init-session";
 import {database, kafkaTopics, server} from "./config";
 import logger from "./utils/logger";
 import dbPool from "./database/connection";

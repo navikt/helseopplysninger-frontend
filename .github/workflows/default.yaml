@@ -9,6 +9,10 @@ env:
   APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
   NX_BASE: ""
 
+concurrency:
+  group: ${{ github.head_ref }}
+  cancel-in-progress: true
+
 jobs:
   test:
     name: Test and build
@@ -51,7 +55,7 @@ jobs:
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 4
     needs: test
     if: ${{ needs.test.outputs.changed != '[]' }}
     strategy:
@@ -84,7 +88,7 @@ jobs:
         run: |
           docker push --all-tags ${{ steps.tag.outputs.base }}
       - name: Deploy to Dev
-        uses: nais/deploy/actions/deploy@master
+        uses: nais/deploy/actions/deploy@v1
         env:
           IMAGE: ${{ steps.tag.outputs.base }}:${{ steps.tag.outputs.sha }}
           CLUSTER: dev-gcp

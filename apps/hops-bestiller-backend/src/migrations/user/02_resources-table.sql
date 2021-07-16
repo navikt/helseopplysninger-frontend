@@ -1,4 +1,4 @@
 CREATE TABLE "resources" (
-  "id" uuid NOT NULL COLLATE "default",
-  "resource" json NOT NULL,
+    "id" uuid NOT NULL,
+    "resource" text NOT NULL
 )
