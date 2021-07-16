@@ -3,6 +3,7 @@ import {JWT} from "jose";
 import {mockKafkaProducer, nockFhirResource, testFhirQuestionnaire} from "@navikt/hops-testutils";
 import {QuestionnaireResponseStatusKind} from "@ahryman40k/ts-fhir-types/lib/R4";
 import {randomUUID} from "crypto";
+import {createFhirCanonical} from "@navikt/fhir";
 
 
 test("it should pull bundle and send questionnaire", async () => {
@@ -14,10 +15,11 @@ test("it should pull bundle and send questionnaire", async () => {
 
     nockFhirResource(questionnaire);
     nockFhirResource(questionnaireResponse);
-    const kafkaSendFunc = jest.fn()
+    const kafkaSendFunc = jest.fn();
+
     const operationOutcome = await pullBundleSendQuestionnaire({
         fhirServerUrl: new URL(process.env.FHIR_SERVER_ADDRESS),
-        canonical: "QuestionnaireResponse/" + questionnaireResponse.id,
+        canonical: createFhirCanonical(questionnaireResponse),
         token: token,
         kafkaTopic: process.env.KAFKA_TOPIC_BESTILLING,
         kafkaProducer: mockKafkaProducer(kafkaSendFunc)

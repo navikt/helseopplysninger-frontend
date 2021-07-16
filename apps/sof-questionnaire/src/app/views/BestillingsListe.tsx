@@ -18,6 +18,6 @@ function BestillingsListe() {
             </ul>
         </div>
     )
-};
+}
 
 export default BestillingsListe;

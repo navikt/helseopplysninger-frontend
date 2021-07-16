@@ -4,7 +4,7 @@ import dbPool from "../database/connection"
 
 const cookieParser = require("cookie-parser")
 const pgSession = connectPgSimple(session)
-const initSession = (app) => {
+export const initSession = (app) => {
     app.set('trust proxy', 1);
     app.use(cookieParser());
     app.use(session({
@@ -20,4 +20,4 @@ const initSession = (app) => {
     }))
 };
 
-export default initSession;
+

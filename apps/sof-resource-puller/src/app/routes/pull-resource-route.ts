@@ -14,7 +14,7 @@ function pullResourceRoute(app: Express) {
             fhirServerUrl,
             canonical,
             token,
-            kafkaTopic: "3234",
+            kafkaTopic: process.env.KAFKA_TOPIC_BESTILLING,
             kafkaProducer: null,
         })
         res.json(operationOutcome)

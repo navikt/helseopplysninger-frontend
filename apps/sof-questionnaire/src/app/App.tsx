@@ -11,17 +11,17 @@ function App() {
     return (
         <BrowserRouter>
             <FhirContextProvider>
-                <Route exact path={"/launch"}>
+                <Route exact path={"/questionnaire"}>
                     <h1 style={{"color": "black"}}>INDEX</h1>
                     <BestillingsListe/>
                 </Route>
-                <Route exact path={"/launch/utfylling/:id"}>
+                <Route exact path={"/questionnaire/utfylling/:id"}>
                     <h1 style={{"color": "blue"}}>BESTILLINGS_SKJEMA</h1>
                     <QuestionnaireResponseContextProvider>
                         <BestillingSkjema/>
                     </QuestionnaireResponseContextProvider>
                 </Route>
-                <Route exact path={"/launch/test-test"}>
+                <Route exact path={"/questionnaire/test-test"}>
                     <h1 style={{"color": "black"}}>TEST_TEST</h1>
                     <TestTest/>
                 </Route>

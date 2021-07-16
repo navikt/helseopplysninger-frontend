@@ -37,7 +37,7 @@ app.get("/callback", async (req, res) => {
     res.send(JWT.decode(tokenSet.id_token))
 });
 internalRoutes(app);
-const port = process.env.port || 8000;
+const port = process.env.SERVER_PORT || 8000;
 const server = app.listen(port, () => {
     console.log(`Listening at http://localhost:${port}/api`);
 });
