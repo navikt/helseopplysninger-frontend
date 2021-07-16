@@ -6,7 +6,8 @@ export function sofCommon(): string {
 }
 
 export enum SofPaths {
-    PULL_RESOURCE = '/sof-resource-puller/pull-resource'
+    PULLER_HOME = "/resource-puller",
+    PULL_RESOURCE = '/resource-puller/pull-resource',
 }
 
 export function validatePullResourceRequest(resourceUrl: URL, token): string[] {
