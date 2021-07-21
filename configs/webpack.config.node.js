@@ -1,9 +1,10 @@
 // "@nrwl/react/plugins/webpack"
-
-module.exports = (config, context) => {
-  config.externals = config.externals || [];
-  config.externals.push('bufferutil', 'utf-8-validate');
-  config.stats.warningsFilter = config.stats.warningsFilter || [];
-  config.stats.warningsFilter.push(/critical dependency:/i)
-  return config;
+const getWebpackConfig = require('@nrwl/react/plugins/webpack.js');
+module.exports = (config) => {
+  const defaultConfig = getWebpackConfig(config);
+  defaultConfig.externals = defaultConfig.externals || [];
+  defaultConfig.externals.push('bufferutil', 'utf-8-validate');
+  defaultConfig.stats.warningsFilter = defaultConfig.stats.warningsFilter || [];
+  defaultConfig.stats.warningsFilter.push(/critical dependency:/i);
+  return { ...defaultConfig };
 };

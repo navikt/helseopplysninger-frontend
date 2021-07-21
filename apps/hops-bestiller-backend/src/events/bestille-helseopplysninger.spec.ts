@@ -1,30 +1,26 @@
-import {bestilleHelseopplysning} from "./bestille-helseopplysning";
-import {Kafka} from "kafkajs";
-import {fhirBestilling} from "@navikt/fhir";
+import { bestilleHelseopplysning } from './bestille-helseopplysning';
+import { Producer } from 'kafkajs';
+import { fhirBestilling } from '@navikt/fhir';
 
-test("it should bestille helseopplysninger", async () => {
-    const topic = "fsadfasfd";
-    let result = {
-        topic: null,
-        messages: [],
-    };
-    const kafkaClient = {
-        producer: () => {
-            return {
-                send: (d) => Promise.resolve(result = d),
-                connect: jest.fn(),
-                disconnect: jest.fn(),
-            };
-        }
-    } as unknown as Kafka;
-    const bestilling: fhirBestilling = {
-        description: "",
-        patientIdentifier: undefined,
-        practionerIdentifier: undefined,
-        questionnaireItems: [],
-        saksbehandlerIdentifier: ""
+test('it should bestille helseopplysninger', async () => {
+  const topic = 'fsadfasfd';
+  let result = {
+    topic: null,
+    messages: [],
+  };
+  const producer = {
+    send: (d) => Promise.resolve((result = d)),
+    connect: jest.fn(),
+    disconnect: jest.fn(),
+  } as unknown as Producer;
 
-    }
-    const metadata = await bestilleHelseopplysning(kafkaClient, topic, bestilling);
-    expect(result.topic).toBe(topic)
-})
+  const bestilling: fhirBestilling = {
+    description: '',
+    patientIdentifier: undefined,
+    practionerIdentifier: undefined,
+    questionnaireItems: [],
+    saksbehandlerIdentifier: '',
+  };
+  const metadata = await bestilleHelseopplysning(producer, topic, bestilling);
+  expect(result.topic).toBe(topic);
+});

@@ -29,3 +29,10 @@ spec:
     path: /internal/prometheus
   ingresses:
     - {{behandler-ingress}}/api
+  env:
+    - name: REDIS_HOST
+      value: redis.helseopplysninger.svc.cluster.local
+  accessPolicy:
+    outbound:
+      rules:
+        - application: redis

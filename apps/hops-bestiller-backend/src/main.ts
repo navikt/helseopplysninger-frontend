@@ -1,66 +1,33 @@
-import * as express from 'express';
-import defaults from "./routes/defaults";
-import internals from "./routes/internals";
-import {initPassport} from "./config/init-passport"
-import {initSession} from "./config/init-session";
-import {database, kafkaTopics, server} from "./config";
-import logger from "./utils/logger";
-import dbPool from "./database/connection";
-import runMigrations from "./database/run-migration";
-import path from "path";
-import patient from "./routes/patient";
-import {Server} from "http";
-import waitOn from "wait-on";
-import {kafkaConsumer} from "./kafka/kafka-consumer";
-import {kafkaClient} from "./kafka/kafka-client";
-import bestill from "./routes/bestill";
-import {attatchWsServer, wsBroadcast} from "./ws/wsServer";
+import defaults from './routes/defaults';
+import { initPassport } from './config/init-passport';
 
-async function bootstrap(): Promise<Server> {
-    logger.info("Bootstrap started");
-    await waitOn({
-        resources: [
-            ["tcp", database.host, database.port].join(":")
-        ],
-        timeout: 30000, // total timeout før vi forventer at databasen skal være oppe
-        delay: 3000, // venter 3 sekunder før vi prøver cloudsql
-        interval: 1000, // spørr bare hvert sekund
-    })
-    const result = await dbPool.query('SELECT NOW() as message');
-    logger.info("Bootstrap, db connected servertime: " + result.rows[0].message);
-    kafkaConsumer(
-        kafkaClient,
-        "bestiller",
-        kafkaTopics.bestillinger,
-        message => {
-            logger.info("KafkaReceivedMessage", message.value.toString());
-            wsBroadcast(JSON.parse(message.value.toString()));
-        }).then(() => {
-        logger.info("Bootstrap, kafka connected");
-    });
-    const app = express();
-    initSession(app);
-    await initPassport(app);
-    [
-        bestill,
-        defaults,
-        internals,
-        patient,
-    ].forEach(f => f(app))
+import { database, kafkaTopics } from './config';
+import {
+  bootstrapServer,
+  kafkaClient,
+  kafkaConsume,
+  logger,
+} from '@navikt/hops-common';
+import dbPool from './database/connection';
+import runMigrations from './database/run-migration';
+import path from 'path';
+import patient from './routes/patient';
+import bestill from './routes/bestill';
+import { attachWsServer, wsBroadcast } from './ws/wsServer';
+import { waitOnDatabase } from './database/wait-on-database';
 
-    const {port, ingress} = server;
-    const httpServer = app.listen(port, async () => {
-        await runMigrations(path.join(__dirname, "migrations/user"));
-        logger.info(`Bootstrap, server listening at ${ingress}/api`);
-    })
-    attatchWsServer(httpServer);
-    return httpServer;
-}
-
-bootstrap().then(() => {
-    logger.info("Bootstrap successful");
-}).catch((error: Error) => {
-    logger.error("Bootstrap failed, " + error.name + ": " + error.message);
-    process.exit(1);
-})
-
+bootstrapServer(async (app) => {
+  await waitOnDatabase(database);
+  const result = await dbPool.query('SELECT NOW() as message');
+  logger.info('Bootstrap, db connected servertime: ' + result.rows[0].message);
+  await kafkaConsume(
+    kafkaClient.consumer({ groupId: 'bestiller-local' }),
+    kafkaTopics.bestillinger,
+    (message) => {
+      wsBroadcast(JSON.parse(message.value.toString()));
+    }
+  );
+  await initPassport(app);
+  [bestill, defaults, patient].forEach((f) => f(app));
+  await runMigrations(path.join(__dirname, 'migrations/user'));
+}, 2022).then(attachWsServer);

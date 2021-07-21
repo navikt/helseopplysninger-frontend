@@ -21,6 +21,27 @@
     }
   },
   "projects": {
+    "bestiller-types": {
+      "root": "libs/bestiller-types",
+      "sourceRoot": "libs/bestiller-types/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/bestiller-types/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/bestiller-types"],
+          "options": {
+            "jestConfig": "libs/bestiller-types/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
     "fhir": {
       "root": "libs/fhir",
       "sourceRoot": "libs/fhir/src",
@@ -311,6 +332,27 @@
         }
       }
     },
+    "hops-common": {
+      "root": "libs/hops-common",
+      "sourceRoot": "libs/hops-common/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/hops-common/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/hops-common"],
+          "options": {
+            "jestConfig": "libs/hops-common/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
     "hops-testutils": {
       "root": "libs/hops-testutils",
       "sourceRoot": "libs/hops-testutils/src",
@@ -327,27 +369,6 @@
           "outputs": ["coverage/libs/hops-testutils"],
           "options": {
             "jestConfig": "libs/hops-testutils/jest.config.js",
-            "passWithNoTests": true
-          }
-        }
-      }
-    },
-    "hops-types": {
-      "root": "libs/hops-types",
-      "sourceRoot": "libs/hops-types/src",
-      "projectType": "library",
-      "targets": {
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["libs/hops-types/**/*.ts"]
-          }
-        },
-        "test": {
-          "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/hops-types"],
-          "options": {
-            "jestConfig": "libs/hops-types/jest.config.js",
             "passWithNoTests": true
           }
         }
