@@ -15,13 +15,14 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@navikt/bestiller-types": ["libs/bestiller-types/src/index.ts"],
       "@navikt/fhir": ["libs/fhir/src/index.ts"],
       "@navikt/fhir-components": ["libs/fhir-components/src/index.ts"],
       "@navikt/fixtures": ["libs/fixtures/src/index.ts"],
       "@navikt/fkr-client": ["libs/fkr-client/src/index.ts"],
       "@navikt/helseid": ["libs/helseid/src/index.ts"],
+      "@navikt/hops-common": ["libs/hops-common/src/index.ts"],
       "@navikt/hops-testutils": ["libs/hops-testutils/src/index.ts"],
-      "@navikt/hops-types": ["libs/hops-types/src/index.ts"],
       "@navikt/sof-common": ["libs/sof-common/src/index.ts"]
     },
     "types": ["jest", "node"],

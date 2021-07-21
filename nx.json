@@ -13,6 +13,9 @@
     }
   },
   "projects": {
+    "bestiller-types": {
+      "tags": []
+    },
     "fhir": {
       "tags": []
     },
@@ -37,10 +40,10 @@
     "hops-bestiller-frontend": {
       "tags": []
     },
-    "hops-testutils": {
+    "hops-common": {
       "tags": []
     },
-    "hops-types": {
+    "hops-testutils": {
       "tags": []
     },
     "sof-common": {

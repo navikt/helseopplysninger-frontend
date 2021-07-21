@@ -1,17 +1,13 @@
-import {kafkaProducer} from "../kafka/kafka-producer";
-import {Kafka} from "kafkajs";
-import {createFhirBestilling, fhirBestilling} from "@navikt/fhir";
+import { createFhirBestilling, fhirBestilling } from '@navikt/fhir';
+import { kafkaProduce } from '@navikt/hops-common';
+import { Producer } from 'kafkajs';
 
 export const bestilleHelseopplysning = async (
-    kafkaClient: Kafka,
-    topic: string,
-    fhirBestilling: fhirBestilling
+  producer: Producer,
+  topic: string,
+  fhirBestilling: fhirBestilling
 ) => {
-    const bundle = createFhirBestilling(fhirBestilling);
-    const recordMetadata = await kafkaProducer(
-        kafkaClient,
-        topic,
-        bundle
-    );
-    return recordMetadata;
-}
+  const bundle = createFhirBestilling(fhirBestilling);
+  const recordMetadata = await kafkaProduce(producer, topic, bundle);
+  return recordMetadata;
+};

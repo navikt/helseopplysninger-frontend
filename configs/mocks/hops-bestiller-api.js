@@ -7,19 +7,21 @@ const events = require('../../fixtures/bestiller/events.json');
 const brukerinfo = require('../../fixtures/bestiller/brukerinfo.json');
 const items = require('../../fixtures/items.json');
 require('ts-node').register();
-const {BackendPaths} = require('../../libs/hops-types/src');
+const { BackendPaths } = require('../../libs/bestiller-types/src');
 
 module.exports = (app, server) => {
   let websocket;
   app.use(cookieParser());
   app.use(bodyParser.json());
-  app.get(BackendPaths.USER_PATH, function(req, res) {
+  app.get(BackendPaths.USER_PATH, function (req, res) {
     if (req.cookies['loggedIn']) {
       res.json(brukerinfo);
     } else {
-      res.json({
-        innlogget: false,
-      }).status(401);
+      res
+        .json({
+          innlogget: false,
+        })
+        .status(401);
     }
   });
 
@@ -37,8 +39,8 @@ module.exports = (app, server) => {
   });
 
   app.post(BackendPaths.BESTILLING_PATH, (req, res) => {
-    if(websocket){
-      websocket.send("Tok i mot data!");
+    if (websocket) {
+      websocket.send('Tok i mot data!');
     }
     res.json({});
   });
@@ -47,21 +49,22 @@ module.exports = (app, server) => {
     res.json(items);
   });
 
-  const wsServer = new ws.Server({noServer: true});
+  const wsServer = new ws.Server({ noServer: true });
 
-  wsServer.on('connection', socket => {
+  wsServer.on('connection', (socket) => {
     websocket = socket;
-    socket.on('message', message => console.info('Websocket received message: ' + message));
+    socket.on('message', (message) =>
+      console.info('Websocket received message: ' + message)
+    );
   });
 
   server.options.onListening = (s) => {
-    s.listeningApp.on('upgrade', function(req, socket, head) {
+    s.listeningApp.on('upgrade', function (req, socket, head) {
       if (req.url === '/ws') {
-        wsServer.handleUpgrade(req, socket, head, socket => {
+        wsServer.handleUpgrade(req, socket, head, (socket) => {
           wsServer.emit('connection', socket, req);
         });
       }
     });
   };
-
 };

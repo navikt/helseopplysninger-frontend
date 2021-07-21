@@ -1,13 +1,13 @@
-import {Pool} from 'pg';
-import {database} from "../config"
-import logger from "../utils/logger";
+import { Pool } from 'pg';
+import { database } from '../config';
+import { logger } from '@navikt/hops-common';
 
-const dbPool = new Pool(database)
+const dbPool = new Pool(database);
 
 dbPool.on('connect', () => {
-    dbPool.on('error', (error) => {
-        logger.error("(pg)" + error.name + ": " + error.message);
-    })
+  dbPool.on('error', (error) => {
+    logger.error('(pg)' + error.name + ': ' + error.message);
+  });
 });
 /*
 process.on("exit", async (code) => {

@@ -10,9 +10,10 @@ module.exports = {
     '<rootDir>/libs/fixtures',
     '<rootDir>/libs/fkr-client',
     '<rootDir>/libs/helseid',
-    '<rootDir>/libs/hops-types',
+    '<rootDir>/libs/hops-common',
     '<rootDir>/libs/sof-common',
     '<rootDir>/tools',
     '<rootDir>/libs/hops-testutils',
+    '<rootDir>/libs/bestiller-types',
   ],
 };
