@@ -25,7 +25,7 @@ spec:
     max: 2
     cpuThresholdPercentage: 90
   prometheus:
-    enabled: false
+    enabled: true
     path: /internal/prometheus
   ingresses:
     - {{sof-ingress}}/resource-puller

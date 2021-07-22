@@ -1,5 +1,5 @@
 import { Express } from 'express';
-import { kafkaClient } from '@navikt/hops-common';
+import { getKafkaClient } from '@navikt/hops-common';
 import { bestilleHelseopplysning } from '../events/bestille-helseopplysning';
 import { kafkaTopics } from '../config';
 import { fhirBestilling } from '@navikt/fhir';
@@ -40,7 +40,7 @@ function bestillingRoutes(app: Express): void {
       saksbehandlerIdentifier: ident,
     };
     const metadata = await bestilleHelseopplysning(
-      kafkaClient.producer(),
+      getKafkaClient().producer(),
       kafkaTopics.bestillinger,
       bestilling
     );
