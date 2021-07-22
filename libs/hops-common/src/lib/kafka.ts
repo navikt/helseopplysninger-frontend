@@ -10,23 +10,31 @@ import {
 } from 'kafkajs';
 import { logger } from './logger';
 
-const kafkaConfig: { brokers: string[]; ssl?: any } = {
-  brokers: env.get('KAFKA_BROKERS').required().asArray(','),
-};
+let kafkaClient;
+export const getKafkaClient = () => {
+  if (!kafkaClient) {
+    const kafkaConfig: { brokers: string[]; ssl?: any; clientId?: string } = {
+      clientId: env.get('NAIS_CLIENT_ID').default('local').asString(),
+      brokers: env.get('KAFKA_BROKERS').required().asArray(','),
+    };
 
-if (isOnNais()) {
-  // Henter SSL-config på nais.
-  const caPath = env.get('KAFKA_CA_PATH').required().asString();
-  const keyPath = env.get('KAFKA_PRIVATE_KEY_PATH').required().asString();
-  const certPath = env.get('KAFKA_CERTIFICATE_PATH').required().asString();
-  kafkaConfig.ssl = {
-    rejectUnauthorized: false,
-    ca: [fs.readFileSync(caPath, 'utf-8')],
-    key: fs.readFileSync(keyPath, 'utf-8'),
-    cert: fs.readFileSync(certPath, 'utf-8'),
-  };
-}
-export const kafkaClient = new Kafka(kafkaConfig);
+    if (isOnNais()) {
+      // Henter SSL-config på nais.
+      const caPath = env.get('KAFKA_CA_PATH').required().asString();
+      const keyPath = env.get('KAFKA_PRIVATE_KEY_PATH').required().asString();
+      const certPath = env.get('KAFKA_CERTIFICATE_PATH').required().asString();
+
+      kafkaConfig.ssl = {
+        rejectUnauthorized: false,
+        ca: [fs.readFileSync(caPath, 'utf-8')],
+        key: fs.readFileSync(keyPath, 'utf-8'),
+        cert: fs.readFileSync(certPath, 'utf-8'),
+      };
+    }
+    kafkaClient = new Kafka(kafkaConfig);
+  }
+  return kafkaClient;
+};
 
 export const kafkaConsume = async (
   consumer: Consumer,

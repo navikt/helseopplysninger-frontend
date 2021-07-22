@@ -4,7 +4,7 @@ import { initPassport } from './config/init-passport';
 import { database, kafkaTopics } from './config';
 import {
   bootstrapServer,
-  kafkaClient,
+  getKafkaClient,
   kafkaConsume,
   logger,
 } from '@navikt/hops-common';
@@ -21,7 +21,7 @@ bootstrapServer(async (app) => {
   const result = await dbPool.query('SELECT NOW() as message');
   logger.info('Bootstrap, db connected servertime: ' + result.rows[0].message);
   await kafkaConsume(
-    kafkaClient.consumer({ groupId: 'bestiller-local' }),
+    getKafkaClient().consumer({ groupId: 'bestiller-local' }),
     kafkaTopics.bestillinger,
     (message) => {
       wsBroadcast(JSON.parse(message.value.toString()));

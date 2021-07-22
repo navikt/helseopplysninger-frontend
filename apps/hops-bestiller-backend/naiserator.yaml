@@ -38,7 +38,7 @@ spec:
     max: 2
     cpuThresholdPercentage: 50
   prometheus:
-    enabled: false
+    enabled: true
     path: /internal/prometheus
   ingresses:
     - {{hops-ingress}}/api

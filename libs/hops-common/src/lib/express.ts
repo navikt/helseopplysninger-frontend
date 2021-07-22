@@ -48,13 +48,20 @@ export const bootstrapServer = async (
   routes: (app: Express) => Promise<any>,
   port: number
 ): Promise<Server> => {
-  logger.info('Bootstrap: Started');
-  const app = express();
-  app.use(express.json());
-  await routes(app);
-  logger.info('Bootstrap: Routes started');
-  internalRoutes(app);
-  return await startServer(app, port);
+  try {
+    logger.info('Bootstrap: Started');
+    const app = express();
+    app.use(express.json());
+    await routes(app);
+    logger.info('Bootstrap: Routes started');
+    internalRoutes(app);
+    return await startServer(app, port);
+  } catch (e) {
+    logger.fatal(e.message, {
+      stack_trace: e.stack,
+    });
+    process.exit(1);
+  }
 };
 
 export const startServer = async (
@@ -65,7 +72,7 @@ export const startServer = async (
   return new Promise((resolve, reject) => {
     const server = app
       .listen(port, () => {
-        logger.info(`Bootstrap: server listening on port ${selectedPort}`);
+        logger.info(`Bootstrap: Server listening on port ${selectedPort}`);
       })
       .once('listening', () => resolve(server))
       .once('error', reject);
