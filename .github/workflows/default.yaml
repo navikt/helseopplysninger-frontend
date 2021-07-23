@@ -80,7 +80,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Build and tag docker image
         run: |
-          docker build \
+          docker build --quiet \
             --tag ${{ steps.tag.outputs.base }}:${{ steps.tag.outputs.sha }} \
             --tag ${{ steps.tag.outputs.base }}:latest --build-arg APPNAME=${{ matrix.appname }} .
       - name: Push docker image
