@@ -6,6 +6,27 @@ metadata:
   labels:
     team: helseopplysninger
 spec:
+  image: {{image}}
+  port: 2022
+  team: helseopplysninger
+  liveness:
+    path: /internal/is-alive
+  readiness:
+    path: /internal/is-ready
+  resources:
+    limits:
+      cpu: 400m
+      memory: 512Mi
+    requests:
+      cpu: 200m
+      memory: 256Mi
+  replicas:
+    min: 1
+    max: 2
+    cpuThresholdPercentage: 80
+  prometheus:
+    enabled: false
+    path: /internal/prometheus
   gcp:
     sqlInstances:
       - type: POSTGRES_12
@@ -19,27 +40,6 @@ spec:
       claims:
         extra:
           - "NAVident"
-  image: {{image}}
-  port: 2022
-  team: helseopplysninger
-  liveness:
-    path: /internal/health
-  readiness:
-    path: /internal/health
-  resources:
-    limits:
-      cpu: 400m
-      memory: 512Mi
-    requests:
-      cpu: 200m
-      memory: 256Mi
-  replicas:
-    min: 1
-    max: 2
-    cpuThresholdPercentage: 50
-  prometheus:
-    enabled: true
-    path: /internal/prometheus
   ingresses:
     - {{hops-ingress}}/api
     - {{hops-ingress}}/oauth2
@@ -51,7 +51,5 @@ spec:
       value: {{hops-ingress}}
     - name: KAFKA_TOPIC_BESTILLING
       value: {{kafka-topic-bestilling}}
-    - name: KAFKA_SECURITY_ENABLED
-      value: "true"
   envFrom:
     - secret: oppslag

@@ -6,26 +6,26 @@ metadata:
   labels:
     team: helseopplysninger
 spec:
-  image: {{ image }}
+  image: {{image}}
   port: 2022
   team: helseopplysninger
   liveness:
-    path: /internal/health
+    path: /internal/is-alive
   readiness:
-    path: /internal/health
+    path: /internal/is-ready
   resources:
     limits:
-      cpu: 200m
+      cpu: 400m
       memory: 512Mi
     requests:
-      cpu: 100m
+      cpu: 200m
       memory: 256Mi
   replicas:
     min: 1
     max: 2
-    cpuThresholdPercentage: 90
+    cpuThresholdPercentage: 80
   prometheus:
-    enabled: true
+    enabled: false
     path: /internal/prometheus
   ingresses:
     - {{sof-ingress}}/resource-puller

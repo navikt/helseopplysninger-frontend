@@ -1,6 +1,5 @@
 import defaults from './routes/defaults';
 import { initPassport } from './config/init-passport';
-
 import { database, kafkaTopics } from './config';
 import {
   bootstrapServer,

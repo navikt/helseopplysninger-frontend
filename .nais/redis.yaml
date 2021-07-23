@@ -25,3 +25,4 @@ spec:
     inbound:
       rules:
         - application: hops-behandler-backend
+        - application: hops-bestiller-backend

@@ -11,6 +11,7 @@ services:
     environment:
       APP_INGRESS: http://localhost:8002
       DB_HOST: pg
+      KAFKA_BROKERS: http://kafka:9093
     env_file:
       - .env
     depends_on:
@@ -32,6 +33,28 @@ services:
         APPNAME: hops-bestiller-frontend
     ports:
       - 8004:2022
+
+  sof-resource-puller:
+    build:
+      context: "."
+      args:
+        APPNAME: sof-resource-puller
+    ports:
+      - 8005:2022
+    depends_on:
+      - "redis"
+
+  hops-behandler-backend:
+    build:
+      context: "."
+      args:
+        APPNAME: hops-behandler-backend
+    ports:
+      - 8006:2022
+    depends_on:
+      - "redis"
+    environment:
+      - REDIS_HOST=redis
 
   mock-oauth2-server:
     image: ghcr.io/navikt/mock-oauth2-server:0.3.4
@@ -61,6 +84,10 @@ services:
     environment:
       hapi.fhir.server_address: http://host.docker.internal:${FHIR_SERVER_PORT}/fhir
 
+  redis:
+    image: redis
+    ports:
+      - "6379:6379"
 
   zookeeper:
     image: wurstmeister/zookeeper
