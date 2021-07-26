@@ -1,6 +1,6 @@
 import * as env from 'env-var';
 import { join } from 'path';
-import { JSONWebKeySet } from 'jose';
+import { JSONWebKey, JSONWebKeySet } from 'jose';
 import { readFileSync } from 'fs';
 
 export type HelseIDConfig = {
@@ -20,7 +20,9 @@ export function getHelseIdConfig(): HelseIDConfig {
     authority: env.get('HELSEID_AUTHORITY').asString(),
     clientId: env.get('HELSEID_CLIENT_ID').asString(),
     clientSecret: env.get('HELSEID_CLIENT_SECRET').asString(),
-    jwks: getJSONWebKeySet(env.get('HELSEID_JWKS_FILE').asString()),
+    jwks: {
+      keys: [env.get('HELSEID_JWKS').asJsonObject() as JSONWebKey],
+    },
     redirectUris: env.get('HELSEID_REDIRECT_URIS').asString(),
     scopes: env.get('HELSEID_SCOPES').asString(),
     loginUrl: '/',
