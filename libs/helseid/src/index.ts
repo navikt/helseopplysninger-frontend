@@ -1,1 +1,2 @@
-export * from './lib/helseid';
+export * from './lib/ensure-logged-in';
+export * from './lib/configure-auth';

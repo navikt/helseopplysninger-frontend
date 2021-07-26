@@ -181,7 +181,13 @@
           "executor": "@nrwl/node:execute",
           "options": {
             "buildTarget": "hops-behandler-backend:build"
-          }
+          },
+          "dependsOn": [
+            {
+              "target": "start-redis",
+              "projects": "dependencies"
+            }
+          ]
         },
         "lint": {
           "executor": "@nrwl/linter:eslint",
@@ -370,6 +376,15 @@
           "options": {
             "jestConfig": "libs/hops-testutils/jest.config.js",
             "passWithNoTests": true
+          }
+        },
+        "start-redis": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "docker-compose up -d redis",
+              "wait-on tcp:6379"
+            ]
           }
         }
       }

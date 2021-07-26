@@ -19,5 +19,5 @@ export const logger = createLogger({
 });
 
 process.on('unhandledRejection', (error: Error) => {
-  logger.error(error.message);
+  logger.error('Unhandled Rejection: ' + error.message, error);
 });
