@@ -39,3 +39,5 @@ spec:
     outbound:
       rules:
         - application: redis
+  envFrom:
+    - secret: helseid
