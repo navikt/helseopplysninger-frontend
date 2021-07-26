@@ -1,20 +1,19 @@
 import { Client, Strategy, TokenSet, UserinfoResponse } from 'openid-client';
+import { HelseIDConfig } from './helseid-config';
+import { AuthUser } from '@navikt/hops-common';
 
-import { getHelseIdConfig } from './helseid-config';
-import { User } from './user';
-
-export default async function helseidStrategy(
-  client: Client
+export async function helseidStrategy(
+  client: Client,
+  config: HelseIDConfig
 ): Promise<Strategy<UserinfoResponse, Client>> {
-  const config = getHelseIdConfig();
   const verify = (
     tokenSet: TokenSet,
-    done: (err: any, user?: User) => void
+    done: (err: any, user?: AuthUser) => void
   ) => {
     if (tokenSet.expired()) {
       return done(undefined, undefined);
     }
-    const user: User = {
+    const user: AuthUser = {
       claims: tokenSet.claims(),
       tokenSets: {
         self: tokenSet,

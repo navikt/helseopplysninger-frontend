@@ -1,40 +1,40 @@
 import { PassportStatic } from 'passport';
 import { Client, generators, Strategy } from 'openid-client';
-import { User } from './user';
+
 import { Express } from 'express';
-import { getHelseIdConfig } from './helseid-config';
+import { STRATEGY_NAME } from './constants';
+import { AuthUrls, AuthUser } from '@navikt/hops-common';
 
 export const createAuthEndpoints = (
   app: Express,
   passport: PassportStatic,
-  strategy: Strategy<User, Client>
+  strategy: Strategy<AuthUser, Client>,
+  urls: AuthUrls
 ) => {
-  const config = getHelseIdConfig();
   app.get(
-    '/login',
-    passport.authenticate('helseid', { state: generators.state() })
+    urls.loginUrl,
+    passport.authenticate(STRATEGY_NAME, { state: generators.state() })
   );
   app.get(
-    config.callbackUrl,
-    passport.authenticate('helseid', {
-      successRedirect: '/',
-      failureRedirect: config.loginUrl,
+    urls.callbackUrl,
+    passport.authenticate(STRATEGY_NAME, {
+      failureRedirect: urls.errorUrl,
     }),
     (req: any, res) => {
       if (req.session.redirectTo) {
-        res.redirect(config.loginUrl);
+        res.redirect(req.session.redirectTo);
       } else {
-        res.redirect(config.loginUrl);
+        res.redirect(urls.indexUrl);
       }
     }
   );
 
-  app.get(config.logoutUrl, (req, res) => {
+  app.get(urls.logoutUrl, (req, res) => {
     req.logOut();
     res.redirect(
       // @ts-ignore
       strategy._client.endSessionUrl({
-        post_logout_redirect_uri: '/',
+        post_logout_redirect_uri: urls.unauthenticatedUrl,
       })
     );
   });

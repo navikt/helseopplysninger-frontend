@@ -31,6 +31,7 @@ spec:
     pool: {{kafka-pool}}
   ingresses:
     - {{behandler-ingress}}/api
+    - {{behandler-ingress}}/auth
     - {{behandler-ingress}}/callback
   env:
     - name: REDIS_HOST
