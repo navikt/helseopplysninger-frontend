@@ -156,7 +156,7 @@
           "executor": "@nrwl/node:build",
           "outputs": ["{options.outputPath}"],
           "options": {
-            "externalDependencies": "none",
+            "externalDependencies": ["express"],
             "generatePackageJson": true,
             "outputPath": "dist/apps/hops-behandler-backend",
             "main": "apps/hops-behandler-backend/src/main.ts",
@@ -215,7 +215,7 @@
           "executor": "@nrwl/node:build",
           "outputs": ["{options.outputPath}"],
           "options": {
-            "externalDependencies": "none",
+            "externalDependencies": ["express"],
             "generatePackageJson": true,
             "outputPath": "dist/apps/hops-bestiller-backend",
             "main": "apps/hops-bestiller-backend/src/main.ts",
