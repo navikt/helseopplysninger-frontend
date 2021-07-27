@@ -1,30 +1,31 @@
 import passport from 'passport';
-import { Client, Strategy } from 'openid-client';
 import { Express } from 'express';
-import createClient from './create-client';
-import { User } from './user';
-import { getHelseIdConfig } from './helseid-config';
-import helseidStrategy from './helseid-strategy';
+import { createClient } from './create-client';
+import { HelseIDConfig } from './helseid-config';
+import { helseidStrategy } from './helseid-strategy';
 import { createAuthEndpoints } from './create-auth-endpoints';
-import bodyParser from 'body-parser';
+import { STRATEGY_NAME } from './constants';
+import { AuthUrls, AuthUser } from '@navikt/hops-common';
+
+import { Client, Strategy } from 'openid-client';
 
 export const configureAuthentication = async (
-  app: Express
-): Promise<Strategy<User, Client>> => {
+  app: Express,
+  config: HelseIDConfig,
+  urls: AuthUrls
+): Promise<Strategy<AuthUser, Client>> => {
   app.use(passport.initialize());
   app.use(passport.session());
-  const config = getHelseIdConfig();
   const client = await createClient(config);
-  const strategy = await helseidStrategy(client);
+  const strategy = await helseidStrategy(client, config);
 
-  passport.use('helseid', strategy);
+  passport.use(STRATEGY_NAME, strategy);
   passport.serializeUser((user, done) => {
     done(null, user);
   });
   passport.deserializeUser((user, done) => {
     done(null, user);
   });
-
-  createAuthEndpoints(app, passport, strategy);
+  createAuthEndpoints(app, passport, strategy, urls);
   return strategy;
 };

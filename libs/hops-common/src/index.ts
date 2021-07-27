@@ -3,3 +3,4 @@ export * from './lib/express/init-session';
 export * from './lib/express/internal-routes';
 export * from './lib/kafka';
 export * from './lib/logger';
+export * from './lib/auth';
