@@ -2,6 +2,10 @@ import session from 'express-session';
 import connectPgSimple from 'connect-pg-simple';
 import dbPool from '../database/connection';
 
+/**
+ *
+ * Deprecated... kan slettes
+ */
 const cookieParser = require('cookie-parser');
 const pgSession = connectPgSimple(session);
 export const initSession = (app) => {
