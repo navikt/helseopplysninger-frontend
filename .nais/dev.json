@@ -1,7 +1,7 @@
 {
   "hops-ingress": "https://hops.dev.intern.nav.no",
-  "sof-ingress": "https://sof.dev.nav.no",
-  "behandler-ingress": "https://behandler.dev.nav.no",
+  "sof-ingress": "https://sof.ekstern.dev.nav.no",
+  "behandler-ingress": "https://behandler.ekstern.dev.nav.no",
   "kafka-pool": "nav-dev",
   "kafka-topic-bestilling": "helseopplysninger.bestilling",
   "fkr-sts-url": "https://helseid-sts.test.nhn.no/connect/token",

@@ -5,6 +5,7 @@ import {
   getHelseIdConfig,
 } from '@navikt/helseid';
 import { AuthUrls } from '@navikt/hops-common';
+import { ensureBasicAuth } from './basic-auth';
 
 export async function authRoutes(app: Express): Promise<void> {
   const config = getHelseIdConfig();
@@ -18,6 +19,8 @@ export async function authRoutes(app: Express): Promise<void> {
   };
   await configureAuthentication(app, config, urls);
   app.use(ensureAuth(urls, ['/api/session', '/api/test']));
+  app.use('/api/*', ensureBasicAuth);
+  app.use('/auth/*', ensureBasicAuth);
   app.get(urls.unauthenticatedUrl, (req, res) =>
     res.send({
       what: urls.unauthenticatedUrl,

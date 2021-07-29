@@ -29,7 +29,6 @@
     "down": "docker compose down"
   },
   "dependencies": {
-    "@microsoft/microsoft-graph-client": "^2.2.1",
     "@navikt/ds-icons": "^0.3.3",
     "@navikt/fnrvalidator": "^1.1.3",
     "@navikt/helse-frontend-header": "^2.0.1",
@@ -47,6 +46,7 @@
     "document-register-element": "1.14.10",
     "env-var": "^7.0.1",
     "express": "4.17.1",
+    "express-basic-auth": "^1.2.0",
     "express-session": "^1.17.1",
     "fhirclient": "^2.3.10",
     "flat-cache": "^3.0.4",
