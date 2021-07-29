@@ -323,9 +323,7 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "apps/hops-bestiller-frontend/**/*.{ts,tsx,js,jsx}"
-            ]
+            "lintFilePatterns": ["apps/hops-bestiller-frontend/**/*.{ts,tsx,js,jsx}"]
           }
         },
         "test": {
@@ -381,10 +379,7 @@
         "start-redis": {
           "executor": "@nrwl/workspace:run-commands",
           "options": {
-            "commands": [
-              "docker-compose up -d redis",
-              "wait-on tcp:6379"
-            ]
+            "commands": ["docker-compose up -d redis", "wait-on tcp:6379"]
           }
         }
       }
@@ -517,10 +512,7 @@
         "start-hapi": {
           "executor": "@nrwl/workspace:run-commands",
           "options": {
-            "commands": [
-              "# docker-compose up -d hapi",
-              "# wait-on http://localhost:8096"
-            ]
+            "commands": ["# docker-compose up -d hapi", "# wait-on http://localhost:8096"]
           }
         },
         "serve": {
