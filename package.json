@@ -7,6 +7,7 @@
     "nx": "nx",
     "start": "nx serve",
     "build": "nx build",
+    "build-all": "nx run-many --target=build --all",
     "test": "npm run affected:test",
     "lint": "nx workspace-lint && nx lint",
     "affected:apps": "nx affected:apps --plain --base=remotes/origin/main$NX_BASE",
@@ -25,8 +26,8 @@
     "help": "nx help",
     "gen": "ts-node --skip-project tools/test-data",
     "matrix": "nx affected:apps --plain --base=remotes/origin/main$NX_BASE|tr -d '\\n'|jq -cRs 'split(\" \")'",
-    "up": "npm run affected:build && docker compose --env-file ./.env up -d --build --remove-orphans",
-    "down": "docker compose down"
+    "up": "npm run build-all && docker compose -p hops --env-file .env up -d --build --remove-orphans",
+    "down": "docker-compose down"
   },
   "dependencies": {
     "@navikt/ds-icons": "^0.3.3",

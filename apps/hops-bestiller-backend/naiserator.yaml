@@ -51,5 +51,11 @@ spec:
       value: {{hops-ingress}}
     - name: KAFKA_TOPIC_BESTILLING
       value: {{kafka-topic-bestilling}}
+    - name: REDIS_HOST
+      value: redis.helseopplysninger.svc.cluster.local
   envFrom:
     - secret: oppslag
+  accessPolicy:
+    outbound:
+      rules:
+        - application: redis

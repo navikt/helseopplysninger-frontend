@@ -36,6 +36,8 @@ spec:
   env:
     - name: REDIS_HOST
       value: redis.helseopplysninger.svc.cluster.local
+    - name: KAFKA_TOPIC_BESTILLING
+      value: {{kafka-topic-bestilling}}
   accessPolicy:
     outbound:
       rules:

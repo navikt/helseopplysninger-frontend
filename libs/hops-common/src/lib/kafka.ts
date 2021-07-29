@@ -1,13 +1,7 @@
 import fs from 'fs';
 import * as env from 'env-var';
 import { isOnNais } from './utils';
-import {
-  Consumer,
-  Kafka,
-  KafkaMessage,
-  Producer,
-  RecordMetadata,
-} from 'kafkajs';
+import { Consumer, Kafka, KafkaMessage, Producer, RecordMetadata } from 'kafkajs';
 import { logger } from './logger';
 
 let kafkaClient;
@@ -41,7 +35,10 @@ export const kafkaConsume = async (
   topic,
   onMessage: (m: KafkaMessage) => void
 ): Promise<Consumer> => {
-  logger.info('Trying to subscribed to Kafka-topic: ' + topic);
+  logger.info('Trying to subscribed to Kafka', {
+    topic,
+    broker: process.env.KAFKA_BROKERS,
+  });
   await consumer.connect();
   await consumer.subscribe({ topic });
   await consumer.run({

@@ -9,7 +9,7 @@ import { logger } from '../logger';
 
 function getSessionStore(session, forceRedis): Store {
   const redisConfig: { host: string } = {
-    host: env.get('REDIS_HOST').default('localhost').asString(),
+    host: env.get('REDIS_HOST').required().asString(),
   };
   if (isOnNais() || forceRedis) {
     logger.info('Using Redis session store at ' + redisConfig.host + '.');
