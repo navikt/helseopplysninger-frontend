@@ -4,7 +4,7 @@ import { isOnNais } from './utils';
 import { Consumer, Kafka, KafkaMessage, Producer, RecordMetadata } from 'kafkajs';
 import { logger } from './logger';
 
-let kafkaClient;
+let kafkaClient: Kafka;
 export const getKafkaClient = () => {
   if (!kafkaClient) {
     const kafkaConfig: { brokers: string[]; ssl?: any; clientId?: string } = {

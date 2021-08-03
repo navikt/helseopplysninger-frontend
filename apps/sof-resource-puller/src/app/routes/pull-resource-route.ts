@@ -1,6 +1,7 @@
 import { Express } from 'express';
 import { SofPaths } from '@navikt/sof-common';
 import { pullBundleSendQuestionnaire } from '../commands/pull-bundle-send-questionnaire';
+import { getKafkaClient } from '@navikt/hops-common';
 
 /**
  * This route will pull and bundle a resource.
@@ -15,7 +16,7 @@ function pullResourceRoute(app: Express) {
       reference,
       authHeader,
       kafkaTopic: process.env.KAFKA_TOPIC_BESTILLING,
-      kafkaProducer: null,
+      kafkaProducer: getKafkaClient().producer(),
     });
     if (resource.resourceType === 'OperationOutcome') {
       res.status(400);
