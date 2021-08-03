@@ -1,4 +1,4 @@
-import fs from 'fs';
+import { readFileSync } from 'fs';
 import * as env from 'env-var';
 import { isOnNais } from './utils';
 import { Consumer, Kafka, KafkaMessage, Producer, RecordMetadata } from 'kafkajs';
@@ -20,9 +20,9 @@ export const getKafkaClient = () => {
 
       kafkaConfig.ssl = {
         rejectUnauthorized: false,
-        ca: [fs.readFileSync(caPath, 'utf-8')],
-        key: fs.readFileSync(keyPath, 'utf-8'),
-        cert: fs.readFileSync(certPath, 'utf-8'),
+        ca: [readFileSync(caPath, 'utf-8')],
+        key: readFileSync(keyPath, 'utf-8'),
+        cert: readFileSync(certPath, 'utf-8'),
       };
     }
     kafkaClient = new Kafka(kafkaConfig);
