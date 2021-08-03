@@ -9,11 +9,11 @@ import { pullBundleSendQuestionnaire } from '../commands/pull-bundle-send-questi
  */
 function pullResourceRoute(app: Express) {
   app.post(SofPaths.PULL_RESOURCE, async (req, res) => {
-    const { fhirServerUrl, canonical, token } = req.body;
+    const { serverUrl, reference, authHeader } = req.body;
     const resource = await pullBundleSendQuestionnaire({
-      fhirServerUrl,
-      canonical,
-      token,
+      serverUrl,
+      reference,
+      authHeader,
       kafkaTopic: process.env.KAFKA_TOPIC_BESTILLING,
       kafkaProducer: null,
     });
@@ -28,9 +28,10 @@ function pullResourceRoute(app: Express) {
     res.send({
       'required method': 'POST',
       'required body': {
-        fhirServerUrl: 'The url to the fhir server. Need to be whitelisted',
-        canonical: 'Canonical reference to QuestionnaireResponse',
-        token: 'Access Token',
+        serverUrl:
+          'The url to the fhir server. Need to be whitelisted (oauth2Client.state.serverUrl)',
+        reference: 'Canonical reference to QuestionnaireResponse (QuestionnaireResponse/123)',
+        authHeader: 'Access Token (oauth2Client.getAuthorizationHeader())',
       },
     });
   });

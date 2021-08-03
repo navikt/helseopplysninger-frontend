@@ -6,10 +6,7 @@
  * 5. send bundle on kafka.
  */
 import pullQuestionnaireResponse from '../utils/pull-questionnaire-response';
-import {
-  validateFhirCanonical,
-  validateQuestionnaireResponse,
-} from '@navikt/fhir';
+import { validateFhirCanonical, validateQuestionnaireResponse } from '@navikt/fhir';
 import {
   IOperationOutcome,
   OperationOutcome_IssueCodeKind,
@@ -22,16 +19,15 @@ import { logger } from '@navikt/hops-common';
 import { finishQuestionnaireResponse } from '../fhir/finish-questionnaire-response';
 
 type Options = {
-  fhirServerUrl: URL;
-  canonical: string;
-  token: string;
+  serverUrl: URL;
+  reference: string;
+  authHeader: string;
   kafkaTopic: string;
   kafkaProducer: Producer;
 };
 
 async function pullBundleSendQuestionnaire(options: Options) {
-  const { fhirServerUrl, canonical, token, kafkaTopic, kafkaProducer } =
-    options;
+  const { serverUrl, reference, authHeader, kafkaTopic, kafkaProducer } = options;
   const operationOutcome: IOperationOutcome = {
     resourceType: 'OperationOutcome',
     issue: [],
@@ -40,16 +36,14 @@ async function pullBundleSendQuestionnaire(options: Options) {
     /**
      * First validate the incomming resources
      */
-    validatePullResourceRequest(fhirServerUrl, token).forEach(
-      (errorMessage) => {
-        operationOutcome.issue.push({
-          severity: OperationOutcome_IssueSeverityKind._error,
-          code: OperationOutcome_IssueCodeKind._invariant,
-          diagnostics: errorMessage,
-        });
-      }
-    );
-    validateFhirCanonical(canonical).forEach((errorMessage) => {
+    validatePullResourceRequest(serverUrl, authHeader).forEach((errorMessage) => {
+      operationOutcome.issue.push({
+        severity: OperationOutcome_IssueSeverityKind._error,
+        code: OperationOutcome_IssueCodeKind._invariant,
+        diagnostics: errorMessage,
+      });
+    });
+    validateFhirCanonical(reference).forEach((errorMessage) => {
       operationOutcome.issue.push({
         severity: OperationOutcome_IssueSeverityKind._error,
         code: OperationOutcome_IssueCodeKind._invariant,
@@ -59,28 +53,24 @@ async function pullBundleSendQuestionnaire(options: Options) {
 
     if (operationOutcome.issue.length === 0) {
       // No errors yet, trying to make the request
-      const { questionnaireResponse, questionnaire } =
-        await pullQuestionnaireResponse(fhirServerUrl, canonical, token);
-      validateQuestionnaireResponse(questionnaireResponse).forEach(
-        (errorMessage) => {
-          operationOutcome.issue.push({
-            severity: OperationOutcome_IssueSeverityKind._error,
-            code: OperationOutcome_IssueCodeKind._invariant,
-            diagnostics: errorMessage,
-          });
-        }
+      const { questionnaireResponse, questionnaire } = await pullQuestionnaireResponse(
+        serverUrl,
+        reference,
+        authHeader
       );
+      validateQuestionnaireResponse(questionnaireResponse).forEach((errorMessage) => {
+        operationOutcome.issue.push({
+          severity: OperationOutcome_IssueSeverityKind._error,
+          code: OperationOutcome_IssueCodeKind._invariant,
+          diagnostics: errorMessage,
+        });
+      });
       if (operationOutcome.issue.length === 0) {
         /**
          * Adding correlation id to QuestionnaireResponse
          */
-        const questionnaireResponseRefined = finishQuestionnaireResponse(
-          questionnaireResponse
-        );
-        const messageBundle = bundleResources([
-          questionnaire,
-          questionnaireResponseRefined,
-        ]);
+        const questionnaireResponseRefined = finishQuestionnaireResponse(questionnaireResponse);
+        const messageBundle = bundleResources([questionnaire, questionnaireResponseRefined]);
         await kafkaProducer.connect();
         const metadata = await kafkaProducer.send({
           topic: kafkaTopic,
