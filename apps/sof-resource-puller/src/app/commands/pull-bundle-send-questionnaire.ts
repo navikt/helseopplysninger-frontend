@@ -5,7 +5,7 @@
  * 4. bundle resources.
  * 5. send bundle on kafka.
  */
-import pullQuestionnaireResponse from '../utils/pull-questionnaire-response';
+import { pullQuestionnaire, pullQuestionnaireResponse } from '../utils/pull-questionnaire-response';
 import { validateFhirCanonical, validateQuestionnaireResponse } from '@navikt/fhir';
 import {
   IOperationOutcome,
@@ -53,11 +53,12 @@ async function pullBundleSendQuestionnaire(options: Options) {
 
     if (operationOutcome.issue.length === 0) {
       // No errors yet, trying to make the request
-      const { questionnaireResponse, questionnaire } = await pullQuestionnaireResponse(
+      const questionnaireResponse = await pullQuestionnaireResponse(
         serverUrl,
         reference,
         authHeader
       );
+
       validateQuestionnaireResponse(questionnaireResponse).forEach((errorMessage) => {
         operationOutcome.issue.push({
           severity: OperationOutcome_IssueSeverityKind._error,
@@ -65,7 +66,15 @@ async function pullBundleSendQuestionnaire(options: Options) {
           diagnostics: errorMessage,
         });
       });
+      validateFhirCanonical(questionnaireResponse.questionnaire).forEach((errorMessage) => {
+        operationOutcome.issue.push({
+          severity: OperationOutcome_IssueSeverityKind._error,
+          code: OperationOutcome_IssueCodeKind._invariant,
+          diagnostics: errorMessage,
+        });
+      });
       if (operationOutcome.issue.length === 0) {
+        const questionnaire = await pullQuestionnaire(serverUrl, reference, authHeader);
         /**
          * Adding correlation id to QuestionnaireResponse
          */

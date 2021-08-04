@@ -1,18 +1,18 @@
-import {IQuestionnaire, IQuestionnaireResponse} from "@ahryman40k/ts-fhir-types/lib/R4";
-import pullResource from "./pull-resource";
+import { IQuestionnaire, IQuestionnaireResponse } from '@ahryman40k/ts-fhir-types/lib/R4';
+import pullResource from './pull-resource';
 
-type ReturnValues = {
-    questionnaireResponse: IQuestionnaireResponse,
-    questionnaire: IQuestionnaire
+export async function pullQuestionnaireResponse(
+  serverUrl: URL,
+  reference: string,
+  authHeader: string
+): Promise<IQuestionnaireResponse> {
+  return (await pullResource(serverUrl, reference, authHeader)) as IQuestionnaireResponse;
 }
 
-async function pullQuestionnaireResponse(fhirServerUrl: URL, canonical, token: string): Promise<ReturnValues> {
-    const questionnaireResponse = await pullResource(fhirServerUrl, canonical, token) as IQuestionnaireResponse;
-    const questionnaire = await pullResource(fhirServerUrl, questionnaireResponse.questionnaire, token) as IQuestionnaire;
-    return {
-        questionnaireResponse,
-        questionnaire
-    }
+export async function pullQuestionnaire(
+  serverUrl: URL,
+  reference: string,
+  authHeader: string
+): Promise<IQuestionnaire> {
+  return (await pullResource(serverUrl, reference, authHeader)) as IQuestionnaire;
 }
-
-export default pullQuestionnaireResponse
