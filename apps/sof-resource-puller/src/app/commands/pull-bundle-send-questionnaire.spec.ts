@@ -4,7 +4,6 @@ import { mockKafkaProducer, nockFhirResource, testFhirQuestionnaire } from '@nav
 import { QuestionnaireResponseStatusKind } from '@ahryman40k/ts-fhir-types/lib/R4';
 import { randomUUID } from 'crypto';
 import { createFhirCanonical } from '@navikt/fhir';
-import * as nock from 'nock';
 
 test('it should pull bundle and send questionnaire', async () => {
   const authHeader = 'Bearer ' + JWT.sign({}, 'abc123');

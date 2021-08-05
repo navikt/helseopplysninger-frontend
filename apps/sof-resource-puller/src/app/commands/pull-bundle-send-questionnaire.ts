@@ -66,6 +66,7 @@ async function pullBundleSendQuestionnaire(options: Options) {
           diagnostics: errorMessage,
         });
       });
+
       validateFhirCanonical(questionnaireResponse.questionnaire).forEach((errorMessage) => {
         operationOutcome.issue.push({
           severity: OperationOutcome_IssueSeverityKind._error,
