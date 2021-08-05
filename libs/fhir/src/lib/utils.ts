@@ -1,5 +1,5 @@
 import { IResourceList } from '@ahryman40k/ts-fhir-types/lib/R4';
-import { randomUUID } from 'crypto';
+import { v4 as uuidv4 } from 'uuid';
 
 export const addCorreleationId = (inResource: IResourceList): IResourceList => {
   const outResource = Object.assign({}, inResource);
@@ -7,7 +7,7 @@ export const addCorreleationId = (inResource: IResourceList): IResourceList => {
   outResource.meta.extension = outResource.meta.extension || [];
   outResource.meta.extension.push({
     url: 'https://fhir.nav.no/StructureDefinition/nav-CorrelationId',
-    valueString: randomUUID(),
+    valueString: uuidv4(),
   });
   return outResource;
 };
