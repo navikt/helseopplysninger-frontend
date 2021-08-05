@@ -102,7 +102,10 @@ async function pullBundleSendQuestionnaire(options: Options) {
       code: OperationOutcome_IssueCodeKind._exception,
       diagnostics: e.message,
     });
-    logger.error(e);
+    logger.error('pullBundleSendQuestionnaire: ' + e.message, {
+      stack_trace: e.stack,
+      code: e.code,
+    });
   }
   return operationOutcome;
 }
