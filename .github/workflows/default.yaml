@@ -100,5 +100,5 @@ jobs:
         env:
           IMAGE: ${{ steps.tag.outputs.base }}:${{ steps.tag.outputs.sha }}
           CLUSTER: ${{ env.CLUSTER }}
-          VARS: .nais/dev.json
+          VARS: .nais/dev.yaml
           RESOURCE: apps/${{ matrix.appname }}/naiserator.yaml

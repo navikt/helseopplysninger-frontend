@@ -9,7 +9,6 @@ const createAzureClient = async () => {
   const metadata: ClientMetadata = {
     client_id: azureAd.clientId,
     client_secret: azureAd.clientSecret,
-    redirect_uris: [azureAd.redirectUri],
     token_endpoint_auth_method: 'client_secret_post',
   };
   return new issuer.Client(metadata, jwks);

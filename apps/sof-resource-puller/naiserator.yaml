@@ -7,6 +7,11 @@ metadata:
     team: helseopplysninger
 spec:
   image: {{image}}
+  env:
+  {{#each env}}
+    - name: {{@key}}
+      value: "{{this}}"
+  {{/each}}
   port: 2022
   team: helseopplysninger
   liveness:
@@ -15,23 +20,19 @@ spec:
     path: /internal/is-ready
   resources:
     limits:
-      cpu: 400m
-      memory: 512Mi
-    requests:
       cpu: 200m
       memory: 256Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi
   replicas:
     min: 1
     max: 2
     cpuThresholdPercentage: 80
   kafka:
-    pool: {{kafka-pool}}
+    pool: {{KAFKA_POOL}}
   prometheus:
-    enabled: false
+    enabled: true
     path: /internal/prometheus
-  env:
-    - name: KAFKA_TOPIC_BESTILLING
-      value: {{kafka-topic-bestilling}}
   ingresses:
-    - {{sof-ingress}}/resource-puller
-
+    - {{SOF_INGRESS}}/resource-puller

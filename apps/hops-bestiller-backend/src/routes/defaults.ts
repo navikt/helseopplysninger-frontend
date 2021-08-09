@@ -1,7 +1,8 @@
 import { Express } from 'express';
 import getUserInfoFromRequest from '../auth/get-user-info-from-request';
-import { azureAd, server } from '../config';
+import { azureAd } from '../config';
 import { BackendPaths } from '@navikt/bestiller-types';
+import { fullUrl } from '@navikt/hops-common';
 
 function defaults(app: Express): void {
   app.get(BackendPaths.PATH, (req: any, res) => {
@@ -10,7 +11,7 @@ function defaults(app: Express): void {
       application: 'hops-bestiller-backend!',
       isAuthenticated: req.isAuthenticated(),
       azureAdClientId: azureAd.clientId,
-      loginUrl: server.ingress + '/api/oauth2/login',
+      loginUrl: fullUrl(req, '/api/oauth2/login'),
       user: req.user || null,
     });
   });
