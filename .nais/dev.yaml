@@ -1,0 +1,9 @@
+BESTILLER_INGRESS: "https://hops.dev.intern.nav.no"
+SOF_INGRESS: "https://sof.ekstern.dev.nav.no"
+BEHANDLER_INGRESS: "https://behandler.ekstern.dev.nav.no"
+KAFKA_POOL: "nav-dev"
+env:
+  KAFKA_TOPIC_BESTILLING: "helseopplysninger.rapid"
+  FKR_STS_URL: "https://helseid-sts.test.nhn.no/connect/token"
+  FKR_FHIR_URL: "https://hint-inet.utv.helsedir.no/kontaktregister/ekstern"
+  REDIS_HOST: "redis.helseopplysninger.svc.cluster.local"

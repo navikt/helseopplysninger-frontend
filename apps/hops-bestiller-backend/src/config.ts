@@ -12,7 +12,6 @@ const envVar = (name, required = true) => {
 
 const server = {
   port: envVar('SERVER_PORT', false) || 2022,
-  ingress: envVar('APP_INGRESS', true),
   sessionKey: envVar('SESSION_KEY', false) || 'sadfasdf',
   cookieName: 'security-blueprints-login',
 };
@@ -22,8 +21,8 @@ const azureAd = {
   clientId: envVar('AZURE_APP_CLIENT_ID', true),
   clientSecret: envVar('AZURE_APP_CLIENT_SECRET', true),
   clientJwks: JSON.parse(envVar('AZURE_APP_JWKS', true)),
-  redirectUri: envVar('APP_INGRESS', true) + '/api/oauth2/callback',
-  logoutRedirectUri: envVar('APP_INGRESS', true) + '/api/logget-out',
+  redirectPath: '/api/oauth2/callback',
+  logoutRedirectPath: '/api/logget-out',
   tokenEndpointAuthMethod: 'private_key_jwt',
   responseTypes: ['code'],
   responseMode: 'query',

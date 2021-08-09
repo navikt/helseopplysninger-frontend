@@ -9,7 +9,6 @@ services:
     ports:
      - 8001:2022
     environment:
-      APP_INGRESS: http://localhost:8002
       DB_HOST: pg
       KAFKA_BROKERS: kafka:9093
       REDIS_HOST: redis
