@@ -1,20 +1,26 @@
-import {fkrGetPatient, getCache} from './fkr-client';
-
+import { fkrGetPatient, getCache } from './fkr-client';
 
 describe('fkrClient', () => {
+  const OLD_ENV = process.env;
+  beforeEach(async () => {
+    await getCache().destroy();
+    jest.resetModules(); // Most important - it clears the cache
+    process.env = { ...OLD_ENV }; // Make a copy
+  });
 
+  afterAll(() => {
+    process.env = OLD_ENV; // Restore old environment
+  });
 
-    it('should work', async () => {
-        await getCache().destroy();
+  it('should work', async () => {
+    process.env.FKR_STS_URL = 'https://example.local/fgsdf';
+    process.env.FKR_FHIR_URL = 'https://example.local/fgsdf';
+    process.env.FKR_CLIENT_ID = 'xxx';
+    process.env.FKR_CLIENT_SECRET = 'xxx';
 
-        const result = await fkrGetPatient({
-            "fhirUrl": "https://example.local/fgsdf",
-            "stsUrl": "https://example.local/fgsdf",
-            "clientId": "xxx",
-            "accessKey": "xxx"
-        }, {
-            name: "Michael"
-        })
-        expect(result).toEqual([]);
+    const result = await fkrGetPatient({
+      name: 'Michael',
     });
+    expect(result).toEqual([]);
+  });
 });
