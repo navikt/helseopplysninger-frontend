@@ -548,6 +548,79 @@
           ]
         }
       }
+    },
+    "sof-skjema": {
+      "root": "apps/sof-skjema",
+      "sourceRoot": "apps/sof-skjema/src",
+      "projectType": "application",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/web:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/sof-skjema",
+            "index": "apps/sof-skjema/src/index.html",
+            "main": "apps/sof-skjema/src/main.tsx",
+            "polyfills": "apps/sof-skjema/src/polyfills.ts",
+            "tsConfig": "apps/sof-skjema/tsconfig.app.json",
+            "assets": ["apps/sof-skjema/src/favicon.ico", "apps/sof-skjema/src/assets"],
+            "styles": ["apps/sof-skjema/src/styles.less"],
+            "scripts": [],
+            "webpackConfig": "@nrwl/react/plugins/webpack"
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/sof-skjema/src/environments/environment.ts",
+                  "with": "apps/sof-skjema/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/web:dev-server",
+          "options": {
+            "buildTarget": "sof-skjema:build",
+            "hmr": true
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "sof-skjema:build:production",
+              "hmr": false
+            }
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/sof-skjema/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/sof-skjema"],
+          "options": {
+            "jestConfig": "apps/sof-skjema/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   }
 }

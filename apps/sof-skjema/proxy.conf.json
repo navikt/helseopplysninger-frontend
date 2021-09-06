@@ -1,0 +1,7 @@
+{
+  "/resource-puller": {
+    "target": "https://sof.ekstern.dev.nav.no",
+    "changeOrigin": true,
+    "secure": false
+  }
+}

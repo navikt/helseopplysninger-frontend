@@ -1,0 +1,53 @@
+/*Styles for landingpage.tsx*/
+.questionnairesContainer {
+  width: 100%;
+}
+
+.skjemaTable {
+  width: 100%;
+}
+
+.etiketter {
+  width: 120px;
+  text-align: center;
+  margin-left: 10px;
+}
+
+.listOfLinks {
+  border-style: solid none none none;
+  border-color: #dbdbdb;
+  border-width: 0.5px;
+}
+
+/*Styles for QuestionnaireLinks that renders in landingpage.tsx*/
+
+.ContentContainer {
+  padding: 10px 20px;
+}
+
+.navds-story-cell {
+  color: black;
+}
+
+.questionLink {
+  text-decoration: none;
+}
+
+.questionnaireLinkContainer {
+  border-style: none none solid none;
+  border-color: #dbdbdb;
+  border-width: 0.5px;
+}
+
+.statuscelle {
+  text-align: start;
+}
+
+.chevroncelle {
+  text-align: end;
+  padding: 5px 0;
+}
+
+.questionnaireLinkContainer:hover {
+  background-color: #f5f5f5;
+}

@@ -1,0 +1,56 @@
+.typo-undertittel {
+  margin-top: 25px;
+}
+
+.componentItems {
+  margin: 30px 0;
+}
+
+.innerContainerInput {
+  width: 100%;
+}
+
+.radio-button {
+  margin-top: 10px;
+}
+
+.typo-element {
+  margin-top: 25px;
+}
+
+.buttons {
+  margin: 10px;
+}
+
+.ugyldigDato > div > .nav-datovelger > .nav-datovelger__inputContainer {
+  border: 2px solid #ba3a26;
+  border-radius: 6.5px;
+}
+
+.ugyldigDato > div > .nav-datovelger > .nav-datovelger__inputContainer:focus {
+  border: 2px solid #ba3a26;
+  border-radius: 6.5px;
+}
+
+.ugyldigDato
+  > div
+  > .nav-datovelger
+  > .nav-datovelger__inputContainer
+  > .nav-datovelger__input:focus {
+  box-shadow: 0 0 0 3px #a32a17;
+}
+.ugyldigDato
+  > div
+  > .nav-datovelger
+  > .nav-datovelger__inputContainer
+  > .nav-datovelger__input:focus {
+  box-shadow: 0 0 0 3px #a32a17;
+}
+
+.ugyldigDato
+  > div
+  > .nav-datovelger
+  > .nav-datovelger__inputContainer
+  > .nav-datovelger__kalenderknapp:focus {
+  box-shadow: 0 0 0 3px #a32a17;
+}

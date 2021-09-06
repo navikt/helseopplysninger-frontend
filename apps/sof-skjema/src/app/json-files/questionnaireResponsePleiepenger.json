@@ -1,0 +1,115 @@
+{
+  "resourceType": "QuestionnaireResponse",
+  "id": "",
+  "identifier": {
+    "use": "official",
+    "value": ""
+  },
+  "status": "in-progress",
+  "questionnaire": "Questionnaire/1340031",
+  "subject": {
+    "resourceType": "Reference",
+    "id": "",
+    "reference": "",
+    "type": "Patient"
+  },
+  "authored": "2021-07-19",
+  "source": {
+    "resourceType": "Reference",
+    "id": "",
+    "reference": "",
+    "type": "Practitioner"
+  },
+  "item": [
+    {
+      "linkId": "1",
+      "text": "Barnet har følgende diagnoser",
+      "answer": [
+        {
+          "valueString": ""
+        }
+      ]
+    },
+    {
+      "linkId": "2.1",
+      "text": "Perioder for relevante innleggelser: start",
+      "answer": [
+        {
+          "valueDate": ""
+        }
+      ]
+    },
+    {
+      "linkId": "2.2",
+      "text": "Perioder for relevante innleggelser: slutt",
+      "answer": [
+        {
+          "valueDate": ""
+        }
+      ]
+    },
+    {
+      "linkId": "3",
+      "text": "Beskriv barnets nåværende og forventede tlstand/funksjonsnivå",
+      "answer": [
+        {
+          "valueString": ""
+        }
+      ]
+    },
+    {
+      "linkId": "4",
+      "text": "Er det behov for to omsorgspersoner samtidig?",
+      "answer": [
+        {
+          "valueString": ""
+        }
+      ]
+    },
+    {
+      "linkId": "5",
+      "text": "Vurder barnets tilsyn- og pleiebehov",
+      "answer": [
+        {
+          "valueString": ""
+        }
+      ]
+    },
+    {
+      "linkId": "6.1",
+      "text": "Forventet varighet på barnets tilsyns- og pleiebehov: Start",
+      "answer": [
+        {
+          "valueDate": ""
+        }
+      ]
+    },
+    {
+      "linkId": "6.2",
+      "text": "Forventet varighet på barnets tilsyns- og pleiebehov: Slutt",
+      "answer": [
+        {
+          "valueDate": ""
+        }
+      ]
+    },
+    {
+      "linkId": "7",
+      "text": "Er barnet under oppfølging av BUP?",
+      "answer": [
+        {
+          "valueString": ""
+        }
+      ]
+    },
+    {
+      "linkId": "8",
+      "text": "Om mulig, beskriv barnets funksjonsnivå ved hjelp av CGAS",
+      "answer": [
+        {
+          "valueString": ""
+        }
+      ]
+    }
+  ]
+}
