@@ -15,8 +15,9 @@ export const attachWsServer = (server: Server) => {
   // the same ws upgrade process described here:
   // https://www.npmjs.com/package/ws#multiple-servers-sharing-a-single-https-server
   server.on('upgrade', (request, socket, head) => {
-    wsServer.handleUpgrade(request, socket, head, (socket) => {
-      wsServer.emit('connection', socket, request);
+    // @ts-ignore
+    wsServer.handleUpgrade(request, socket, head, (webSocket) => {
+      wsServer.emit('connection', webSocket, request);
     });
   });
 };
