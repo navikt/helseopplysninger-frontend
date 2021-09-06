@@ -1,0 +1,162 @@
+{
+  "resourceType": "Questionnaire",
+  "id": "123456789",
+  "identifier": {
+    "use": "official",
+    "value": ""
+  },
+  "version": "1.0.0",
+  "name": "pleiepengeskjema",
+  "title": "Legeerklæring: pleiepenger for sykt barn",
+  "status": "active",
+  "date": "2021-07-13",
+  "description": "Legeerklæringen skal fylles ut av behandlende lege. Det er kun sykehusleger og leger i spesialisthelsetjenesten som kan skrive legeerklæring for pleiepenger for sykt barn. NAV trenger tidsnære opplysninger for å behandle søknad om pleiepenger. Det innebærer at NAV trenger oppdaterte medisinske opplysninger for å vurdere om vilkårene for rett til pleiepenger er oppfylt. ",
+  "item": [
+    {
+      "linkId": "1",
+      "text": "Barnet har følgende diagnoser",
+      "type": "string",
+      "item": [
+        {
+          "linkId": "1-help",
+          "text": "Hvis barnet er under utredning og det ikke er fastsatt noen diagnose trengs det ikke",
+          "type": "display"
+        }
+      ],
+      "required": "true"
+    },
+    {
+      "linkId": "2",
+      "text": "Perioder for relevante innleggelser",
+      "type": "group",
+      "item": [
+        {
+          "linkId": "2.1",
+          "text": "Start",
+          "type": "date",
+          "required": "false"
+        },
+        {
+          "linkId": "2.2",
+          "text": "Slutt",
+          "type": "date",
+          "required": "false"
+        }
+      ],
+      "required": "false"
+    },
+    {
+      "linkId": "3",
+      "text": "Beskriv barnets nåværende og forventede tilstand/funksjonsnivå",
+      "type": "text",
+      "item": [
+        {
+          "linkId": "3-help",
+          "text": "Merk: Hvis pasienten er over 18 må du gi en vurdering av om pasienten er utviklingshemmet og svært alvorlig eller livstruende syk.",
+          "type": "display"
+        }
+      ],
+      "required": "true"
+    },
+    {
+      "linkId": "4",
+      "text": "Er det behov for to omsorgspersoner samtidig?",
+      "type": "choice",
+      "answerOption": [
+        {
+          "valueCoding": {
+            "code": "Ja",
+            "display": "Ja"
+          }
+        },
+        {
+          "valueCoding": {
+            "code": "Nei",
+            "display": "Nei"
+          }
+        }
+      ],
+      "item": [
+        {
+          "linkId": "4-help",
+          "text": "Dette kan for eksempel være en beskrivelse av hva barnet trenger hjelp til og omsorgspersonens rolle i pleien.",
+          "type": "display"
+        }
+      ],
+      "required": "true"
+    },
+    {
+      "linkId": "5",
+      "text": "Vurder barnets tilsyn- og pleiebehov",
+      "type": "text",
+      "item": [
+        {
+          "linkId": "5-help",
+          "text": "Dette kan for eksempel være en beskrivelse av hva barnet trenger hjelp til og omsorgspersonens rolle i pleien.",
+          "type": "display"
+        }
+      ],
+      "required": "true"
+    },
+    {
+      "linkId": "6",
+      "text": "Forventet varighet på barnets tilsyns- og pleiebehov",
+      "type": "group",
+      "item": [
+        {
+          "linkId": "6-help",
+          "text": "Her skal du sette en dato på hvor langt fram i tid du forventer at barnet har behov for kontinuerlig tilsyn og pleie. Hvis du er usikker på varigheten setter du en dato så langt frem i tid som du er sikker på per nå.",
+          "type": "display"
+        },
+        {
+          "linkId": "6.1",
+          "text": "Start",
+          "type": "date",
+          "required": "false"
+        },
+        {
+          "linkId": "6.2",
+          "text": "Slutt",
+          "type": "date",
+          "required": "false"
+        }
+      ],
+      "required": "true"
+    },
+    {
+      "linkId": "7",
+      "text": "Er barnet under oppfølging av BUP?",
+      "type": "choice",
+      "answerOption": [
+        {
+          "valueCoding": {
+            "code": "Ja",
+            "display": "Ja"
+          }
+        },
+        {
+          "valueCoding": {
+            "code": "Nei",
+            "display": "Nei"
+          }
+        }
+      ],
+      "required": "true"
+    },
+    {
+      "linkId": "8",
+      "text": "Om mulig, beskriv barnets funksjonsnivå ved hjelp av CGAS",
+      "type": "text",
+      "enableWhen": [
+        {
+          "question": "7",
+          "operator": "=",
+          "answerCoding": {
+            "code": "Ja"
+          }
+        }
+      ],
+      "required": "false"
+    }
+  ]
+}

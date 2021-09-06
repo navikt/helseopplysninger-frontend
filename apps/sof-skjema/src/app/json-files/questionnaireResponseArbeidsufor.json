@@ -1,0 +1,493 @@
+{
+  "resourceType": "QuestionnaireResponse",
+  "id": "",
+  "identifier": {
+    "use": "official",
+    "value": ""
+  },
+  "status": "in-progress",
+  "questionnaire": "Questionnaire/1340031",
+  "authored": "2021-08-03",
+  "subject": {
+    "resourceType": "Reference",
+    "id": "",
+    "reference": "",
+    "type": "Patient"
+  },
+  "source": {
+    "resourceType": "Reference",
+    "id": "",
+    "reference": "",
+    "type": "Practitioner"
+  },
+  "item": [
+    {
+      "linkId": "1",
+      "text": "Erklæringen gjelder",
+      "answer": [
+        {
+          "valueString": ""
+        }
+      ]
+    },
+    {
+      "linkId": "3",
+      "text": "Pasientens yrke",
+      "answer": [
+        {
+          "valueString": ""
+        }
+      ]
+    },
+    {
+      "linkId": "4",
+      "text": "Arbeidsgivers navn",
+      "answer": [
+        {
+          "valueString": ""
+        }
+      ]
+    },
+    {
+      "linkId": "5",
+      "text": "Arbeidsgivers adresse",
+      "answer": [
+        {
+          "valueString": ""
+        }
+      ]
+    },
+    {
+      "linkId": "7",
+      "text": "Pasienten har følgende diagnoser",
+      "answer": [
+        {
+          "valueString": ""
+        }
+      ]
+    },
+    {
+      "linkId": "8",
+      "text": "Sykehistorie med symptomer og behandling",
+      "answer": [
+        {
+          "valueString": ""
+        }
+      ]
+    },
+    {
+      "linkId": "9",
+      "text": "Status presens: beskriv av status og resultat av relevante undersøkelser",
+      "answer": [
+        {
+          "valueString": ""
+        }
+      ]
+    },
+    {
+      "linkId": "10",
+      "text": "Er dette en yrkessdakde/yrkessykdom?",
+      "answer": [
+        {
+          "valueString": ""
+        }
+      ]
+    },
+    {
+      "linkId": "11",
+      "text": "Skadedato",
+      "answer": [
+        {
+          "valueDate": ""
+        }
+      ]
+    },
+    {
+      "linkId": "13",
+      "text": "Er pasienten henvist til utredning?",
+      "answer": [
+        {
+          "valueString": ""
+        }
+      ]
+    },
+    {
+      "linkId": "14",
+      "text": "Dato for henvisning",
+      "answer": [
+        {
+          "valueDate": ""
+        }
+      ]
+    },
+    {
+      "linkId": "15",
+      "text": "Spesifiser",
+      "answer": [
+        {
+          "valueString": ""
+        }
+      ]
+    },
+    {
+      "linkId": "16",
+      "text": "Antatt ventetid (uker)",
+      "answer": [
+        {
+          "valueString": ""
+        }
+      ]
+    },
+    {
+      "linkId": "17",
+      "text": "Utredningplan (oppgi planlagte undersøkelser og tidspunkt/varighet)",
+      "answer": [
+        {
+          "valueString": ""
+        }
+      ]
+    },
+    {
+      "linkId": "18",
+      "text": "Er pasienten henvist til behandling?",
+      "answer": [
+        {
+          "valueString": ""
+        }
+      ]
+    },
+    {
+      "linkId": "19",
+      "text": "Dato for henvisning",
+      "answer": [
+        {
+          "valueDate": ""
+        }
+      ]
+    },
+    {
+      "linkId": "20",
+      "text": "Spesifiser",
+      "answer": [
+        {
+          "valueString": ""
+        }
+      ]
+    },
+    {
+      "linkId": "21",
+      "text": "Antatt ventetid (uker)",
+      "answer": [
+        {
+          "valueString": ""
+        }
+      ]
+    },
+    {
+      "linkId": "22",
+      "text": "Utredningplan (oppgi planlagte undersøkelser og tidspunkt/varighet)",
+      "answer": [
+        {
+          "valueString": ""
+        }
+      ]
+    },
+    {
+      "linkId": "23",
+      "text": "Ny vurdering av tidligere utrednings-/behandlingsplan",
+      "answer": [
+        {
+          "valueString": ""
+        }
+      ]
+    },
+    {
+      "linkId": "24",
+      "text": "Når er det hensiktsmessig, i forhold til utrednings- og behandlingsopplegget, at NAV-kontoret ber om nye legeopplysninger?",
+      "answer": [
+        {
+          "valueString": ""
+        }
+      ]
+    },
+    {
+      "linkId": "25",
+      "text": "Er videre behandling aktuelt?",
+      "answer": [
+        {
+          "valueString": ""
+        }
+      ]
+    },
+    {
+      "linkId": "26",
+      "text": "Hvorfor er ikke videre behandling aktuelt?",
+      "answer": [
+        {
+          "valueString": ""
+        }
+      ]
+    },
+    {
+      "linkId": "28",
+      "text": "Er det ut fra en medisinsk vurdering aktuelt med videre tiltak nå?",
+      "answer": [
+        {
+          "valueString": ""
+        }
+      ]
+    },
+    {
+      "linkId": "29.1",
+      "text": "Hvilke? Kjøp av helsetjenester",
+      "answer": [
+        {
+          "valuBoolean": false
+        }
+      ]
+    },
+    {
+      "linkId": "29.2",
+      "text": "Hvilke? Arbeidsavklaringspenger",
+      "answer": [
+        {
+          "valuBoolean": false
+        }
+      ]
+    },
+    {
+      "linkId": "29.3",
+      "text": "Hvilke? Reisetilskudd",
+      "answer": [
+        {
+          "valuBoolean": false
+        }
+      ]
+    },
+    {
+      "linkId": "29.4",
+      "text": "Hvilke? friskmelding til arbeidsformidling",
+      "answer": [
+        {
+          "valuBoolean": false
+        }
+      ]
+    },
+    {
+      "linkId": "29.5",
+      "text": "Hvilke? Aktiv sykemelding",
+      "answer": [
+        {
+          "valuBoolean": false
+        }
+      ]
+    },
+    {
+      "linkId": "29.6",
+      "text": "Hvilke? Annet, beskriv",
+      "answer": [
+        {
+          "valuBoolean": false
+        }
+      ]
+    },
+    {
+      "linkId": "31",
+      "text": "Beskriv hvordan funksjonsevnen generelt er nedsatt på grunn av sykdom",
+      "answer": [
+        {
+          "valueString": ""
+        }
+      ]
+    },
+    {
+      "linkId": "32.1",
+      "text": "Pasienten er: I inntektsgivende arbeid",
+      "answer": [
+        {
+          "valueBoolean": false
+        }
+      ]
+    },
+    {
+      "linkId": "32.2",
+      "text": "Pasienten er: Hjemmearbeidende",
+      "answer": [
+        {
+          "valueBoolean": false
+        }
+      ]
+    },
+    {
+      "linkId": "32.3",
+      "text": "Pasienten er: Student",
+      "answer": [
+        {
+          "valueBoolean": false
+        }
+      ]
+    },
+    {
+      "linkId": "32.4",
+      "text": "Pasienten er: Annet, beskriv",
+      "answer": [
+        {
+          "valueBoolean": false
+        }
+      ]
+    },
+    {
+      "linkId": "33",
+      "text": "Beskriv kort type arbeid og hvilke krav som stilles",
+      "answer": [
+        {
+          "valueString": ""
+        }
+      ]
+    },
+    {
+      "linkId": "34",
+      "text": "Pasienten kan gjenoppta det tidligere arbeidet",
+      "answer": [
+        {
+          "valueString": ""
+        }
+      ]
+    },
+    {
+      "linkId": "35",
+      "text": "Pasienten kan ta annet arbeid",
+      "answer": [
+        {
+          "valueString": ""
+        }
+      ]
+    },
+    {
+      "linkId": "36",
+      "text": "Hva kan pasienten ikke gjøre i det nåværende arbeidet?",
+      "answer": [
+        {
+          "valueString": ""
+        }
+      ]
+    },
+    {
+      "linkId": "37",
+      "text": "Hvilke andre hensyn må eventuelt tas ved valg av annet yrke/arbeid?",
+      "answer": [
+        {
+          "valueString": ""
+        }
+      ]
+    },
+    {
+      "linkId": "39",
+      "text": "Antas behandlingen å føre til bedring av arbeidsevnen?",
+      "answer": [
+        {
+          "valueString": ""
+        }
+      ]
+    },
+    {
+      "linkId": "40.1",
+      "text": "Antatt varighet av funksjonsnedsettelsen: start",
+      "answer": [
+        {
+          "valueDate": ""
+        }
+      ]
+    },
+    {
+      "linkId": "40.2",
+      "text": "Antatt varighet av funksjonsnedsettelsen: slutt",
+      "answer": [
+        {
+          "valueDate": ""
+        }
+      ]
+    },
+    {
+      "linkId": "41.1",
+      "text": "Antatt varighet av nedsatt arbeidsevne: start",
+      "answer": [
+        {
+          "valueDate": ""
+        }
+      ]
+    },
+    {
+      "linkId": "41.2",
+      "text": "Antatt varighet av nedsatt arbeidsevne: slutt",
+      "answer": [
+        {
+          "valueDate": ""
+        }
+      ]
+    },
+    {
+      "linkId": "42",
+      "text": "Anslå hvor stor betydning funksjonsnedsettelsen har for at arbeidsevnen er nedsatt",
+      "answer": [
+        {
+          "valueString": ""
+        }
+      ]
+    },
+    {
+      "linkId": "43.1",
+      "text": "Hvem skal nav ta kontakt med? Behandlende lege",
+      "answer": [
+        {
+          "valueBoolean": false
+        }
+      ]
+    },
+    {
+      "linkId": "43.2",
+      "text": "Hvem skal nav ta kontakt med? Arbeidsgiver",
+      "answer": [
+        {
+          "valueBoolean": false
+        }
+      ]
+    },
+    {
+      "linkId": "43.3",
+      "text": "Hvem skal nav ta kontakt med? Basisgruppe",
+      "answer": [
+        {
+          "valueBoolean": false
+        }
+      ]
+    },
+    {
+      "linkId": "43.4",
+      "text": "Hvem skal nav ta kontakt med? Annet, beskriv",
+      "answer": [
+        {
+          "valueBoolean": false
+        }
+      ]
+    },
+    {
+      "linkId": "44",
+      "text": "Er det noe i legeerklæringen som pasienten ikke bør få vite av medisinske grunner?",
+      "answer": [
+        {
+          "valueString": ""
+        }
+      ]
+    },
+    {
+      "linkId": "45",
+      "text": "Hva bør ikke pasienten få vite?",
+      "answer": [
+        {
+          "valueString": ""
+        }
+      ]
+    }
+  ]
+}

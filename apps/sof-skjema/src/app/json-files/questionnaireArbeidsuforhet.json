@@ -1,0 +1,650 @@
+{
+  "resourceType": "Questionnaire",
+  "id": "214865456",
+  "identifier": {
+    "use": "official",
+    "value": ""
+  },
+  "version": "1.0.0",
+  "name": "arbeidsuførerklæring",
+  "title": "Legeerklæring ved arbeidsuførhet",
+  "status": "active",
+  "date": "2021-08-04",
+  "description": "Dette skjemaet benyttes ved arbeidsevnevurdering ved sykefravær etter anmodning fra NAV-kontoret i sykepengeperioden, krav om arbeidsavklaringspenger eller krav om uførepensjon",
+  "item": [
+    {
+      "linkId": "1",
+      "text": "Erklæringen gjelder",
+      "type": "choice",
+      "answerOption": [
+        {
+          "valueCoding": {
+            "code": "Arbeidsevnevurdering",
+            "display": "Arbeidsevnevurdering ved sykefravær"
+          }
+        },
+        {
+          "valueCoding": {
+            "code": "AAP",
+            "display": "Arbeidsavklaringspenger"
+          }
+        },
+        {
+          "valueCoding": {
+            "code": "Uførepensjon",
+            "display": "Uførepensjon"
+          }
+        }
+      ],
+      "required": "true"
+    },
+    {
+      "linkId": "2",
+      "text": "1 - Opplysninger om pasientens arbeidsforhold",
+      "type": "display"
+    },
+    {
+      "linkId": "3",
+      "text": "Pasientens yrke",
+      "type": "text",
+      "required": "true"
+    },
+    {
+      "linkId": "4",
+      "text": "Arbeidsgivers navn",
+      "type": "text",
+      "required": "true"
+    },
+    {
+      "linkId": "5",
+      "text": "Arbeidsgivers adresse",
+      "type": "text",
+      "required": "true"
+    },
+    {
+      "linkId": "6",
+      "text": "2 - Diagnose og sykdomsopplysninger",
+      "type": "display",
+      "required": "true"
+    },
+    {
+      "linkId": "7",
+      "text": "Pasienten har følgende diagnoser",
+      "type": "string",
+      "required": "true"
+    },
+    {
+      "linkId": "8",
+      "text": "Sykehistorie med symptomer og behandling",
+      "type": "text",
+      "required": "true"
+    },
+    {
+      "linkId": "9",
+      "text": "Status presens: beskriv av status og resultat av relevante undersøkelser",
+      "type": "text",
+      "required": "true"
+    },
+    {
+      "linkId": "10",
+      "text": "Er dette en yrkessdakde/yrkessykdom?",
+      "type": "choice",
+      "answerOption": [
+        {
+          "valueCoding": {
+            "code": "ja",
+            "display": "ja"
+          }
+        },
+        {
+          "valueCoding": {
+            "code": "nei",
+            "display": "nei"
+          }
+        }
+      ],
+      "required": "true"
+    },
+    {
+      "linkId": "11",
+      "text": "Skadedato",
+      "type": "date",
+      "enableWhen": [
+        {
+          "question": "10",
+          "operator": "=",
+          "answerCoding": {
+            "code": "ja"
+          }
+        }
+      ],
+      "required": "true"
+    },
+    {
+      "linkId": "12",
+      "text": "3 - Plan  for medisinsk utredning og behandling",
+      "type": "display",
+      "required": "true"
+    },
+    {
+      "linkId": "13",
+      "text": "Er pasienten henvist til utredning?",
+      "type": "choice",
+      "answerOption": [
+        {
+          "valueCoding": {
+            "code": "ja",
+            "display": "ja"
+          }
+        },
+        {
+          "valueCoding": {
+            "code": "nei",
+            "display": "nei"
+          }
+        }
+      ],
+      "required": "true"
+    },
+    {
+      "linkId": "14",
+      "text": "Dato for henvisning",
+      "type": "date",
+      "enableWhen": [
+        {
+          "question": "13",
+          "operator": "=",
+          "answerCoding": {
+            "code": "ja"
+          }
+        }
+      ],
+      "required": "true"
+    },
+    {
+      "linkId": "15",
+      "text": "Spesifiser",
+      "type": "text",
+      "enableWhen": [
+        {
+          "question": "13",
+          "operator": "=",
+          "answerCoding": {
+            "code": "ja"
+          }
+        }
+      ],
+      "required": "true"
+    },
+    {
+      "linkId": "16",
+      "text": "Antatt ventetid (uker)",
+      "type": "text",
+      "enableWhen": [
+        {
+          "question": "13",
+          "operator": "=",
+          "answerCoding": {
+            "code": "ja"
+          }
+        }
+      ],
+      "required": "true"
+    },
+    {
+      "linkId": "17",
+      "text": "Utredningplan (oppgi planlagte undersøkelser og tidspunkt/varighet)",
+      "type": "text",
+      "enableWhen": [
+        {
+          "question": "13",
+          "operator": "=",
+          "answerCoding": {
+            "code": "ja"
+          }
+        }
+      ],
+      "required": "true"
+    },
+    {
+      "linkId": "18",
+      "text": "Er pasienten henvist til behandling?",
+      "type": "choice",
+      "answerOption": [
+        {
+          "valueCoding": {
+            "code": "ja",
+            "display": "ja"
+          }
+        },
+        {
+          "valueCoding": {
+            "code": "nei",
+            "display": "nei"
+          }
+        }
+      ],
+      "required": "true"
+    },
+    {
+      "linkId": "19",
+      "text": "Dato for henvisning",
+      "type": "date",
+      "enableWhen": [
+        {
+          "question": "18",
+          "operator": "=",
+          "answerCoding": {
+            "code": "ja"
+          }
+        }
+      ],
+      "required": "true"
+    },
+    {
+      "linkId": "20",
+      "text": "Spesifiser",
+      "type": "text",
+      "enableWhen": [
+        {
+          "question": "18",
+          "operator": "=",
+          "answerCoding": {
+            "code": "ja"
+          }
+        }
+      ],
+      "required": "true"
+    },
+    {
+      "linkId": "21",
+      "text": "Antatt ventetid (uker)",
+      "type": "text",
+      "enableWhen": [
+        {
+          "question": "18",
+          "operator": "=",
+          "answerCoding": {
+            "code": "ja"
+          }
+        }
+      ],
+      "required": "true"
+    },
+    {
+      "linkId": "22",
+      "text": "Utredningplan (oppgi planlagte undersøkelser og tidspunkt/varighet)",
+      "type": "text",
+      "enableWhen": [
+        {
+          "question": "18",
+          "operator": "=",
+          "answerCoding": {
+            "code": "ja"
+          }
+        }
+      ],
+      "required": "true"
+    },
+    {
+      "linkId": "23",
+      "text": "Ny vurdering av tidligere utrednings-/behandlingsplan",
+      "type": "text",
+      "required": "true"
+    },
+    {
+      "linkId": "24",
+      "text": "Når er det hensiktsmessig, i forhold til utrednings- og behandlingsopplegget, at NAV-kontoret ber om nye legeopplysninger?",
+      "type": "text",
+      "required": "true"
+    },
+    {
+      "linkId": "25",
+      "text": "Er videre behandling aktuelt?",
+      "type": "choice",
+      "answerOption": [
+        {
+          "valueCoding": {
+            "code": "ja",
+            "display": "ja"
+          }
+        },
+        {
+          "valueCoding": {
+            "code": "nei",
+            "display": "nei"
+          }
+        }
+      ],
+      "required": "true"
+    },
+    {
+      "linkId": "26",
+      "text": "Hvorfor er ikke videre behandling aktuelt?",
+      "type": "text",
+      "enableWhen": [
+        {
+          "question": "25",
+          "operator": "=",
+          "answerCoding": {
+            "code": "nei"
+          }
+        }
+      ],
+      "required": "true"
+    },
+    {
+      "linkId": "27",
+      "text": "4 - Forslag til tiltak utover medisinsk behandling",
+      "type": "display",
+      "required": "true"
+    },
+    {
+      "linkId": "28",
+      "text": "Er det ut fra en medisinsk vurdering aktuelt med videre tiltak nå?",
+      "type": "choice",
+      "answerOption": [
+        {
+          "valueCoding": {
+            "code": "ja",
+            "display": "ja"
+          }
+        },
+        {
+          "valueCoding": {
+            "code": "nei",
+            "display": "nei"
+          }
+        }
+      ],
+      "required": "true"
+    },
+    {
+      "linkId": "29",
+      "text": "Hvilke?",
+      "type": "group",
+      "item": [
+        {
+          "linkId": "29.1",
+          "text": "Kjøp av helsetjenester",
+          "type": "boolean",
+          "required": "true"
+        },
+        {
+          "linkId": "29.2",
+          "text": "Arbeidsavklaringspenger",
+          "type": "boolean",
+          "required": "true"
+        },
+        {
+          "linkId": "29.3",
+          "text": "Reisetilskudd",
+          "type": "boolean",
+          "required": "true"
+        },
+        {
+          "linkId": "29.4",
+          "text": "friskmelding til arbeidsformidling",
+          "type": "boolean",
+          "required": "true"
+        },
+        {
+          "linkId": "29.5",
+          "text": "Aktiv sykemelding",
+          "type": "boolean",
+          "required": "true"
+        },
+        {
+          "linkId": "29.6",
+          "text": "Annet, beskriv",
+          "type": "text",
+          "required": "true"
+        }
+      ],
+      "enableWhen": [
+        {
+          "question": "28",
+          "operator": "=",
+          "answerCoding": {
+            "code": "ja"
+          }
+        }
+      ],
+      "required": "true"
+    },
+    {
+      "linkId": "30",
+      "text": "5 - Medisinsk begrunnet vurdering av funksjons- og arbeidsevne",
+      "type": "display",
+      "required": "true"
+    },
+    {
+      "linkId": "31",
+      "text": "Beskriv hvordan funksjonsevnen generelt er nedsatt på grunn av sykdom",
+      "type": "text",
+      "required": "true"
+    },
+    {
+      "linkId": "32",
+      "text": "Pasienten er",
+      "type": "group",
+      "item": [
+        {
+          "linkId": "32.1",
+          "text": "I inntektsgivende arbeid",
+          "type": "boolean",
+          "required": "true"
+        },
+        {
+          "linkId": "32.2",
+          "text": "Hjemmearbeidende",
+          "type": "boolean",
+          "required": "true"
+        },
+        {
+          "linkId": "32.3",
+          "text": "Student",
+          "type": "boolean",
+          "required": "true"
+        },
+        {
+          "linkId": "32.4",
+          "text": "Annet, beskriv",
+          "type": "text",
+          "required": "true"
+        }
+      ]
+    },
+    {
+      "linkId": "33",
+      "text": "Beskriv kort type arbeid og hvilke krav som stilles",
+      "type": "text",
+      "required": "true"
+    },
+    {
+      "linkId": "34",
+      "text": "Pasienten kan gjenoppta det tidligere arbeidet",
+      "type": "choice",
+      "answerOption": [
+        {
+          "valueCoding": {
+            "code": "ja",
+            "display": "ja"
+          }
+        },
+        {
+          "valueCoding": {
+            "code": "nei",
+            "display": "nei"
+          }
+        }
+      ],
+      "required": "true"
+    },
+    {
+      "linkId": "35",
+      "text": "Pasienten kan ta annet arbeid",
+      "type": "choice",
+      "answerOption": [
+        {
+          "valueCoding": {
+            "code": "ja",
+            "display": "ja"
+          }
+        },
+        {
+          "valueCoding": {
+            "code": "nei",
+            "display": "nei"
+          }
+        }
+      ],
+      "required": "true"
+    },
+    {
+      "linkId": "36",
+      "text": "Hva kan pasienten ikke gjøre i det nåværende arbeidet?",
+      "type": "text",
+      "required": "true"
+    },
+    {
+      "linkId": "37",
+      "text": "Hvilke andre hensyn må eventuelt tas ved valg av annet yrke/arbeid?",
+      "type": "text",
+      "required": "true"
+    },
+    {
+      "linkId": "38",
+      "text": "6 - Prognose",
+      "type": "display",
+      "required": "true"
+    },
+    {
+      "linkId": "39",
+      "text": "Antas behandlingen å føre til bedring av arbeidsevnen?",
+      "type": "choice",
+      "answerOption": [
+        {
+          "valueCoding": {
+            "code": "ja",
+            "display": "ja"
+          }
+        },
+        {
+          "valueCoding": {
+            "code": "nei",
+            "display": "nei"
+          }
+        }
+      ],
+      "required": "true"
+    },
+    {
+      "linkId": "40",
+      "text": "Antatt varighet av funksjonsnedsettelsen",
+      "type": "group",
+      "item": [
+        {
+          "linkId": "40.1",
+          "text": "Start",
+          "type": "date"
+        },
+        {
+          "linkId": "40.2",
+          "text": "Slutt",
+          "type": "date"
+        }
+      ]
+    },
+    {
+      "linkId": "41",
+      "text": "Antatt varighet av nedsatt arbeidsevne",
+      "type": "group",
+      "item": [
+        {
+          "linkId": "41.1",
+          "text": "Start",
+          "type": "date"
+        },
+        {
+          "linkId": "41.2",
+          "text": "Slutt",
+          "type": "date"
+        }
+      ]
+    },
+    {
+      "linkId": "42",
+      "text": "Anslå hvor stor betydning funksjonsnedsettelsen har for at arbeidsevnen er nedsatt",
+      "type": "text",
+      "required": "true"
+    },
+    {
+      "linkId": "43",
+      "text": "Hvem skal nav ta kontakt med?",
+      "type": "group",
+      "item": [
+        {
+          "linkId": "43.1",
+          "text": "Behandlende lege",
+          "type": "boolean",
+          "required": "true"
+        },
+        {
+          "linkId": "43.2",
+          "text": "Arbeidsgiver",
+          "type": "boolean",
+          "required": "true"
+        },
+        {
+          "linkId": "43.3",
+          "text": "Basisgruppe",
+          "type": "boolean",
+          "required": "true"
+        },
+        {
+          "linkId": "43.4",
+          "text": "Annet, beskriv",
+          "type": "text",
+          "required": "true"
+        }
+      ]
+    },
+    {
+      "linkId": "44",
+      "text": "Er det noe i legeerklæringen som pasienten ikke bør få vite av medisinske grunner?",
+      "type": "choice",
+      "answerOption": [
+        {
+          "valueCoding": {
+            "code": "ja",
+            "display": "ja"
+          }
+        },
+        {
+          "valueCoding": {
+            "code": "nei",
+            "display": "nei"
+          }
+        }
+      ],
+      "required": "true"
+    },
+    {
+      "linkId": "45",
+      "text": "Hva bør ikke pasienten få vite?",
+      "type": "text",
+      "enableWhen": [
+        {
+          "question": "44",
+          "operator": "=",
+          "answerCoding": {
+            "code": "ja"
+          }
+        }
+      ],
+      "required": "true"
+    }
+  ],
+  "required": "true"
+}

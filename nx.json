@@ -54,6 +54,9 @@
     },
     "sof-resource-puller": {
       "tags": []
+    },
+    "sof-skjema": {
+      "tags": []
     }
   },
   "targetDependencies": {
