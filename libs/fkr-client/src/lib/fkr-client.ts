@@ -2,8 +2,8 @@ import axios from 'axios';
 import * as flatCache from 'flat-cache';
 import { Cache } from 'flat-cache';
 import { JWT } from 'jose';
-import { IdTokenClaims } from 'openid-client';
-import { IBundle_Entry, IPatient } from '@ahryman40k/ts-fhir-types/lib/R4';
+import { IdTokenClaims, TokenSet } from 'openid-client';
+import { IBundle, IBundle_Entry, IPatient } from '@ahryman40k/ts-fhir-types/lib/R4';
 import * as env from 'env-var';
 
 const getConfig = (): fkrClientConfig => {
@@ -16,7 +16,7 @@ const getConfig = (): fkrClientConfig => {
   };
 };
 
-const getFreshToken = async () => {
+const getFreshToken = async (): Promise<TokenSet> => {
   const config = getConfig();
   const params = new URLSearchParams({
     grant_type: 'client_credentials',
@@ -27,7 +27,7 @@ const getFreshToken = async () => {
       password: config.accessKey,
     },
   });
-  return result.data;
+  return result.data as TokenSet;
 };
 
 const cache = flatCache.load('FKR');
@@ -72,7 +72,7 @@ export async function fkrGetPatient(params?: fkrGetPatientParams): Promise<IPati
     params,
   });
   const returnValue: IPatient[] = [];
-  result.data.entry.forEach((entry: IBundle_Entry) => {
+  (result.data as IBundle).entry.forEach((entry: IBundle_Entry) => {
     returnValue.push(entry.resource as IPatient);
   });
   return returnValue;

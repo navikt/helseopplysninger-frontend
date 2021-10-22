@@ -1,11 +1,7 @@
 import { useParams } from 'react-router';
 import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
-import {
-  BackendPaths,
-  PatientEvent,
-  StatusPresens,
-} from '@navikt/bestiller-types';
+import { BackendPaths, PatientEvent, StatusPresens } from '@navikt/bestiller-types';
 
 interface ParamTypes {
   patientId: string;
@@ -51,8 +47,8 @@ const PatientContextProvider = (props: any) => {
       );
       setPatient({
         patientId: patientId,
-        statusPresens: statusRes.data,
-        events: eventRes.data,
+        statusPresens: statusRes.data as StatusPresens,
+        events: eventRes.data as PatientEvent[],
       });
     }
 
@@ -60,20 +56,14 @@ const PatientContextProvider = (props: any) => {
   }, [patientId]);
   useEffect(() => {
     async function fetch() {
-      const eventRes = await axios.get(
-        BackendPaths.PATIENT_EVENT.replace(':eventId', eventId)
-      );
+      const eventRes = await axios.get(BackendPaths.PATIENT_EVENT.replace(':eventId', eventId));
       setSelectedEvent(eventRes.data);
     }
 
     if (eventId) fetch().then(null);
   }, [eventId]);
 
-  return (
-    <PatientContext.Provider value={patient}>
-      {props.children}
-    </PatientContext.Provider>
-  );
+  return <PatientContext.Provider value={patient}>{props.children}</PatientContext.Provider>;
 };
 
 const usePatientContext = () => useContext(PatientContext);

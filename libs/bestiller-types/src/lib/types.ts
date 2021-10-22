@@ -1,5 +1,5 @@
 export type Brukerinfo = {
-  innlogget: Boolean;
+  innlogget: boolean;
   navn: string;
   ident: string;
   enhet?: string;
