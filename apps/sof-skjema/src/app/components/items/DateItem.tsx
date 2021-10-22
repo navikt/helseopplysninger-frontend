@@ -1,7 +1,7 @@
 import { FC, useState, useEffect } from 'react';
 import { DatepickerItem } from './DatepickerItem';
-import { Feilmelding } from 'nav-frontend-typografi';
 import { QuestionTextItem } from './QuestionTextItem';
+import { BodyShort, Detail, Tag } from '@navikt/ds-react';
 
 /**
  * Renders a question with type Date
@@ -55,10 +55,7 @@ const DateItem: FC<IItemProps & savedType> = ({
         dateList.forEach((innerList) => {
           tempList.push(innerList[i]);
         });
-        copiedAnswers.set(
-          mainQuestion.linkId + '.' + (i + 1),
-          JSON.stringify(tempList)
-        );
+        copiedAnswers.set(mainQuestion.linkId + '.' + (i + 1), JSON.stringify(tempList));
       }
     } else {
       copiedAnswers.set(mainQuestion.linkId, JSON.stringify(dateList));
@@ -76,7 +73,6 @@ const DateItem: FC<IItemProps & savedType> = ({
     // TODO: Fix so that dateList is set correctly based on data from the server
     // This code is currently not working
   }, [saved]);
-
   return (
     <div className="componentItems">
       <div className="typo-element">
@@ -87,10 +83,7 @@ const DateItem: FC<IItemProps & savedType> = ({
         {optionList && optionList.length !== 0 ? (
           optionList.map((option: string, index: number) => {
             return (
-              <div
-                key={mainQuestion.linkId + index}
-                style={{ display: 'block', margin: '10px' }}
-              >
+              <div key={mainQuestion.linkId + index} style={{ display: 'block', margin: '10px' }}>
                 <div className={wrongDateStatus}>
                   <DatepickerItem
                     index={index}
@@ -103,15 +96,10 @@ const DateItem: FC<IItemProps & savedType> = ({
             );
           })
         ) : (
-          <DatepickerItem
-            index={0}
-            text={''}
-            dateList={dateList}
-            setDateList={setDateList}
-          />
+          <DatepickerItem index={0} text={''} dateList={dateList} setDateList={setDateList} />
         )}
       </div>
-      <Feilmelding>{errorMsg}</Feilmelding>
+      <BodyShort style={{ color: '#ba3a26' }}>{errorMsg}</BodyShort>
     </div>
   );
 };

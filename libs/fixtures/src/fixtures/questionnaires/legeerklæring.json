@@ -1,6 +1,8 @@
 {
   "resourceType": "Questionnaire",
   "title": "Legeerklæring om arbeidsoppgaver som krever løft over hodet.",
+  "name": "erklaering-test-1",
+  "url": "http://fhir.nav.no/Questionnaire/erklaering-test-1",
   "purpose": "Få informasjon om x,y,z",
   "copyright": "NAV 2021",
   "approvalDate": "2020-12-04",

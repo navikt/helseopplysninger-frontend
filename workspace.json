@@ -405,6 +405,79 @@
         }
       }
     },
+    "sof-components": {
+      "root": "libs/sof-components",
+      "sourceRoot": "libs/sof-components/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/sof-components/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/sof-components"],
+          "options": {
+            "jestConfig": "libs/sof-components/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "sof-dev-server": {
+      "root": "apps/sof-dev-server",
+      "sourceRoot": "apps/sof-dev-server/src",
+      "projectType": "application",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/sof-dev-server",
+            "main": "apps/sof-dev-server/src/main.ts",
+            "tsConfig": "apps/sof-dev-server/tsconfig.app.json",
+            "assets": ["apps/sof-dev-server/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/sof-dev-server/src/environments/environment.ts",
+                  "with": "apps/sof-dev-server/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "sof-dev-server:build"
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["apps/sof-dev-server/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/sof-dev-server"],
+          "options": {
+            "jestConfig": "apps/sof-dev-server/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
     "sof-questionnaire": {
       "root": "apps/sof-questionnaire",
       "sourceRoot": "apps/sof-questionnaire/src",
@@ -425,7 +498,7 @@
             ],
             "styles": ["apps/sof-questionnaire/src/styles.less"],
             "scripts": [],
-            "webpackConfig": "@nrwl/react/plugins/webpack"
+            "webpackConfig": "configs/webpack.config.sof.js"
           },
           "configurations": {
             "production": {
@@ -597,7 +670,8 @@
           "executor": "@nrwl/web:dev-server",
           "options": {
             "buildTarget": "sof-skjema:build",
-            "hmr": true
+            "hmr": true,
+            "port": 4210
           },
           "configurations": {
             "production": {

@@ -1,4 +1,4 @@
-import { IQuestionnaire, IQuestionnaireResponse } from '@ahryman40k/ts-fhir-types/lib/R4';
+import { IBundle, IQuestionnaire, IQuestionnaireResponse } from '@ahryman40k/ts-fhir-types/lib/R4';
 import pullResource from './pull-resource';
 
 export async function pullQuestionnaireResponse(
@@ -11,8 +11,11 @@ export async function pullQuestionnaireResponse(
 
 export async function pullQuestionnaire(
   serverUrl: URL,
-  reference: string,
+  questionnaireUrl: string,
   authHeader: string
 ): Promise<IQuestionnaire> {
-  return (await pullResource(serverUrl, reference, authHeader)) as IQuestionnaire;
+  const bundle = (await pullResource(serverUrl, 'Questionnaire', authHeader, {
+    url: questionnaireUrl,
+  })) as IBundle;
+  return bundle.entry[0].resource as IQuestionnaire;
 }

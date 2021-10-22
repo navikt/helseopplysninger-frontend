@@ -1,22 +1,20 @@
 import React from 'react';
-import Lenke from 'nav-frontend-lenker';
 import { BackendPaths } from '@navikt/bestiller-types';
-import { Hovedknapp } from 'nav-frontend-knapper';
-import { Column, Container, Row } from 'nav-frontend-grid';
+import { Button, Cell, ContentContainer, Grid, Link } from '@navikt/ds-react';
 
 export const LoginView = () => {
   return (
-    <Container>
-      <Row>
-        <Column>
+    <ContentContainer>
+      <Grid>
+        <Cell xs={12}>
           <br />
-        </Column>
-      </Row>
-      <Row style={{ textAlign: 'center' }}>
-        <Lenke href={BackendPaths.LOGIN_PATH}>
-          <Hovedknapp>Logg inn</Hovedknapp>
-        </Lenke>
-      </Row>
-    </Container>
+        </Cell>
+      </Grid>
+      <Grid style={{ textAlign: 'center' }}>
+        <Link href={BackendPaths.LOGIN_PATH}>
+          <Button variant={'primary'}>Logg inn</Button>
+        </Link>
+      </Grid>
+    </ContentContainer>
   );
 };

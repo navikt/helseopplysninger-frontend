@@ -38,14 +38,9 @@ export type PatientEvent = {
   };
   icon: string;
   status: {
-    type: 'suksess' | 'info' | 'advarsel' | 'fokus';
+    type: 'warning' | 'error' | 'info' | 'success';
     tekst: string;
   };
 };
 
-export type PatientEventIcon =
-  | 'Bandage'
-  | 'Information'
-  | 'DialogDots'
-  | 'Law'
-  | 'FileContent';
+export type PatientEventIcon = 'Bandage' | 'Information' | 'DialogDots' | 'Law' | 'FileContent';

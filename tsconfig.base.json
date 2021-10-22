@@ -23,10 +23,12 @@
       "@navikt/helseid": ["libs/helseid/src/index.ts"],
       "@navikt/hops-common": ["libs/hops-common/src/index.ts"],
       "@navikt/hops-testutils": ["libs/hops-testutils/src/index.ts"],
-      "@navikt/sof-common": ["libs/sof-common/src/index.ts"]
+      "@navikt/sof-common": ["libs/sof-common/src/index.ts"],
+      "@navikt/sof-components": ["libs/sof-components/src/index.ts"]
     },
     "types": ["jest", "node"],
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true
   },
   "exclude": ["node_modules", "tmp"]
 }

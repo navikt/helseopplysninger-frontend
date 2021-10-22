@@ -1,7 +1,7 @@
-import { Radio, RadioGruppe } from 'nav-frontend-skjema';
 import { useEffect, useState } from 'react';
 import { useInputErrorContext } from '../../context/inputErrorContext';
 import { QuestionTextItem } from './QuestionTextItem';
+import { Radio, RadioGroup } from '@navikt/ds-react';
 
 /**
  * Renders a question with type Choice
@@ -11,9 +11,7 @@ import { QuestionTextItem } from './QuestionTextItem';
 const RadiobuttonItem = (props: IItemProps & savedType) => {
   const optionarray: Array<string> | undefined = props.answeroptions;
   const [radioValue, setRadioValue] = useState(''); // The label value of a checked radiobutton
-  const [checked, setChecked] = useState<boolean[]>(
-    new Array(optionarray?.length).fill(false)
-  ); // A list of the options with true or false, depending on if checked
+  const [checked, setChecked] = useState<boolean[]>(new Array(optionarray?.length).fill(false)); // A list of the options with true or false, depending on if checked
   const [inputError, setInputError] = useState('');
   const { checkedForError, setCheckedForError } = useInputErrorContext();
 
@@ -30,7 +28,7 @@ const RadiobuttonItem = (props: IItemProps & savedType) => {
     }
     setChecked(copyList);
     setInputError('');
-    setCheckedForError && setCheckedForError(false);
+    setCheckedForError(false);
   };
 
   // When input is saved: set the radiobuttons to the correct answer.
@@ -43,9 +41,7 @@ const RadiobuttonItem = (props: IItemProps & savedType) => {
       props.answers.get(props.mainQuestion.linkId) &&
       typeof props.answers.get(props.mainQuestion.linkId) === 'string'
     ) {
-      const temp: string = props.answers.get(
-        props.mainQuestion.linkId
-      ) as string;
+      const temp: string = props.answers.get(props.mainQuestion.linkId) as string;
       optionarray?.map((text: string, index: number) => {
         if (text === temp) {
           checked[index] = true;
@@ -76,25 +72,22 @@ const RadiobuttonItem = (props: IItemProps & savedType) => {
   return (
     <>
       <div className="componentItems">
-        <RadioGruppe
-          legend={
-            <QuestionTextItem
-              mainQuestion={props.mainQuestion}
-              helptext={props.helptext}
-            />
-          }
-          feil={inputError}
+        <RadioGroup
+          legend={<QuestionTextItem mainQuestion={props.mainQuestion} helptext={props.helptext} />}
+          error={inputError}
         >
           {optionarray?.map((option: string, index: number) => (
             <Radio
               onChange={() => handleOnChange(option, index)}
               key={option}
-              label={option}
+              value={option}
               name={'group' + props.mainQuestion.linkId}
               checked={checked[index]}
-            />
+            >
+              {option}
+            </Radio>
           ))}
-        </RadioGruppe>
+        </RadioGroup>
       </div>
     </>
   );

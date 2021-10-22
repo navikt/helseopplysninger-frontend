@@ -16,7 +16,7 @@ export const ListItem: FC<IListItemProps> = ({ valueList, setValueList }) => {
   const handleOnClick = (value: string) => {
     setTempValue(value);
     setIsValueChanged(true);
-    setCheckedForError && setCheckedForError(false);
+    setCheckedForError(false);
   };
 
   // Update list of elements
@@ -34,10 +34,7 @@ export const ListItem: FC<IListItemProps> = ({ valueList, setValueList }) => {
     <>
       {valueList?.map((value: string, index: number) => {
         return (
-          <div
-            key={value + index}
-            style={{ display: 'flex', alignItems: 'center' }}
-          >
+          <div key={value + index} style={{ display: 'flex', alignItems: 'center' }}>
             <Xknapp mini onClick={() => handleOnClick(value)} />
             <p className="typo-normal">{value}</p>
           </div>

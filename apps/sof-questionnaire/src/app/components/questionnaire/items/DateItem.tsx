@@ -1,9 +1,11 @@
-import React from "react";
-import {ItemProps} from "../types/ItemProps";
-//import {Datepicker} from 'nav-datovelger';
-import {responseItemToString, stringAnswer} from "../utils/response-item-utils";
-import {Input, Label} from "nav-frontend-skjema";
-import {guid} from "nav-frontend-js-utils";
+import React from 'react';
+import { ItemProps } from '../types/ItemProps';
+
+import { TextField } from '@navikt/ds-react';
+import {
+  questionnaireResponseItemStringAnswer,
+  questionnaireResponseItemToString,
+} from '@navikt/fhir';
 
 /**
  * Denne bør vel etterhvert bruke
@@ -12,26 +14,22 @@ import {guid} from "nav-frontend-js-utils";
  * @param setResponseItem
  * @constructor
  */
-const DateItem: React.FunctionComponent<ItemProps> = (
-    {
-        questionnaireItem,
-        responseItem,
-        setResponseItem
-    }
-) => {
-    const inputId = guid()
-    return (
-        <div className={"skjemaelement"}>
-            <Label htmlFor={inputId}>{questionnaireItem.text}</Label>
-           <Input
-                //inputId={inputId}
-                value={responseItemToString(responseItem)}
-                onChange={(value) =>
-                    setResponseItem(stringAnswer(responseItem, value.target.value))
-                }
-            />
-        </div>
-    );
-}
+const DateItem: React.FunctionComponent<ItemProps> = ({
+  questionnaireItem,
+  responseItem,
+  setResponseItem,
+}) => {
+  return (
+    <div className={'skjemaelement'}>
+      <TextField
+        label={questionnaireItem.text}
+        value={questionnaireResponseItemToString(responseItem)}
+        onChange={(value) =>
+          setResponseItem(questionnaireResponseItemStringAnswer(responseItem, value.target.value))
+        }
+      />
+    </div>
+  );
+};
 
 export default DateItem;

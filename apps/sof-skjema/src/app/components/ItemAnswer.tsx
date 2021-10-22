@@ -5,16 +5,14 @@ import CheckboxItem from './items/CheckboxItem';
 import DateItem from './items/DateItem';
 import InputItem from './items/InputItem';
 import RadiobuttonItem from './items/RadiobuttonItem';
-import { Undertittel } from 'nav-frontend-typografi';
+import { Detail } from '@navikt/ds-react';
 
 interface IProps {
   mainItem: itemType;
   subItems: itemType[];
   optionItems: answerOptionType[];
   answers: Map<string, string | boolean>;
-  setAnswers: React.Dispatch<
-    React.SetStateAction<Map<string, string | boolean>>
-  >;
+  setAnswers: React.Dispatch<React.SetStateAction<Map<string, string | boolean>>>;
   saved: boolean;
 }
 
@@ -93,8 +91,7 @@ export const ItemAnswer: FC<IProps> = ({
   useEffect(() => {
     if (mainItem.enableWhen) {
       if (
-        answers.get(mainItem.enableWhen[0].question) ===
-        mainItem.enableWhen[0].answerCoding.code
+        answers.get(mainItem.enableWhen[0].question) === mainItem.enableWhen[0].answerCoding.code
       ) {
         setEnableWhen(true);
       } else {
@@ -109,28 +106,10 @@ export const ItemAnswer: FC<IProps> = ({
         {
           text: <TextareaItem {...itemProps} saved={saved} />,
           string: <InputItem {...itemProps} saved={saved} />,
-          boolean: (
-            <CheckboxItem
-              {...itemProps}
-              answeroptions={arrayOfItems}
-              saved={saved}
-            />
-          ),
-          date: (
-            <DateItem
-              {...itemProps}
-              answeroptions={arrayOfItems}
-              saved={saved}
-            />
-          ),
-          radio: (
-            <RadiobuttonItem
-              {...itemProps}
-              answeroptions={arrayOfItems}
-              saved={saved}
-            />
-          ),
-          display: <Undertittel>{mainItem.text}</Undertittel>,
+          boolean: <CheckboxItem {...itemProps} answeroptions={arrayOfItems} saved={saved} />,
+          date: <DateItem {...itemProps} answeroptions={arrayOfItems} saved={saved} />,
+          radio: <RadiobuttonItem {...itemProps} answeroptions={arrayOfItems} saved={saved} />,
+          display: <Detail>{mainItem.text}</Detail>,
           nothing: <></>,
         }[renderSwitch()]
       ) : (

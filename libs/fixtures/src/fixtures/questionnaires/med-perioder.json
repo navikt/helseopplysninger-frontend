@@ -1,6 +1,9 @@
 {
   "resourceType": "Questionnaire",
   "title": "Skjema med perioder",
+  "name": "erklaering-test-2",
+  "url": "http://fhir.nav.no/Questionnaire/erklaering-test-2",
+  "version": "1.0.0",
   "purpose": "Få informasjon om x,y,z",
   "copyright": "NAV 2020",
   "approvalDate": "2020-12-04",

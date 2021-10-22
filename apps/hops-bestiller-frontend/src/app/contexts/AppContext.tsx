@@ -22,6 +22,7 @@ const AppContextProvider = (props: any) => {
     navn: null,
     ident: null,
   });
+
   const [loading, isLoading] = useState<Boolean>(true);
   const [items, setItems] = useState([]);
   const [messages, setMessages] = useState([]);
@@ -42,8 +43,10 @@ const AppContextProvider = (props: any) => {
       setItems(res.data);
     });
   }, []);
+  const history = useHistory();
+  const routeMatch = useRouteMatch();
 
-  const goto = new Goto(useHistory(), useRouteMatch());
+  const goto = new Goto(history, routeMatch);
   const context: AppContextProps = {
     user,
     loading,
@@ -51,9 +54,7 @@ const AppContextProvider = (props: any) => {
     messages,
     goto,
   };
-  return (
-    <AppContext.Provider value={context}>{props.children}</AppContext.Provider>
-  );
+  return <AppContext.Provider value={context}>{props.children}</AppContext.Provider>;
 };
 const useAppContext = () => useContext(AppContext);
 export { useAppContext, AppContextProvider, AppContext };

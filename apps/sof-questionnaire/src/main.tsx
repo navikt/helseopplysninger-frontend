@@ -4,12 +4,11 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 
 import App from './app/App';
-import { Undertittel } from 'nav-frontend-typografi';
+import { Ingress } from '@navikt/ds-react';
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <Undertittel>change</Undertittel>
       <App />
     </BrowserRouter>
   </React.StrictMode>,

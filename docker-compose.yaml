@@ -7,7 +7,7 @@ services:
       args:
         APPNAME: hops-bestiller-backend
     ports:
-     - 8001:2022
+      - "8001:2022"
     environment:
       DB_HOST: pg
       KAFKA_BROKERS: kafka:9093
@@ -25,9 +25,9 @@ services:
       args:
         APPNAME: hops-bestiller-frontend
     ports:
-      - 8002:2022
+      - "8002:2022"
     depends_on:
-      - "bestiller-backend"
+      - 'bestiller-backend'
 
   sof-questionnaire:
     build:
@@ -35,7 +35,7 @@ services:
       args:
         APPNAME: sof-questionnaire
     ports:
-      - 8003:2022
+      - "8003:2022"
 
   sof-resource-puller:
     build:
@@ -43,9 +43,9 @@ services:
       args:
         APPNAME: sof-resource-puller
     ports:
-      - 8004:2022
+      - "8004:2022"
     depends_on:
-      - "redis"
+      - 'redis'
     environment:
       KAFKA_BROKERS: kafka:9093
       REDIS_HOST: redis
@@ -56,20 +56,20 @@ services:
       args:
         APPNAME: hops-behandler-backend
     ports:
-      - 8005:2022
+      - "8005:2022"
     depends_on:
-      - "redis"
+      - 'redis'
     environment:
       KAFKA_BROKERS: kafka:9093
       REDIS_HOST: redis
     env_file:
       - .local.env
-# Support
+  # Support
 
   mock-oauth2-server:
-    image: ghcr.io/navikt/mock-oauth2-server:0.3.4
+    image: ghcr.io/navikt/mock-oauth2-server
     ports:
-      - 8030:8030
+      - "8030:8030"
     environment:
       - SERVER_PORT=8030
     hostname: host.docker.internal
@@ -90,14 +90,22 @@ services:
   hapi:
     image: hapiproject/hapi
     ports:
-      - ${FHIR_SERVER_PORT}:8080
+      - "${FHIR_SERVER_PORT}:8080"
     environment:
       hapi.fhir.server_address: http://host.docker.internal:${FHIR_SERVER_PORT}/fhir
+
+  smart-launcher:
+    image: smartonfhir/smart-launcher
+    ports:
+      - "8099:80"
+    environment:
+      FHIR_SERVER_R4: http://host.docker.internal:${FHIR_SERVER_PORT}/fhir
+      FHIR_SERVER_R4_INTERNAL: http://hapi:${FHIR_SERVER_PORT}/fhir
 
   redis:
     image: redis
     ports:
-      - "6379:6379"
+      - '6379:6379'
 
   zookeeper:
     image: confluentinc/cp-zookeeper
@@ -108,7 +116,7 @@ services:
   kafka:
     image: confluentinc/cp-kafka
     ports:
-      - "9092:9092"
+      - '9092:9092'
     depends_on:
       - zookeeper
     environment:
@@ -119,4 +127,4 @@ services:
       KAFKA_LISTENERS: INSIDE://:9093,OUTSIDE://:9092
       KAFKA_INTER_BROKER_LISTENER_NAME: INSIDE
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
-      KAFKA_CREATE_TOPICS: "${KAFKA_TOPIC_BESTILLING}:1:1"
+      KAFKA_CREATE_TOPICS: '${KAFKA_TOPIC_BESTILLING}:1:1'

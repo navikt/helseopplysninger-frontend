@@ -17,6 +17,8 @@ import bundleResources from '../fhir/bundle-resources';
 import { Producer } from 'kafkajs';
 import { logger } from '@navikt/hops-common';
 import { finishQuestionnaireResponse } from '../fhir/finish-questionnaire-response';
+import validator from 'validator';
+import isURL = validator.isURL;
 
 type Options = {
   serverUrl: URL;
@@ -66,7 +68,7 @@ async function pullBundleSendQuestionnaire(options: Options) {
           diagnostics: errorMessage,
         });
       });
-
+      /*
       validateFhirCanonical(questionnaireResponse.questionnaire).forEach((errorMessage) => {
         operationOutcome.issue.push({
           severity: OperationOutcome_IssueSeverityKind._error,
@@ -74,8 +76,14 @@ async function pullBundleSendQuestionnaire(options: Options) {
           diagnostics: errorMessage,
         });
       });
+
+ */
       if (operationOutcome.issue.length === 0) {
-        const questionnaire = await pullQuestionnaire(serverUrl, reference, authHeader);
+        const questionnaire = await pullQuestionnaire(
+          serverUrl,
+          questionnaireResponse.questionnaire,
+          authHeader
+        );
         /**
          * Adding correlation id to QuestionnaireResponse
          */

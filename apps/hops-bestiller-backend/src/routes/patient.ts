@@ -1,15 +1,13 @@
 import { Express } from 'express';
 import { BackendPaths } from '@navikt/bestiller-types';
-
-const patientEvents = require('../../../../fixtures/bestiller/events.json');
-const patientStatusPresens = require('../../../../fixtures/bestiller/status-presens.json');
+import { bestillerFixtures } from '@navikt/fixtures';
 
 function patientRoutes(app: Express): void {
   app.get(BackendPaths.PATIENT_EVENTS, (req, res) => {
-    res.json(patientEvents);
+    res.json(bestillerFixtures.events);
   });
   app.get(BackendPaths.PATIENT_STATUS_PRESENS, (req, res) => {
-    res.send(patientStatusPresens);
+    res.send(bestillerFixtures.statusPresens);
   });
 }
 
