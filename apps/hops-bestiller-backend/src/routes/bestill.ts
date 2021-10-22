@@ -41,7 +41,7 @@ function bestillingRoutes(app: Express): void {
     };
     const metadata = await bestilleHelseopplysning(
       getKafkaClient().producer(),
-      kafkaTopics.bestillinger,
+      kafkaTopics.outgoing,
       bestilling
     );
     res.json(metadata).status(201);

@@ -20,7 +20,7 @@ test('it should pull bundle and send questionnaire', async () => {
     serverUrl: new URL(process.env.FHIR_SERVER_ADDRESS),
     reference: createFhirCanonical(questionnaireResponse),
     authHeader: authHeader,
-    kafkaTopic: process.env.KAFKA_TOPIC_BESTILLING,
+    kafkaTopic: process.env.KAFKA_TOPIC_OUTGOING,
     kafkaProducer: mockKafkaProducer(kafkaSendFunc),
   });
   console.log(resource);

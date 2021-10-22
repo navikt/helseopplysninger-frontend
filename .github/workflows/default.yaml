@@ -54,9 +54,9 @@ jobs:
         run: |
           echo "::set-output name=matrix::{\"appname\":$(npm run matrix --silent)}"
           echo "::set-output name=changed::$(npm run matrix --silent)"
+      - run: npm run affected:build
       - run: npm run wait-on-hapi
       - run: npm run affected:test
-      - run: npm run affected:build
       - name: Caching Dist Folder
         uses: actions/cache@v2
         with:

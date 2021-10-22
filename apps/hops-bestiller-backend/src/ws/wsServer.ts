@@ -1,8 +1,8 @@
 import { Server } from 'http';
-import ws from 'ws';
+import { WebSocketServer } from 'ws';
 import { logger } from '@navikt/hops-common';
 
-export const wsServer = new ws.Server({ noServer: true });
+export const wsServer = new WebSocketServer({ noServer: true });
 
 export const attachWsServer = (server: Server) => {
   wsServer.on('connection', (socket) => {

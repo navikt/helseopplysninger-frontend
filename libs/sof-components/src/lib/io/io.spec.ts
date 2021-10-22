@@ -27,6 +27,7 @@ const practitioner: IPractitioner = {
   resourceType: 'Practitioner',
   id: 'test-practitioner-1',
 };
+jest.setTimeout(20000);
 beforeAll(async () => {
   const questionnaireSearchString = queryString.stringify({
     url: questionnaireUrl,
@@ -57,7 +58,9 @@ beforeAll(async () => {
   await Promise.all(deletes);
   console.log('Cleaned up ', deletes.length, ' entries.');
 });
-
+it('just clean', async () => {
+  console.log('cleaned');
+});
 it('should fetch Questionnaire', async () => {
   const questionnaire = createFhirQuestionnaire(questionnaireUrl, []);
   questionnaire.status = QuestionnaireStatusKind._active;
