@@ -12,8 +12,8 @@ import {
 } from '@navikt/fhir';
 import axios from 'axios';
 import * as nock from 'nock';
-import { Scope } from 'nock';
 import { Producer, ProducerRecord } from 'kafkajs';
+import * as queryString from 'querystring';
 
 export function hopsTestutils(): string {
   return 'hops-testutils';
@@ -46,7 +46,7 @@ export function testFhirQuestionnaire(id: string) {
   });
   const practitioner = createFhirPractitionerReference('herid-123');
   const patient = createFhirPatientReference('fnr-123');
-  let questionnaire = createFhirQuestionnaire('test', items);
+  let questionnaire = createFhirQuestionnaire('http://fhir.example.com/test-questionnaire', items);
   questionnaire.id = id;
   let questionnaireResponse = createFhirQuestionnaireResponse(
     questionnaire,
@@ -74,11 +74,27 @@ export async function pushResource(
   return result.data as IResourceList;
 }
 
-export function nockFhirResource(resource: IResourceList): Scope {
-  return nock(process.env.FHIR_SERVER_ADDRESS)
+export function nockFhirResource(resource: IResourceList): void {
+  nock(process.env.FHIR_SERVER_ADDRESS)
     .persist()
     .get('/' + resource.resourceType + '/' + resource.id)
     .reply(200, resource);
+  if ('url' in resource && resource.url) {
+    const qs = queryString.stringify({
+      url: resource.url,
+    });
+    nock(process.env.FHIR_SERVER_ADDRESS)
+      .persist()
+      .get('/' + resource.resourceType + '?' + qs)
+      .reply(200, {
+        resourceType: 'Bundle',
+        entry: [
+          {
+            resource,
+          },
+        ],
+      });
+  }
 }
 
 export function mockKafkaProducer(kafkaSendFunc): Producer {

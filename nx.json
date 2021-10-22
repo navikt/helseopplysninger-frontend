@@ -49,6 +49,12 @@
     "sof-common": {
       "tags": []
     },
+    "sof-components": {
+      "tags": []
+    },
+    "sof-dev-server": {
+      "tags": []
+    },
     "sof-questionnaire": {
       "tags": []
     },

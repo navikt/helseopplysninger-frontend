@@ -35,10 +35,7 @@ export const bootstrapServer = async (
   }
 };
 
-export const startServer = async (
-  app: Express,
-  port: string | number
-): Promise<Server> => {
+export const startServer = async (app: Express, port: string | number): Promise<Server> => {
   return new Promise((resolve) => {
     const server = app.listen(port, () => {
       server.on('error', logger.error);

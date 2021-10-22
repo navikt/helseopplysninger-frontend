@@ -1,24 +1,21 @@
 import { StatusPresens } from '@navikt/bestiller-types';
 import React from 'react';
-import { EtikettInfo } from 'nav-frontend-etiketter';
+
 import './StatusPresensBox.less';
 import FormattedDate from '../../components/generic/FormattedDate';
 import HorisontalTr from '../../components/generic/HorisontalTr';
+import { Tag } from '@navikt/ds-react';
 
 interface Props {
   statusPresens: StatusPresens;
 }
 
-const StatusPresensBox: React.FunctionComponent<Props> = ({
-  statusPresens,
-}) => {
+const StatusPresensBox: React.FunctionComponent<Props> = ({ statusPresens }) => {
   return (
     <div className={'status-presens-box'}>
       <div className={'status-presens-box-header'}>
         <h3>Status Presens</h3>
-        {statusPresens && (
-          <EtikettInfo>{statusPresens.status.navn}</EtikettInfo>
-        )}
+        {statusPresens && <Tag variant={'info'}>{statusPresens.status.navn}</Tag>}
       </div>
       <table className={'status-presens-table'}>
         <tbody>

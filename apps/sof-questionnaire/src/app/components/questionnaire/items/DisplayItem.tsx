@@ -1,20 +1,13 @@
-import React from "react";
-import {ItemProps} from "../types/ItemProps";
-import StringItem from "./StringItem";
-import {Normaltekst} from "nav-frontend-typografi";
+import React from 'react';
+import { ItemProps } from '../types/ItemProps';
+import { BodyShort } from '@navikt/ds-react';
 
-const DisplayItem: React.FunctionComponent<ItemProps> = (
-    {
-        questionnaireItem,
-        responseItem,
-        setResponseItem
-    }
-) => {
-    return (
-        <Normaltekst>
-            {questionnaireItem.text}
-        </Normaltekst>
-    );
-}
+const DisplayItem: React.FunctionComponent<ItemProps> = ({
+  questionnaireItem,
+  responseItem,
+  setResponseItem,
+}) => {
+  return <BodyShort>{questionnaireItem.text}</BodyShort>;
+};
 
 export default DisplayItem;

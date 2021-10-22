@@ -1,7 +1,9 @@
 import { fhirclient } from 'fhirclient/lib/types';
 import {
   IPatient,
+  IPractitioner,
   IQuestionnaireResponse,
+  IRelatedPerson,
 } from '@ahryman40k/ts-fhir-types/lib/R4';
 
 /**
@@ -14,10 +16,7 @@ import {
 export const setAutomaticAnswers = (
   response: IQuestionnaireResponse,
   patient: IPatient,
-  user:
-    | fhirclient.FHIR.Patient
-    | fhirclient.FHIR.Practitioner
-    | fhirclient.FHIR.RelatedPerson
+  user: IPatient | IPractitioner | IRelatedPerson
 ) => {
   setSubject(response, patient);
   setSource(response, user);
@@ -29,13 +28,8 @@ export const setAutomaticAnswers = (
  * the json template.
  * @param patient the patient we are logged in at in the EHR
  */
-export const setSubject = (
-  response: IQuestionnaireResponse,
-  patient: IPatient
-) => {
-  response.subject
-    ? (response.subject.reference = `Patient/${patient.id}`)
-    : null;
+export const setSubject = (response: IQuestionnaireResponse, patient: IPatient) => {
+  response.subject ? (response.subject.reference = `Patient/${patient.id}`) : null;
 };
 
 /**
@@ -45,12 +39,7 @@ export const setSubject = (
  */
 export const setSource = (
   response: IQuestionnaireResponse,
-  user:
-    | fhirclient.FHIR.Patient
-    | fhirclient.FHIR.Practitioner
-    | fhirclient.FHIR.RelatedPerson
+  user: IPatient | IPractitioner | IRelatedPerson
 ) => {
-  response.source
-    ? (response.source.reference = `Practitioner/${user.id}`)
-    : null;
+  response.source ? (response.source.reference = `Practitioner/${user.id}`) : null;
 };

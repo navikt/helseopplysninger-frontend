@@ -1,7 +1,8 @@
-import React from "react";
-import {ItemProps} from "../types/ItemProps";
-import {Select} from "nav-frontend-skjema";
-import {isSelected, optionDisplayValue} from "../utils/response-item-utils";
+import React from 'react';
+import { ItemProps } from '../types/ItemProps';
+
+import { Select } from '@navikt/ds-react';
+import { questionnaireAnswerOptionDisplayValue } from '@navikt/fhir';
 
 /**
  * Question with a Coding drawn from a list of possible answers (specified in either the answerOption
@@ -15,32 +16,28 @@ import {isSelected, optionDisplayValue} from "../utils/response-item-utils";
  * @param setResponseItem
  * @constructor
  */
-const ChoiceItem: React.FunctionComponent<ItemProps> = (
-    {
-        questionnaireItem,
-        responseItem,
-        setResponseItem
-    }
-) => {
-    const answerOption = questionnaireItem.answerOption || [];
-    return (
-        <Select
-            label={questionnaireItem.text}
-            onChange={(e) => {
-                responseItem.answer = JSON.parse(e.target.value)
-                setResponseItem(responseItem)
-            }}
-            defaultValue={JSON.stringify([responseItem])}
-        >
-            {answerOption.map((option, index) =>
-                <option
-                    key={"har-arbeidsgiver-valg-" + index}
-                    value={JSON.stringify([option])}>
-                    {optionDisplayValue(option)}
-                </option>
-            )}
-        </Select>
-    );
-}
+const ChoiceItem: React.FunctionComponent<ItemProps> = ({
+  questionnaireItem,
+  responseItem,
+  setResponseItem,
+}) => {
+  const answerOption = questionnaireItem.answerOption || [];
+  return (
+    <Select
+      label={questionnaireItem.text}
+      onChange={(e) => {
+        responseItem.answer = JSON.parse(e.target.value);
+        setResponseItem(responseItem);
+      }}
+      defaultValue={JSON.stringify([responseItem])}
+    >
+      {answerOption.map((option, index) => (
+        <option key={'har-arbeidsgiver-valg-' + index} value={JSON.stringify([option])}>
+          {questionnaireAnswerOptionDisplayValue(option)}
+        </option>
+      ))}
+    </Select>
+  );
+};
 
 export default ChoiceItem;

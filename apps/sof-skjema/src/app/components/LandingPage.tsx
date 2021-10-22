@@ -1,30 +1,35 @@
 import { Link } from 'react-router-dom';
-import { Sidetittel } from 'nav-frontend-typografi';
 import '@navikt/ds-css';
 import './landingpageStylesheet.css';
 import QuestionnaireLinks from './QuestionnaireLinks';
+import { Heading } from '@navikt/ds-react';
 
 /**
  * @returns a page with links to all questionnaires to choose from
  */
 
 export const LandingPage = () => {
+  const skjemaer = [
+    {
+      link: '/skjema/pleiepengeskjema',
+      title: 'Legeerklæring: pleiepenger for sykt barn',
+      status: true,
+    },
+    {
+      link: '/skjema/arbeidsuførerklæring',
+      title: 'Legeerklæring ved arbeidsuførhet',
+      status: false,
+    },
+  ];
   return (
     <div className="app-container">
-      <Sidetittel style={{ marginBottom: '50px' }}>Skjemaer</Sidetittel>
+      <Heading size={'large'}>Skjemaer</Heading>
       <div className="listOfLinks">
-        <Link className="questionLink" to="/skjema/pleiepengeskjema">
-          <QuestionnaireLinks
-            title={'Legeerklæring: pleiepenger for sykt barn'}
-            status={true}
-          ></QuestionnaireLinks>
-        </Link>
-        <Link className="questionLink" to="/skjema/arbeidsuførerklæring">
-          <QuestionnaireLinks
-            title={'Legeerklæring ved arbeidsuførhet'}
-            status={false}
-          ></QuestionnaireLinks>
-        </Link>
+        {skjemaer.map((skjema) => (
+          <Link className="questionLink" to={skjema.link}>
+            <QuestionnaireLinks title={skjema.title} status={skjema.status} />
+          </Link>
+        ))}
       </div>
     </div>
   );

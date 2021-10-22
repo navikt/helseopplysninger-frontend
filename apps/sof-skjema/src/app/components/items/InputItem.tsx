@@ -1,10 +1,8 @@
 import { useEffect, useState } from 'react';
-import { Flatknapp, Knapp } from 'nav-frontend-knapper';
-import Popover, { PopoverOrientering } from 'nav-frontend-popover';
-import { Input } from 'nav-frontend-skjema';
 import { ListItem } from './ListItem';
 import { useInputErrorContext } from '../../context/inputErrorContext';
 import { QuestionTextItem } from './QuestionTextItem';
+import { Button, Popover, TextField } from '@navikt/ds-react';
 
 /**
  * Renders a question with type String
@@ -14,11 +12,12 @@ import { QuestionTextItem } from './QuestionTextItem';
 const InputItem = (props: IItemProps & savedType) => {
   const [inputValue, setInputValue] = useState(''); // The written value in the input field
   const [tempValueList, setTempValueList] = useState<string[]>([]); // A (temporary) list of the values added from the input field
-  const [anker, setAnker] = useState(undefined);
+  const [open, setOpen] = useState(false);
+  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const [inputError, setInputError] = useState('');
   const { checkedForError, setCheckedForError } = useInputErrorContext();
 
-  const [exampleElements] = useState([
+  const exampleElements = [
     'F41.9: Uspesifisert angstlidelse',
     'F50: Spiseforstyrrelser',
     'F50.0: Anorexia nervosa',
@@ -28,18 +27,18 @@ const InputItem = (props: IItemProps & savedType) => {
     'R53: Uvelhet og tretthet',
     'R63.0: Anoreksi',
     // A selection of diagnoses from https://finnkode.ehelse.no/#icd10/0/0/0/-1 (codes from ICD-10)
-  ]);
+  ];
 
   const handleOnChange = (e: any) => {
     setInputValue(e.target.value);
-    setCheckedForError && setCheckedForError(false);
+    setCheckedForError(false);
   };
 
   // Displays the popover-window when the input field is focused
   const handleOnFocus = (e: any) => {
-    setAnker(e.currentTarget);
+    setOpen(true);
     setInputError('');
-    setCheckedForError && setCheckedForError(false);
+    setCheckedForError(false);
   };
 
   // Adds the input element in the tempValueList, if not element is contained already or an empty string
@@ -47,13 +46,12 @@ const InputItem = (props: IItemProps & savedType) => {
     if (!tempValueList.includes(inputValue) && inputValue !== '') {
       setTempValueList((prevState) => [...prevState, inputValue]);
     }
-    setCheckedForError && setCheckedForError(false);
+    setCheckedForError(false);
   };
 
   // Sets the chosen element in the input field
   const handleChooseElement = (e: any) => {
     setInputValue(e.target.innerHTML);
-    setAnker(undefined);
   };
 
   // Compares elements with the input field && checks if element is already chosen
@@ -65,17 +63,18 @@ const InputItem = (props: IItemProps & savedType) => {
         (typeof tempAnswer === 'string' && !tempAnswer.includes(element)))
     ) {
       return (
-        <Flatknapp
+        <Button
+          variant={'secondary'}
           style={{
             display: 'block',
             width: '100%',
             textAlign: 'left',
           }}
-          mini
+          size={'small'}
           onClick={handleChooseElement}
         >
           {element}
-        </Flatknapp>
+        </Button>
       );
     }
     return <></>;
@@ -117,51 +116,48 @@ const InputItem = (props: IItemProps & savedType) => {
       }
     }
   }, [checkedForError]);
-
   return (
     <>
       <div className="componentItems" style={{ display: 'flex' }}>
         <div className="innerContainerInput">
-          <Input
+          <TextField
+            ref={(el) => {
+              //setAnchorEl(el);
+            }}
             className="inputTextAreas"
             onChange={handleOnChange}
             onFocus={handleOnFocus}
             value={inputValue}
-            label={
-              <QuestionTextItem
-                mainQuestion={props.mainQuestion}
-                helptext={props.helptext}
-              />
-            }
-            feil={inputError}
+            label={<QuestionTextItem mainQuestion={props.mainQuestion} helptext={props.helptext} />}
+            error={inputError}
           />
+          {/**
           <Popover
-            ankerEl={anker}
-            onRequestClose={() => setAnker(undefined)}
-            orientering={PopoverOrientering.UnderVenstre}
-            autoFokus={false}
-            utenPil
+            anchorEl={anchorEl}
+            open={open}
+            //onClose={() => setOpen(false)}
+            onClose={() => {}}
+            placement={'bottom-start'}
           >
             {exampleElements.map((dataElem: string, index: number) => {
-              return (
-                <div key={props.mainQuestion.linkId + index}>
-                  {displayElements(dataElem)}
-                </div>
-              );
+              return <div key={props.mainQuestion.linkId + index}>{displayElements(dataElem)}</div>;
             })}
           </Popover>
+          */}
         </div>
-        <div style={{ paddingTop: '35px' }}>
-          <Knapp
-            mini
+        <div style={{ paddingTop: '26px' }}>
+          <Button
+            variant={'primary'}
+            size={'small'}
             style={{
               marginLeft: '10px',
               height: '22px',
+              width: '100px',
             }}
             onClick={handleAddElement}
           >
             Legg til
-          </Knapp>
+          </Button>
         </div>
       </div>
       <ListItem valueList={tempValueList} setValueList={setTempValueList} />

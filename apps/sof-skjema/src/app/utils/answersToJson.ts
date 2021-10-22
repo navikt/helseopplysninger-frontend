@@ -1,9 +1,10 @@
 import {
   IPatient,
+  IPractitioner,
   IQuestionnaire,
   IQuestionnaireResponse,
+  IRelatedPerson,
 } from '@ahryman40k/ts-fhir-types/lib/R4';
-import { fhirclient } from 'fhirclient/lib/types';
 import { setAutomaticAnswers } from './setAutomaticAnswers';
 import Client from 'fhirclient/lib/Client';
 import { saveToServer } from './saveToServer';
@@ -90,10 +91,7 @@ export const saveAnswers = async (
   answers: Map<string, string | boolean>,
   questionnaireResponse: IQuestionnaireResponse,
   patient: IPatient,
-  user:
-    | fhirclient.FHIR.Patient
-    | fhirclient.FHIR.Practitioner
-    | fhirclient.FHIR.RelatedPerson,
+  user: IPatient | IPractitioner | IRelatedPerson,
   client: Client,
   questionnaire: IQuestionnaire,
   buttonId: string

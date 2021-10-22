@@ -1,7 +1,7 @@
-import { Textarea } from 'nav-frontend-skjema';
 import { useEffect, useState } from 'react';
 import { useInputErrorContext } from '../../context/inputErrorContext';
 import { QuestionTextItem } from './QuestionTextItem';
+import { Textarea } from '@navikt/ds-react';
 
 /**
  * Renders a question with type Text
@@ -16,7 +16,7 @@ const TextareaItem = (props: IItemProps & savedType) => {
   // Updates textValue when writing in the text area field
   const handleOnChange = (e: any) => {
     setTextValue(e.target.value);
-    setCheckedForError && setCheckedForError(false);
+    setCheckedForError(false);
   };
 
   // When input is saved: set the fields text to the correct answer.
@@ -24,10 +24,7 @@ const TextareaItem = (props: IItemProps & savedType) => {
   // make changes to textValue if there is an answer saved on the server
   // that has been fetched, and there is no new answer that can be overwritten.
   useEffect(() => {
-    if (
-      textValue === '' &&
-      typeof props.answers.get(props.mainQuestion.linkId) === 'string'
-    ) {
+    if (textValue === '' && typeof props.answers.get(props.mainQuestion.linkId) === 'string') {
       setTextValue(props.answers.get(props.mainQuestion.linkId) as string);
     }
   }, [props.saved]);
@@ -54,16 +51,11 @@ const TextareaItem = (props: IItemProps & savedType) => {
     <>
       <div className="componentItems">
         <Textarea
-          label={
-            <QuestionTextItem
-              mainQuestion={props.mainQuestion}
-              helptext={props.helptext}
-            />
-          }
+          label={<QuestionTextItem mainQuestion={props.mainQuestion} helptext={props.helptext} />}
           value={textValue}
           onChange={handleOnChange}
           maxLength={0}
-          feil={inputError}
+          error={inputError}
         ></Textarea>
       </div>
     </>

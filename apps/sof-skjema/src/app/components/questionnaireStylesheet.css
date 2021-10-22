@@ -19,7 +19,8 @@
 }
 
 .buttons {
-  margin: 10px;
+  margin: 10px!important;
+
 }
 
 .ugyldigDato > div > .nav-datovelger > .nav-datovelger__inputContainer {

@@ -1,23 +1,23 @@
 import React from 'react';
-import {render} from '@testing-library/react';
+import { render } from '@testing-library/react';
 
-import {BrowserRouter} from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 
 import App from './app';
-import {AppContext} from "./contexts/AppContext";
+import { AppContext } from './contexts/AppContext';
+import { fixtures } from '@navikt/fixtures';
 
-const brukerinfo =require('../../../../fixtures/bestiller/brukerinfo.json');
 const context = {
-  user: brukerinfo,
-  loading:false
-}
+  user: fixtures.TestBrukerInfo,
+  loading: false,
+};
 describe('App', () => {
   it('should render successfully', () => {
     const { baseElement } = render(
       <BrowserRouter>
         <AppContext.Provider value={context}>
-          <App/>
-        </AppContext.Provider >
+          <App />
+        </AppContext.Provider>
       </BrowserRouter>
     );
 
@@ -28,8 +28,8 @@ describe('App', () => {
     const { getByText } = render(
       <BrowserRouter>
         <AppContext.Provider value={context}>
-          <App/>
-        </AppContext.Provider >
+          <App />
+        </AppContext.Provider>
       </BrowserRouter>
     );
 

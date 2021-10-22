@@ -1,11 +1,6 @@
-import {
-  IBundle,
-  IPatient,
-  IQuestionnaireResponse,
-} from '@ahryman40k/ts-fhir-types/lib/R4';
+import { IBundle, IPatient, IQuestionnaireResponse } from '@ahryman40k/ts-fhir-types/lib/R4';
 import Client from 'fhirclient/lib/Client';
 import axios from 'axios';
-import { fhirclient } from 'fhirclient/lib/types';
 
 /**
  * Function to SEND a questionnaire response to the server.

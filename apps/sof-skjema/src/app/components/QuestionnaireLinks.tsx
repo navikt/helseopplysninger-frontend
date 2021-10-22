@@ -1,40 +1,33 @@
-import { Cell, ContentContainer, Grid } from '@navikt/ds-react';
-import { HoyreChevron } from 'nav-frontend-chevron';
-import { EtikettFokus, EtikettInfo } from 'nav-frontend-etiketter';
+import { LinkPanel, Tag } from '@navikt/ds-react';
+import { FC } from 'react';
+import { LinkPanelTitle } from '@navikt/ds-react/esm/link-panel/LinkPanelTitle';
 
 interface IQuestionnaireLinksProps {
   title: string;
   status: boolean;
 }
 
+const StatusChecker: FC<{ status: boolean }> = (status) => {
+  const variant = status ? 'info' : 'warning';
+  const text = status ? 'Ikke startet' : 'Utkast';
+  return (
+    <Tag variant={variant} className="etiketter">
+      {text}
+    </Tag>
+  );
+};
+
 /**
  * @returns A row to click on that leads to a questionnaire
  */
-const QuestionnaireLinks = (props: IQuestionnaireLinksProps) => {
-  function statusChecker() {
-    if (props.status) {
-      return <EtikettInfo className="etiketter">Ikke startet</EtikettInfo>;
-    } else {
-      return <EtikettFokus className="etiketter">Utkast</EtikettFokus>;
-    }
-  }
-
+const QuestionnaireLinks: FC<IQuestionnaireLinksProps> = ({ title, status }) => {
   return (
     <div className="questionnaireLinkContainer">
-      <ContentContainer className="ContentContainer">
-        <Grid>
-          <Cell className={'navds-story-cell tittelcelle'} xs={7}>
-            {props.title}
-          </Cell>
-          <Cell className={'navds-story-cell statuscelle'} xs={4}>
-            Status:
-            {statusChecker()}
-          </Cell>
-          <Cell className={'navds-story-cell chevroncelle'} xs={1}>
-            <HoyreChevron></HoyreChevron>
-          </Cell>
-        </Grid>
-      </ContentContainer>
+      <LinkPanel>
+        <LinkPanelTitle>{title}</LinkPanelTitle>
+        <br />
+        Status: <StatusChecker status={status} />
+      </LinkPanel>
     </div>
   );
 };

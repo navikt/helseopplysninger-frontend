@@ -9,6 +9,8 @@ test('it should pull bundle and send questionnaire', async () => {
   const authHeader = 'Bearer ' + JWT.sign({}, 'abc123');
   const resourceId = randomUUID();
   let { questionnaire, questionnaireResponse } = testFhirQuestionnaire(resourceId);
+  console.log({ questionnaire });
+  console.log({ questionnaireResponse });
   questionnaireResponse.status = QuestionnaireResponseStatusKind._inProgress;
 
   nockFhirResource(questionnaire);
@@ -21,7 +23,7 @@ test('it should pull bundle and send questionnaire', async () => {
     kafkaTopic: process.env.KAFKA_TOPIC_BESTILLING,
     kafkaProducer: mockKafkaProducer(kafkaSendFunc),
   });
-
+  console.log(resource);
   expect(resource.resourceType).toBe('QuestionnaireResponse');
   expect(kafkaSendFunc).toHaveBeenCalled();
 });

@@ -1,11 +1,10 @@
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const ws = require('ws');
-const http = require('http');
-const statusPresens = require('../../fixtures/bestiller/status-presens.json');
-const events = require('../../fixtures/bestiller/events.json');
-const brukerinfo = require('../../fixtures/bestiller/brukerinfo.json');
-const items = require('../../fixtures/items.json');
+const statusPresens = require('../../libs/fixtures/src/fixtures/bestiller/status-presens.json');
+const events = require('../../libs/fixtures/src/fixtures/bestiller/events.json');
+const brukerinfo = require('../../libs/fixtures/src/fixtures/bestiller/brukerinfo.json');
+const items = require('../../libs/fixtures/src/fixtures/items.json');
 require('ts-node').register();
 const { BackendPaths } = require('../../libs/bestiller-types/src');
 
@@ -53,9 +52,7 @@ module.exports = (app, server) => {
 
   wsServer.on('connection', (socket) => {
     websocket = socket;
-    socket.on('message', (message) =>
-      console.info('Websocket received message: ' + message)
-    );
+    socket.on('message', (message) => console.info('Websocket received message: ' + message));
   });
 
   server.options.onListening = (s) => {

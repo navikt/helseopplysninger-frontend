@@ -1,12 +1,12 @@
 {
   "resourceType": "Questionnaire",
-  "id": "123456789",
   "identifier": {
     "use": "official",
     "value": ""
   },
+  "url": "http://fhir.nav.no/canonical/Questionnaire/test-pleiepenger-for-sykt-barn",
   "version": "1.0.0",
-  "name": "pleiepengeskjema",
+  "name": "pleiepenger-for-sykt-barn",
   "title": "Legeerklæring: pleiepenger for sykt barn",
   "status": "active",
   "date": "2021-07-13",

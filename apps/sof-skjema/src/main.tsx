@@ -2,15 +2,20 @@ import { StrictMode } from 'react';
 import * as ReactDOM from 'react-dom';
 import { BrowserRouter, Route } from 'react-router-dom';
 
-import App from './app/components/app';
-import { FhirContextProvider } from './app/context/fhirContext';
+import SkjemaPage from './app/components/SkjemaPage';
 import { LandingPage } from './app/components/LandingPage';
+import { FhirContextProvider, QuestionnaireResponseContextProvider } from '@navikt/sof-components';
+import { questionnaireResolver } from './app/json-files/questionnaire-resolver';
 
 ReactDOM.render(
   <StrictMode>
     <BrowserRouter>
       <FhirContextProvider>
-        <Route path="/skjema/:questionnaireName" component={App} exact />
+        <Route path="/skjema/:questionnaireName" component={SkjemaPage} exact>
+          <QuestionnaireResponseContextProvider questionnaireResolver={questionnaireResolver}>
+            <SkjemaPage />
+          </QuestionnaireResponseContextProvider>
+        </Route>
         <Route path="/" component={LandingPage} exact />
       </FhirContextProvider>
     </BrowserRouter>

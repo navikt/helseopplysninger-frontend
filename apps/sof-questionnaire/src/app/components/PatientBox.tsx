@@ -1,16 +1,12 @@
-import React from "react";
-import {fhirclient} from "fhirclient/lib/types";
+import React, { FC } from 'react';
+import { IPatient } from '@ahryman40k/ts-fhir-types/lib/R4';
 
 interface PatientBoxProps {
-    patient?: fhirclient.FHIR.Patient
+  patient?: IPatient;
 }
 
-const PatientBox: React.FunctionComponent<PatientBoxProps> = ({patient }) => {
-    return patient ? (
-        <div>
-            Pasient: { patient.id}
-        </div>
-    ):(<div>nothing</div>);
-}
+const PatientBox: FC<PatientBoxProps> = ({ patient }) => {
+  return patient ? <div>Pasient: {patient.id}</div> : <div>nothing</div>;
+};
 
 export default PatientBox;

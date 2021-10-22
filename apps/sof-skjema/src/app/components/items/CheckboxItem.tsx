@@ -1,7 +1,7 @@
-import { Checkbox, CheckboxGruppe } from 'nav-frontend-skjema';
 import { useEffect, useState } from 'react';
 import '../questionnaireStylesheet.css';
 import { QuestionTextItem } from './QuestionTextItem';
+import { Checkbox, CheckboxGroup } from '@navikt/ds-react';
 
 /**
  * This component renders a checkbox.
@@ -37,10 +37,7 @@ const CheckboxItem = (props: IItemProps & savedType) => {
     if (checkboxValues && checkboxValues.length > 0) {
       const copiedAnswers = new Map(props.answers);
       for (let i = 0; i < checkboxValues.length; i++) {
-        copiedAnswers.set(
-          props.mainQuestion.linkId + '.' + (i + 1),
-          checkboxValues[i]
-        );
+        copiedAnswers.set(props.mainQuestion.linkId + '.' + (i + 1), checkboxValues[i]);
       }
       props.setAnswers(copiedAnswers);
     }
@@ -58,22 +55,15 @@ const CheckboxItem = (props: IItemProps & savedType) => {
   return (
     <>
       <div className="componentItems">
-        <CheckboxGruppe
-          legend={
-            <QuestionTextItem
-              mainQuestion={props.mainQuestion}
-              helptext={props.helptext}
-            />
-          }
+        <CheckboxGroup
+          legend={<QuestionTextItem mainQuestion={props.mainQuestion} helptext={props.helptext} />}
         >
           {optionarray?.map((option: string, index: number) => (
-            <Checkbox
-              onClick={() => onClickCheckbox(index)}
-              key={option}
-              label={<>{option}</>}
-            />
+            <Checkbox key={option} value={option} onClick={() => onClickCheckbox(index)}>
+              {option}
+            </Checkbox>
           ))}
-        </CheckboxGruppe>
+        </CheckboxGroup>
       </div>
     </>
   );
