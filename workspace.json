@@ -1,25 +1,5 @@
 {
   "version": 2,
-  "cli": {
-    "defaultCollection": "@nrwl/react"
-  },
-  "defaultProject": "sof-questionnaire",
-  "generators": {
-    "@nrwl/react": {
-      "application": {
-        "style": "less",
-        "linter": "eslint",
-        "babel": true
-      },
-      "component": {
-        "style": "less"
-      },
-      "library": {
-        "style": "less",
-        "linter": "eslint"
-      }
-    }
-  },
   "projects": {
     "bestiller-types": {
       "root": "libs/bestiller-types",
@@ -40,7 +20,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": []
     },
     "fhir": {
       "root": "libs/fhir",
@@ -61,7 +42,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": []
     },
     "fhir-components": {
       "root": "libs/fhir-components",
@@ -82,7 +64,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": []
     },
     "fixtures": {
       "root": "libs/fixtures",
@@ -103,7 +86,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": []
     },
     "fkr-client": {
       "root": "libs/fkr-client",
@@ -124,7 +108,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": []
     },
     "helseid": {
       "root": "libs/helseid",
@@ -145,7 +130,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": []
     },
     "hops-behandler-backend": {
       "root": "apps/hops-behandler-backend",
@@ -203,7 +189,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": []
     },
     "hops-bestiller-backend": {
       "root": "apps/hops-bestiller-backend",
@@ -260,7 +247,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": []
     },
     "hops-bestiller-frontend": {
       "root": "apps/hops-bestiller-frontend",
@@ -334,7 +322,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": []
     },
     "hops-common": {
       "root": "libs/hops-common",
@@ -355,7 +344,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": []
     },
     "hops-testutils": {
       "root": "libs/hops-testutils",
@@ -382,7 +372,8 @@
             "commands": ["docker-compose up -d redis", "wait-on tcp:6379"]
           }
         }
-      }
+      },
+      "tags": []
     },
     "sof-common": {
       "root": "libs/sof-common",
@@ -403,7 +394,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": []
     },
     "sof-components": {
       "root": "libs/sof-components",
@@ -425,7 +417,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": []
     },
     "sof-dev-server": {
       "root": "apps/sof-dev-server",
@@ -476,7 +469,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": []
     },
     "sof-questionnaire": {
       "root": "apps/sof-questionnaire",
@@ -550,7 +544,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": []
     },
     "sof-resource-puller": {
       "root": "apps/sof-resource-puller",
@@ -620,7 +615,8 @@
             }
           ]
         }
-      }
+      },
+      "tags": []
     },
     "sof-skjema": {
       "root": "apps/sof-skjema",
@@ -694,7 +690,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": []
     }
   }
 }

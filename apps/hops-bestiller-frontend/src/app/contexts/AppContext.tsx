@@ -29,7 +29,7 @@ const AppContextProvider = (props: any) => {
   useEffect(() => {
     async function fetch() {
       const userRes = await axios.get(BackendPaths.USER_PATH);
-      setUser(userRes.data);
+      setUser(userRes.data as Brukerinfo);
     }
 
     fetch().finally(() => isLoading(false));
@@ -40,7 +40,7 @@ const AppContextProvider = (props: any) => {
   }, []);
   useEffect(() => {
     axios.get(BackendPaths.ITEMS_PATH).then((res) => {
-      setItems(res.data);
+      setItems(res.data as IQuestionnaire_Item[]);
     });
   }, []);
   const history = useHistory();

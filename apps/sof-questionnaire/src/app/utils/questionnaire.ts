@@ -14,7 +14,8 @@ export async function fetchData(path: string, params?: { [key: string]: string }
 export async function fetchQuestionnaireResponseList(): Promise<IQuestionnaireResponse[]> {
   return await fetchData('/fetchQuestionnaireResponseList');
 }
+
 export async function ListBestilling(): Promise<BestillingInterface[]> {
   const result = await axios.get('/fgsd');
-  return result.data;
+  return result.data as BestillingInterface[];
 }

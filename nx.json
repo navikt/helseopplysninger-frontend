@@ -12,59 +12,6 @@
       }
     }
   },
-  "projects": {
-    "bestiller-types": {
-      "tags": []
-    },
-    "fhir": {
-      "tags": []
-    },
-    "fhir-components": {
-      "tags": []
-    },
-    "fixtures": {
-      "tags": []
-    },
-    "fkr-client": {
-      "tags": []
-    },
-    "helseid": {
-      "tags": []
-    },
-    "hops-behandler-backend": {
-      "tags": []
-    },
-    "hops-bestiller-backend": {
-      "tags": []
-    },
-    "hops-bestiller-frontend": {
-      "tags": []
-    },
-    "hops-common": {
-      "tags": []
-    },
-    "hops-testutils": {
-      "tags": []
-    },
-    "sof-common": {
-      "tags": []
-    },
-    "sof-components": {
-      "tags": []
-    },
-    "sof-dev-server": {
-      "tags": []
-    },
-    "sof-questionnaire": {
-      "tags": []
-    },
-    "sof-resource-puller": {
-      "tags": []
-    },
-    "sof-skjema": {
-      "tags": []
-    }
-  },
   "targetDependencies": {
     "build": [
       {
@@ -72,5 +19,25 @@
         "projects": "dependencies"
       }
     ]
-  }
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/react"
+  },
+  "generators": {
+    "@nrwl/react": {
+      "application": {
+        "style": "less",
+        "linter": "eslint",
+        "babel": true
+      },
+      "component": {
+        "style": "less"
+      },
+      "library": {
+        "style": "less",
+        "linter": "eslint"
+      }
+    }
+  },
+  "defaultProject": "sof-questionnaire"
 }
