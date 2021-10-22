@@ -15,7 +15,7 @@ function pullResourceRoute(app: Express) {
       serverUrl,
       reference,
       authHeader,
-      kafkaTopic: process.env.KAFKA_TOPIC_BESTILLING,
+      kafkaTopic: process.env.KAFKA_TOPIC_OUTGOING,
       kafkaProducer: getKafkaClient().producer(),
     });
     if (resource.resourceType === 'OperationOutcome') {

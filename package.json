@@ -27,9 +27,9 @@
     "help": "nx help",
     "gen": "ts-node --skip-project tools/test-data",
     "matrix": "nx affected:apps --plain --exclude=sof-dev-server --base=remotes/origin/main$NX_BASE|tr -d '\\n'|jq -cRs 'split(\" \")'",
-    "up": "npm run build-all && docker compose -p hops --env-file .env up -d --build --remove-orphans",
+    "up": "npm run build-all && docker compose --env-file .env up -d --build --remove-orphans",
     "down": "docker-compose down",
-    "wait-on-hapi": "wait-on http://localhost:8096"
+    "wait-on-hapi": "wait-on http://localhost:8096/resources/bootstrap/dist/css/bootstrap.css"
   },
   "dependencies": {
     "@navikt/ds-css": "^0.10.0",

@@ -38,7 +38,8 @@ const database: PoolConfig = {
 };
 
 let kafkaTopics = {
-  bestillinger: envVar('KAFKA_TOPIC_BESTILLING', true),
+  outgoing: envVar('KAFKA_TOPIC_OUTGOING', true),
+  incoming: envVar('KAFKA_TOPIC_INCOMING', true),
 };
 
 export { azureAd, database, server, kafkaTopics };

@@ -16,7 +16,7 @@ bootstrapServer(async (app) => {
   await initPassport(app);
   [bestill, defaults, patient].forEach((f) => f(app));
   await runMigrations(join(__dirname, 'migrations/user'));
-  await kafkaConsume(kafkaConsumer, kafkaTopics.bestillinger, (message) => {
+  await kafkaConsume(kafkaConsumer, kafkaTopics.incoming, (message) => {
     wsBroadcast(JSON.parse(message.value.toString()));
   });
 }, 2022).then(attachWsServer);
