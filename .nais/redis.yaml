@@ -3,10 +3,13 @@ kind: "Application"
 metadata:
   labels:
     team: helseopplysninger
-  name: redis
+  annotations:
+    nais.io/read-only-file-system: "false"
+    nais.io/run-as-user: "999"
+  name: redis-frontend
   namespace: helseopplysninger
 spec:
-  image: redis
+  image: redis:6.2.6
   port: 6379
   replicas:
     min: 1

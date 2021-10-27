@@ -39,4 +39,6 @@ testem.log
 .DS_Store
 Thumbs.db
 examples/secrets.*
+examples/fkr
 .local.env
+.nais/service-account.json

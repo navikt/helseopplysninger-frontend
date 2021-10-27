@@ -15,6 +15,7 @@ function getSessionStore(session, forceRedis): Store {
     logger.info('Using Redis session store at ' + redisConfig.host + '.');
     const RedisStore = connectRedis(session);
     const redisClient = redis.createClient(redisConfig);
+    redisClient.on('error', (err) => logger.error('Redis Client Error', err));
     return new RedisStore({
       client: redisClient,
       ttl: 43200,
