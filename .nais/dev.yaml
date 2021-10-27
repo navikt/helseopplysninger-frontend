@@ -6,5 +6,6 @@ env:
   KAFKA_TOPIC_OUTGOING: "helseopplysninger.rapid"
   KAFKA_TOPIC_INCOMING: "helseopplysninger.river"
   FKR_STS_URL: "https://helseid-sts.test.nhn.no/connect/token"
-  FKR_FHIR_URL: "https://hint-inet.utv.helsedir.no/kontaktregister/ekstern"
-  REDIS_HOST: "redis.helseopplysninger.svc.cluster.local"
+  FKR_FHIR_URL: "https://hint-inet.utv.helsedir.no/proxy/kontaktregister/api"
+  REDIS_HOST: "redis-frontend.helseopplysninger.svc.cluster.local"
+  FHIR_SERVER_ADDRESS: "https://healthcare.googleapis.com/v1/projects/helseopplysninger-dev-d4b0/locations/europe-west4/datasets/hops/fhirStores/behandler/fhir"

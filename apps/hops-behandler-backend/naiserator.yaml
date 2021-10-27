@@ -42,6 +42,6 @@ spec:
   accessPolicy:
     outbound:
       rules:
-        - application: redis
+        - application: redis-frontend
   envFrom:
     - secret: helseid

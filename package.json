@@ -53,6 +53,7 @@
     "express-session": "^1.17.1",
     "fhirclient": "^2.3.11",
     "flat-cache": "^3.0.4",
+    "google-auth-library": "^7.10.1",
     "http-proxy-middleware": "^2.0.1",
     "kafkajs": "^1.15.0",
     "lodash.throttle": "^4.1.1",
