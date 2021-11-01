@@ -3,8 +3,9 @@ import * as flatCache from 'flat-cache';
 import { Cache } from 'flat-cache';
 import { JWT } from 'jose';
 import { IdTokenClaims, TokenSet } from 'openid-client';
-import { IBundle, IBundle_Entry, IPatient } from '@ahryman40k/ts-fhir-types/lib/R4';
+import { IBundle, IBundle_Entry, IPatient, IResourceList } from '@ahryman40k/ts-fhir-types/lib/R4';
 import * as env from 'env-var';
+import { tmpdir } from 'os';
 
 const getConfig = (): fkrClientConfig => {
   const envInst = env.from(process.env);
@@ -30,7 +31,7 @@ const getFreshToken = async (): Promise<TokenSet> => {
   return result.data as TokenSet;
 };
 
-const cache = flatCache.load('FKR');
+const cache = flatCache.load('FKR', tmpdir());
 
 export type fkrClientConfig = {
   clientId: string;
@@ -63,12 +64,27 @@ export type fkrGetPatientParams = {
   name?: string;
 };
 
+export async function fkrClient() {
+  const { fhirUrl } = getConfig();
+  const fhirClient = axios.create({ baseURL: fhirUrl.toString() });
+  fhirClient.interceptors.request.use(async (req) => {
+    const token = await fkrGetToken();
+    const headers = { Authorization: `Bearer ${token}` };
+    req.headers = Object.assign(req.headers, headers);
+    return req;
+  });
+  return fhirClient;
+}
+
+export async function fkrGet(resource: IResourceList['resourceType'], params: {}) {
+  const client = await fkrClient();
+  return await client.get('/' + resource, {
+    params,
+  });
+}
+
 export async function fkrGetPatient(params?: fkrGetPatientParams): Promise<IPatient[]> {
-  const config = getConfig();
-  const url = config.fhirUrl + '/Patient';
-  const token = await fkrGetToken();
-  const result = await axios.get(url, {
-    headers: { Authorization: `Bearer ${token}` },
+  const result = await fkrGet('Patient', {
     params,
   });
   const returnValue: IPatient[] = [];

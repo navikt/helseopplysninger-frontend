@@ -2,13 +2,11 @@ import { Express } from 'express';
 import { GoogleAuth } from 'google-auth-library';
 import fhirClient from '../../utils/fhir-client';
 
-const bodyParser = require('body-parser');
-
 export async function fhirRoutes(app: Express): Promise<void> {
   const auth = new GoogleAuth({
     scopes: 'https://www.googleapis.com/auth/cloud-platform',
   });
-  app.use(bodyParser.urlencoded({ extended: true }));
+
   app.get('/api/access-token', async (req, res) => {
     const headers = await auth.getRequestHeaders();
     res.send(headers);

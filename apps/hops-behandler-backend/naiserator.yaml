@@ -38,10 +38,13 @@ spec:
     - {{BEHANDLER_INGRESS}}/api
     - {{BEHANDLER_INGRESS}}/auth
     - {{BEHANDLER_INGRESS}}/callback
-
   accessPolicy:
     outbound:
       rules:
         - application: redis-frontend
+      external:
+        - host: helseid-sts.test.nhn.no
+        - host: hint-inet.utv.helsedir.no
   envFrom:
     - secret: helseid
+    - secret: oppslag
