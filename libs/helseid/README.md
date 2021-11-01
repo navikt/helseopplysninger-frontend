@@ -1,16 +1,18 @@
 # helseid
-
 This library was generated with [Nx](https://nx.dev).
+Created to auth against helseid.
 
 ## Running unit tests
 
 Run `nx test helseid` to execute the unit tests via [Jest](https://jestjs.io).
 
+
+## Configuration variables
+
 Configuration variables:
 
 * HELSEID_AUTHORITY
 * HELSEID_CLIENT_ID
-* HELSEID_CLIENT_SECRET
 * HELSEID_JWKS
 * HELSEID_REDIRECT_URIS
 * HELSEID_SCOPES

@@ -7,7 +7,7 @@ env:
   NX_BASE: ""
   IMAGE_PREFIX: ""
   CLUSTER: "dev-gcp"
-  SHOULD_DEPLOY: ${{ github.ref == 'refs/heads/main' || false }}
+  SHOULD_DEPLOY: ${{ github.ref == 'refs/heads/main' || true }}
 
 concurrency:
   group: ${{ github.ref }}

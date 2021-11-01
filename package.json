@@ -72,6 +72,7 @@
     "nav-frontend-veileder-style": "^3.0.1",
     "nav-frontend-veilederpanel": "^2.0.1",
     "nav-frontend-veilederpanel-style": "^2.0.1",
+    "node-rsa": "^1.1.1",
     "openid-client": "^4.7.4",
     "passport": "^0.5.0",
     "pg": "^8.5.1",
