@@ -1,5 +1,6 @@
 import * as env from 'env-var';
-import { JSONWebKey, JSONWebKeySet } from 'jose';
+import { JSONWebKeySet } from 'jose';
+import { xmlRsaKeyToJwk } from '../utils/xml-rsa-key-to-jwk';
 
 export type HelseIDConfig = {
   authority: string;
@@ -7,16 +8,23 @@ export type HelseIDConfig = {
   clientSecret: string;
   jwks: JSONWebKeySet;
   redirectUris: string[];
+  grantTypes: string;
   scopes: string;
+  postLogoutRedirectUris: string;
 };
 
 export function getHelseIdConfig(): HelseIDConfig {
+  const rsaPrivateKey = env.get('HELSEID_RSA_PRIVATE_KEY').asString();
+  const jwks: JSONWebKeySet = { keys: [xmlRsaKeyToJwk(rsaPrivateKey)] };
+
   return {
-    authority: env.get('HELSEID_AUTHORITY').asString(),
-    clientId: env.get('HELSEID_CLIENT_ID').asString(),
+    authority: env.get('HELSEID_AUTHORITY').required().asString(),
+    clientId: env.get('HELSEID_CLIENT_ID').required().asString(),
     clientSecret: env.get('HELSEID_CLIENT_SECRET').asString(),
-    jwks: { keys: [env.get('HELSEID_JWKS').asJsonObject() as JSONWebKey] },
-    redirectUris: env.get('HELSEID_REDIRECT_URIS').asArray(','),
-    scopes: env.get('HELSEID_SCOPES').asString(),
+    grantTypes: env.get('HELSEID_GRANT_TYPES').asString(),
+    jwks,
+    redirectUris: env.get('HELSEID_REDIRECT_URIS').required().asArray(','),
+    scopes: env.get('HELSEID_SCOPES').required().asString(),
+    postLogoutRedirectUris: env.get('HELSEID_POST_LOGOUT_REDIRECT_URIS').asString(),
   };
 }

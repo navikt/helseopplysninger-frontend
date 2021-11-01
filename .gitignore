@@ -38,7 +38,7 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
-examples/secrets.*
+**/secrets.*
 examples/fkr
 .local.env
 .nais/service-account.json

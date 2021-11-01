@@ -11,10 +11,7 @@ export const createAuthEndpoints = (
   strategy: Strategy<AuthUser, Client>,
   urls: AuthUrls
 ) => {
-  app.get(
-    urls.loginUrl,
-    passport.authenticate(STRATEGY_NAME, { state: generators.state() })
-  );
+  app.get(urls.loginUrl, passport.authenticate(STRATEGY_NAME, { state: generators.state() }));
   app.get(
     urls.callbackUrl,
     passport.authenticate(STRATEGY_NAME, {
