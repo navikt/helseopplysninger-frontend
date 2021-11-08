@@ -10,7 +10,7 @@ export async function createClient(options: HelseIDConfig): Promise<Client> {
     token_endpoint_auth_method: 'private_key_jwt',
     token_endpoint_auth_signing_alg: 'RS256',
     response_types: ['code'],
-    post_logout_redirect_uris: [options.postLogoutRedirectUris],
+    post_logout_redirect_uris: options.postLogoutRedirectUris,
   };
   return new issuer.Client(metadata, options.jwks);
 }
