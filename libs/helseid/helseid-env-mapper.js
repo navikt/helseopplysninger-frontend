@@ -1,4 +1,4 @@
-const secret = require('./secrets.helseid_dev-gcp.json');
+const secret = require('./secrets.helseid_local.json');
 
 const snakeCase = (elem) => elem.replace(/[A-Z][^A-Z]/g, '_$&').toUpperCase();
 

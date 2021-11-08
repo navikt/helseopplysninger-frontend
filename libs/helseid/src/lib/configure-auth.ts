@@ -5,13 +5,13 @@ import { getHelseIdConfig } from './helseid-config';
 import { helseidStrategy } from './helseid-strategy';
 import { createAuthEndpoints } from './create-auth-endpoints';
 import { STRATEGY_NAME } from './constants';
-import { AuthUrls, AuthUser } from '@navikt/hops-common';
+import { AuthPaths, AuthUser } from '@navikt/hops-common';
 
 import { Client, Strategy } from 'openid-client';
 
 export const configureAuthentication = async (
   app: Express,
-  urls: AuthUrls
+  urls: AuthPaths
 ): Promise<Strategy<AuthUser, Client>> => {
   const config = getHelseIdConfig();
   app.use(passport.initialize());

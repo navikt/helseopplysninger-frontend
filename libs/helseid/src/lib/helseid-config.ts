@@ -10,7 +10,7 @@ export type HelseIDConfig = {
   redirectUris: string[];
   grantTypes: string;
   scopes: string;
-  postLogoutRedirectUris: string;
+  postLogoutRedirectUris: string[];
 };
 
 export function getHelseIdConfig(): HelseIDConfig {
@@ -23,8 +23,8 @@ export function getHelseIdConfig(): HelseIDConfig {
     clientSecret: env.get('HELSEID_CLIENT_SECRET').asString(),
     grantTypes: env.get('HELSEID_GRANT_TYPES').asString(),
     jwks,
-    redirectUris: env.get('HELSEID_REDIRECT_URIS').required().asArray(','),
+    redirectUris: env.get('HELSEID_REDIRECT_URIS').required().asArray(' '),
     scopes: env.get('HELSEID_SCOPES').required().asString(),
-    postLogoutRedirectUris: env.get('HELSEID_POST_LOGOUT_REDIRECT_URIS').asString(),
+    postLogoutRedirectUris: env.get('HELSEID_POST_LOGOUT_REDIRECT_URIS').asArray(' '),
   };
 }

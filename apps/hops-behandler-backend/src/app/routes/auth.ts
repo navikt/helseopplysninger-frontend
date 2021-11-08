@@ -1,35 +1,36 @@
 import { Express } from 'express';
 import { configureAuthentication, ensureAuth } from '@navikt/helseid';
-import { AuthUrls } from '@navikt/hops-common';
+import { AuthPaths } from '@navikt/hops-common';
 import { ensureBasicAuth } from './basic-auth';
+import { isOnNais } from '@navikt/hops-common';
 
 export async function authRoutes(app: Express): Promise<void> {
-  const urls: AuthUrls = {
-    callbackUrl: '/callback',
-    errorUrl: '/auth/error',
-    loginUrl: '/auth/login',
-    logoutUrl: '/auth/logout',
-    indexUrl: '/api/session',
-    unauthenticatedUrl: '/auth/unauthenticated',
+  const urls: AuthPaths = {
+    callbackPath: '/callback',
+    errorPath: '/auth/error',
+    loginPath: '/auth/login',
+    logoutPath: '/auth/logout',
+    indexPath: '/api/session',
+    unauthenticatedPath: '/auth/unauthenticated',
+    statusPath: '/api/status',
   };
   await configureAuthentication(app, urls);
   app.use(ensureAuth(urls, ['/api/session', '/api/test']));
-  //app.use('/api/*', ensureBasicAuth);
-  //app.use('/auth/*', ensureBasicAuth);
-  app.get(urls.unauthenticatedUrl, (req, res) =>
+  if (isOnNais()) {
+    app.use('/api/*', ensureBasicAuth);
+    app.use('/auth/*', ensureBasicAuth);
+  }
+  app.get(urls.unauthenticatedPath, (req, res) =>
     res.send({
-      what: urls.unauthenticatedUrl,
+      what: urls.unauthenticatedPath,
     })
   );
-  app.get(urls.errorUrl, (req, res) =>
+  app.get(urls.errorPath, (req, res) =>
     res.send({
-      what: urls.errorUrl,
+      what: urls.errorPath,
     })
   );
+
   app.get('/api', (req, res) => res.send('Should be logged in'));
   app.get('/api/session', (req, res) => res.send(req.session));
-  app.get('/api/test', (req, res) => {
-    req.session['test-session'] = req.query.hello;
-    res.redirect('/api');
-  });
 }
